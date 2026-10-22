@@ -102,7 +102,7 @@ html.run .ctrls button svg{height:clamp(36px,7.5vh,90px)}
 #finWrap{display:flex;justify-content:center;align-items:stretch;padding:6px 0}
 #finBtn{position:relative;overflow:hidden;width:100%;height:max(150px,var(--cd,30vh));border:none;border-radius:22px;padding:0 10px;background:#ff0a3c;color:#ffffff;font-family:var(--font-display);font-weight:600;letter-spacing:.05em;text-transform:uppercase;-webkit-text-stroke:3.5px #000;paint-order:stroke fill;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:none;-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center}
 #finBtn *{pointer-events:none;-webkit-user-select:none;user-select:none}
-#finRing{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible}
+#finFill{position:absolute;left:0;top:0;bottom:0;width:0;background:#8a0a25}
 #finTxt{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px}
 #finMain{display:flex;flex-direction:column;align-items:center;font-size:clamp(48px,min(17vw,9vh),150px);line-height:.95}
 #finSub{display:none}
@@ -236,7 +236,7 @@ details.snd summary{cursor:pointer;padding:13px 0;font-family:var(--font-display
     <button id="rst" type="button" aria-label="Reiniciar" title="Reiniciar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.6-5.9" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round"/><path d="M20 3v6h-6z" fill="#000"/></svg></button>
   </div>
 
-  <div id="finWrap" hidden><button id="finBtn" type="button" aria-label="Terminar sesión: mantén apretado 1,5 segundos"><svg id="finRing" aria-hidden="true"><rect id="finBase" fill="none" stroke="#ffffff" stroke-width="8"/><rect id="finArc" fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/></svg><span id="finTxt"><span id="finMain"><span>Terminar</span><span>Sesión</span></span><span id="finSub">Mantén 2 segundos</span></span></button></div>
+  <div id="finWrap" hidden><button id="finBtn" type="button" aria-label="Terminar sesión: mantén apretado 1,5 segundos"><span id="finFill" aria-hidden="true"></span><span id="finTxt"><span id="finMain"><span>Terminar</span><span>Sesión</span></span><span id="finSub">Mantén 2 segundos</span></span></button></div>
 
   <div id="rstBox" role="alertdialog" aria-labelledby="rstTitle" hidden>
     <p id="rstTitle">¿Reiniciar el entrenamiento?</p>
@@ -807,14 +807,14 @@ function holdLabel(){return 'Mantén '+(HOLD_MS/1000)+' segundos'}
 function holdReset(){
   holdOn=false;
   if(holdIv){clearInterval(holdIv);holdIv=null}
-  $('finArc').style.strokeDashoffset=100;
+  $('finFill').style.width='0';
 }
 function holdStart(){
   if(!started||holdOn||$('finBtn').disabled)return;
   holdOn=true;holdT=Date.now();
   holdIv=setInterval(function(){
     var el=Date.now()-holdT;
-    $('finArc').style.strokeDashoffset=100*(1-Math.min(1,el/HOLD_MS));
+    $('finFill').style.width=(100*Math.min(1,el/HOLD_MS))+'%';
     if(el>=HOLD_MS){holdReset();finishEarly()}
   },50);
 }
@@ -822,14 +822,12 @@ function fitFin(){
   try{
     var b=$('finBtn'),m=$('finMain');
     if(!b||!m||!b.offsetWidth||!b.offsetHeight)return;
-    var W=b.clientWidth,H=b.clientHeight,g=12;
-    $('finRing').setAttribute('viewBox','0 0 '+W+' '+H);
-    ['finBase','finArc'].forEach(function(id){var e=$(id);e.setAttribute('x',g);e.setAttribute('y',g);e.setAttribute('width',Math.max(1,W-2*g));e.setAttribute('height',Math.max(1,H-2*g));e.setAttribute('rx',18)});
+    var W=b.clientWidth,H=b.clientHeight;
     m.style.fontSize='';
     var cap=parseFloat(getComputedStyle(m).fontSize)||48;
     var w=m.offsetWidth,h=m.offsetHeight;
     if(!w||!h)return;
-    var k=Math.min((W*0.74)/w,(H*0.66)/h,1);
+    var k=Math.min((W*0.84)/w,(H*0.78)/h,1);
     m.style.fontSize=Math.max(18,Math.floor(cap*k))+'px';
   }catch(e){}
 }
