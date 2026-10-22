@@ -1,7 +1,7 @@
 {
   "id": "./",
-  "name": "TIMER ENTRENO",
-  "short_name": "TIMER ENTRENO",
+  "name": "Kettlebell Timer",
+  "short_name": "Kettlebell Timer",
   "description": "Temporizador de entrenamiento",
   "start_url": "./",
   "scope": "./",
