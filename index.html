@@ -114,7 +114,7 @@ html.run #phase{font-size:max(22px,var(--phfs))}
 html.run #big{font-size:max(80px,var(--bigfs))}
 html.run .ln{font-size:max(30px,var(--lnfs))}
 html.run #totMain{font-size:max(26px,var(--totfs))}
-html.run #totSub{font-size:max(14px,min(4vw,2.6vh))}
+html.run #totSub{display:block;font-family:var(--font-display);font-weight:600;line-height:1.1;letter-spacing:.02em;font-variant-numeric:tabular-nums;font-size:max(26px,var(--totfs))}
 html.run .ctrls{flex:0 0 auto}
 html.run .ctrls button{height:clamp(90px,15vh,170px);min-height:0}
 html.run #finWrap{padding:0}
@@ -598,10 +598,11 @@ function transitionSound(prev,next){
 }
 var names={fstretch:'Estiramiento final',stretch:'Estiramiento',prep:'Prepárate',work:'Ejercicio',rest:'Descanso',srest:'Descanso entre series'};
 function setLook(kind){$('disp').setAttribute('data-phase',kind)}
+function totIdle(){$('totMain').textContent='Duración total '+fmtDur(cfg.total);$('totSub').textContent=cfg.S+' series × '+cfg.E+' ejercicios'}
 function paint(){
   var p=ph[idx];
   if(!p){
-    setLook('done');$('big').classList.remove('warn');
+    totIdle();setLook('done');$('big').classList.remove('warn');
     $('phase').textContent='Entrenamiento terminado';$('big').textContent='0:00';
     setLines('Buen trabajo','',false);$('bar').style.width='100%';return;
   }
@@ -614,6 +615,11 @@ function paint(){
   else if(p.k==='work'||p.k==='rest'){setLines('Serie '+p.s+' de '+cfg.S,'Ejercicio '+p.e+' de '+cfg.E,false)}
   else{setLines('Serie '+(p.s+1)+' de '+cfg.S,'Ejercicio 1 de '+cfg.E,true)}
   $('bar').style.width=(100*(1-rem/(p.d*1000)))+'%';
+  if(started){
+    var left=Math.ceil(rem/1000);for(var i=idx+1;i<ph.length;i++)left+=ph[i].d;
+    $('totMain').textContent='Llevas '+fmtDur(Math.floor(elapsedMs()/1000));
+    $('totSub').textContent='Faltan '+fmtDur(left);
+  }
 }
 var GOI={play:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z" fill="#000"/></svg>',pause:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="5" height="16" rx="1" fill="#000"/><rect x="14" y="4" width="5" height="16" rx="1" fill="#000"/></svg>',resume:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z" fill="#000"/></svg>'},GOL={play:'Iniciar',pause:'Pausar',resume:'Continuar'};
 function setGo(t){$('go').innerHTML=GOI[t];$('go').setAttribute('aria-label',GOL[t]);$('go').title=GOL[t]}
