@@ -590,7 +590,7 @@ function kaStart(){
     if(!KA){KA=new Audio(kaUrl());KA.loop=true}
     var pr=KA.play();if(pr&&pr.catch)pr.catch(function(){});
     if('mediaSession' in navigator){
-      navigator.mediaSession.metadata=new MediaMetadata({title:'Kettlebell Timer',artist:'Entrenamiento en curso'});
+      navigator.mediaSession.metadata=new MediaMetadata({title:'TIMER ENTRENO',artist:'Entrenamiento en curso'});
       navigator.mediaSession.playbackState='playing';
       navigator.mediaSession.setActionHandler('pause',function(){if(running)$('go').click()});
       navigator.mediaSession.setActionHandler('play',function(){if(started&&!running)$('go').click()});
@@ -769,14 +769,19 @@ $('rstNo').onclick=function(){
 };
 $('rstYes').onclick=function(){closeBox();doReset()};
 
+function isApp(){
+  try{return !!(navigator.standalone||(window.matchMedia&&(matchMedia('(display-mode: fullscreen)').matches||matchMedia('(display-mode: standalone)').matches)))}catch(e){return false}
+}
 function enterFs(){
+  if(isApp())return;
   try{
     var el=document.documentElement,rq=el.requestFullscreen||el.webkitRequestFullscreen;
     if(rq){var pr=rq.call(el);if(pr&&pr.catch)pr.catch(function(){})}
   }catch(e){}
 }
 function inFs(){return !!(document.fullscreenElement||document.webkitFullscreenElement)}
-document.addEventListener('pointerup',function(){if(!inFs())enterFs()},true);
+var fsAuto=true;
+document.addEventListener('pointerup',function(){if(!fsAuto||isApp())return;fsAuto=false;if(!inFs())enterFs()},true);
 function exitFs(){
   try{
     if(document.fullscreenElement||document.webkitFullscreenElement){
