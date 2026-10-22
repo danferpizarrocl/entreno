@@ -99,13 +99,13 @@ html.run .ctrls button svg{height:clamp(36px,7.5vh,90px)}
 #go{flex:2}
 #skip,#rst{flex:1}
 
-#finWrap{display:flex;justify-content:center;padding:6px 0}
-#finBtn{position:relative;width:max(200px,min(72vw,42vh,320px));aspect-ratio:1 / 1;border:none;border-radius:50%;padding:0;background:#7a0c0c;color:#ffffff;font-family:var(--font-display);font-weight:600;letter-spacing:.05em;text-transform:uppercase;-webkit-text-stroke:6px #000;paint-order:stroke fill;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:none;-webkit-tap-highlight-color:transparent}
+#finWrap{display:flex;justify-content:center;align-items:stretch;padding:6px 0}
+#finBtn{position:relative;overflow:hidden;width:100%;height:max(150px,var(--cd,30vh));border:none;border-radius:22px;padding:0 10px;background:#dc143c;color:#ffffff;font-family:var(--font-display);font-weight:600;letter-spacing:.05em;text-transform:uppercase;-webkit-text-stroke:6px #000;paint-order:stroke fill;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:none;-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center}
 #finBtn *{pointer-events:none;-webkit-user-select:none;user-select:none}
-#finRing{position:absolute;inset:0;width:100%;height:100%}
-#finTxt{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px}
-#finMain{font-size:clamp(34px,10vw,56px);line-height:1}
-#finSub{font-size:19px;letter-spacing:.04em}
+#finFill{position:absolute;left:0;top:0;bottom:0;width:0;background:#8a0a25}
+#finTxt{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px}
+#finMain{display:flex;flex-direction:column;align-items:center;font-size:clamp(48px,min(17vw,9vh),150px);line-height:.95}
+#finSub{font-size:clamp(17px,min(4.4vw,2.6vh),30px);letter-spacing:.04em}
 
 html.run,html.run body{height:100%;overflow:hidden}
 html.run .wrap{max-width:none;height:100%;padding-block:10px;gap:12px;--bigfs:min(34vw,19vh);--lnfs:min(11vw,5.6vh);--totfs:min(10vw,5vh);--phfs:min(7vw,3.4vh);--cd:min(62vw,30vh,460px)}
@@ -118,14 +118,17 @@ html.run #totSub{display:block;font-family:var(--font-display);font-weight:600;l
 html.run .ctrls{flex:0 0 auto}
 html.run .ctrls button{height:clamp(90px,15vh,170px);min-height:0}
 html.run #finWrap{padding:0}
-html.run #finBtn{width:max(160px,var(--cd))}
-html.run #finMain{font-size:max(34px,calc(var(--cd) * .2))}
-html.run #finSub{font-size:max(17px,calc(var(--cd) * .075))}
+html.run #finBtn{height:100%;min-height:0}
+html.run #finWrap{flex:1 1 0;min-height:max(110px,15vh)}
+html.run #disp{flex:0 1 auto}
 @media (orientation:landscape){
   html.run .wrap{--bigfs:min(24vw,40vh);--lnfs:min(7.5vw,10vh);--totfs:min(6vw,7vh);--phfs:min(5vw,5vh);--cd:min(36vw,58vh,460px);display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;column-gap:16px}
   html.run #disp{grid-column:1;grid-row:1 / -1}
   html.run .ctrls{grid-column:2;grid-row:1}
-  html.run #finWrap{grid-column:2;grid-row:2;align-items:center}
+  html.run #finWrap{grid-column:2;grid-row:2;align-items:stretch}
+  html.run #finBtn{height:100%;min-height:0}
+  #finMain{font-size:clamp(34px,min(6.6vw,15vh),150px)}
+  #finSub{font-size:clamp(15px,min(2.4vw,3.2vh),30px)}
   html.run #rstBox{grid-column:2;grid-row:3}
 }
 #finBtn:disabled{cursor:default}
@@ -148,7 +151,8 @@ html.run #finSub{font-size:max(17px,calc(var(--cd) * .075))}
 .ibtns{display:flex;gap:12px;flex:none}
 .ibtns button{width:clamp(48px,8vh,86px);height:clamp(48px,8vh,86px);border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--fg);display:flex;align-items:center;justify-content:center;padding:0}
 .ibtns svg{width:55%;height:55%}
-@media (max-height:500px){#totSub{display:none}.track{margin:4px 0 2px}#lines{gap:2px;margin:2px 0}.wrap{padding-block:6px;gap:8px}#disp{padding:6px 14px}#big{font-size:clamp(40px,15vh,120px);margin:0}.ln{font-size:clamp(18px,5.6vh,60px)}#totMain{font-size:clamp(18px,4.8vh,40px)}.ctrls button{min-height:clamp(44px,12vh,90px)}.ibtns button{width:44px;height:44px}}
+@media (max-height:700px) and (orientation:portrait){#finSub{display:none}#finMain{font-size:clamp(34px,min(14vw,7.5vh),150px)}}
+@media (max-height:500px){#finSub{display:none}#totSub{display:none}.track{margin:4px 0 2px}#lines{gap:2px;margin:2px 0}.wrap{padding-block:6px;gap:8px}#disp{padding:6px 14px}#big{font-size:clamp(40px,15vh,120px);margin:0}.ln{font-size:clamp(18px,5.6vh,60px)}#totMain{font-size:clamp(18px,4.8vh,40px)}.ctrls button{min-height:clamp(44px,12vh,90px)}.ibtns button{width:44px;height:44px}}
 #cfgPanel .pin{max-width:1000px;gap:22px}
 #cfgTot{position:sticky;top:0;z-index:5;text-align:center;padding:14px 16px;border-radius:22px;background:var(--surface);border:2px solid var(--accent);box-shadow:0 6px 18px rgba(0,0,0,.18)}
 #cfgTotMain{font-family:var(--font-display);font-weight:600;font-size:clamp(34px,9vw,64px);line-height:1.1;letter-spacing:.02em;font-variant-numeric:tabular-nums}
@@ -233,7 +237,7 @@ details.snd summary{cursor:pointer;padding:13px 0;font-family:var(--font-display
     <button id="rst" type="button" aria-label="Reiniciar" title="Reiniciar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.6-5.9" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round"/><path d="M20 3v6h-6z" fill="#000"/></svg></button>
   </div>
 
-  <div id="finWrap" hidden><button id="finBtn" type="button" aria-label="Finalizar entrenamiento: mantén apretado 2 segundos"><svg id="finRing" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="none" stroke="#ffffff" stroke-width="4"/><circle id="finArc" cx="50" cy="50" r="46" fill="none" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-dasharray="289.03" stroke-dashoffset="289.03" transform="rotate(-90 50 50)"/></svg><span id="finTxt"><span id="finMain">Finalizar</span><span id="finSub">Mantén 2 segundos</span></span></button></div>
+  <div id="finWrap" hidden><button id="finBtn" type="button" aria-label="Terminar sesión: mantén apretado 2 segundos"><span id="finFill" aria-hidden="true"></span><span id="finTxt"><span id="finMain"><span>Terminar</span><span>Sesión</span></span><span id="finSub">Mantén 2 segundos</span></span></button></div>
 
   <div id="rstBox" role="alertdialog" aria-labelledby="rstTitle" hidden>
     <p id="rstTitle">¿Reiniciar el entrenamiento?</p>
@@ -799,21 +803,21 @@ function finishEarly(){
   paint();saveEntry(comp);
   started=false;lock(false);setGo('play');
 }
-var RING=289.03,HOLD_MS=2000,holdT=0,holdIv=null,holdOn=false;
+var HOLD_MS=2000,holdT=0,holdIv=null,holdOn=false;
 function holdLabel(){return 'Mantén '+(HOLD_MS/1000)+' segundos'}
 function holdReset(){
   holdOn=false;
   if(holdIv){clearInterval(holdIv);holdIv=null}
-  $('finArc').style.strokeDashoffset=RING;
-  $('finMain').textContent='Finalizar';$('finSub').textContent=holdLabel();
+  $('finFill').style.width='0';
+  $('finSub').textContent=holdLabel();
 }
 function holdStart(){
   if(!started||holdOn||$('finBtn').disabled)return;
   holdOn=true;holdT=Date.now();
   holdIv=setInterval(function(){
     var el=Date.now()-holdT;
-    $('finArc').style.strokeDashoffset=RING*(1-Math.min(1,el/HOLD_MS));
-    $('finMain').textContent=Math.max(0,Math.ceil((HOLD_MS-el)/1000));$('finSub').textContent='Sigue apretando';
+    $('finFill').style.width=(100*Math.min(1,el/HOLD_MS))+'%';
+    $('finSub').textContent='Sigue apretando';
     if(el>=HOLD_MS){holdReset();finishEarly()}
   },50);
 }
