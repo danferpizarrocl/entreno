@@ -399,7 +399,10 @@ var SND={
   fiveSec:[[1175,.16,0,'sine',.3],[1175,.16,.24,'sine',.3]],
   restStart:[[330,.2,0,'sine',.3]],
   quick:[[1000,.1,0,'sine',.2]],
-  tick:[[2200,.03,0,'square',.08]]
+  tick:[[2200,.03,0,'square',.08]],
+  pause:[[700,.12,0,'sine',.25],[440,.2,.11,'sine',.25]],
+  resume:[[440,.12,0,'sine',.25],[740,.2,.11,'sine',.25]],
+  reset:[[196,1.1,0,'triangle',.35]]
 };
 var SLABEL=[
   ['stretchEnd','Término del estiramiento'],
@@ -410,7 +413,10 @@ var SLABEL=[
   ['cycleEnd','Término del ciclo completo'],
   ['fiveSec','Aviso de 5 segundos'],
   ['restStart','Inicio del descanso'],
-  ['tick','Cuenta final (tic)']
+  ['tick','Cuenta final (tic)'],
+  ['pause','Pausar'],
+  ['resume','Reanudar'],
+  ['reset','Reiniciar']
 ];
 (function(){
   var g=$('sgrid'),h='';
@@ -736,8 +742,8 @@ $('go').onclick=function(){
     cfg=build();started=true;accum=0;lock(true);enterFs();idx=0;setPhase(0,true);beginRun();setGo('pause');schedAll();
     if(voiceActive())say(announceSeq(ph[0]),announceText(ph[0]),null);
     return}
-  if(running){stop();stopSpeech();setGo('resume')}
-  else{end=Date.now()+rem;beginRun();setGo('pause');schedAll()}
+  if(running){stop();stopSpeech();setGo('resume');play(SND.pause)}
+  else{end=Date.now()+rem;beginRun();setGo('pause');schedAll();play(SND.resume)}
 };
 $('skip').onclick=function(){
   if(!started)return;
@@ -770,7 +776,7 @@ $('rstNo').onclick=function(){
   closeBox();
   if(wasRunning&&started&&!running){end=Date.now()+rem;beginRun();setGo('pause');schedAll()}
 };
-$('rstYes').onclick=function(){closeBox();doReset()};
+$('rstYes').onclick=function(){ensureAudio();closeBox();doReset();play(SND.reset)};
 
 function isApp(){
   try{return !!(navigator.standalone||(window.matchMedia&&(matchMedia('(display-mode: fullscreen)').matches||matchMedia('(display-mode: standalone)').matches)))}catch(e){return false}
