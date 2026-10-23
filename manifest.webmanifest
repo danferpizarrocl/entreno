@@ -1,10 +1,10 @@
 {
-  "id": "./",
+  "id": "/entreno/",
   "name": "Kettlebell Training",
   "short_name": "Kettlebell",
   "description": "Temporizador de entrenamiento",
-  "start_url": "./",
-  "scope": "./",
+  "start_url": "/entreno/",
+  "scope": "/entreno/",
   "display": "fullscreen",
   "display_override": [
     "fullscreen",
