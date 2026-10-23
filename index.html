@@ -786,8 +786,9 @@ $('rst').onclick=function(){
 };
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!$('rstBox').hidden)$('rstNo').click()});
 $('rstNo').onclick=function(){
-  closeBox();
+  ensureAudio();closeBox();
   if(wasRunning&&started&&!running){end=Date.now()+rem;beginRun();setGo('pause');schedAll()}
+  play(SND.resume);
 };
 $('rstYes').onclick=function(){ensureAudio();closeBox();doReset();play(SND.reset)};
 
