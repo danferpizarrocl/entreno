@@ -212,6 +212,17 @@ details.snd summary{cursor:pointer;padding:13px 0;font-family:var(--font-display
 .hact{display:flex;gap:8px;flex-wrap:wrap}
 .hact button{padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);font-size:14px}
 #hlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.h-item.sm{grid-template-columns:auto minmax(0,1fr) auto;column-gap:12px;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+.h-chk{width:32px;height:32px;border:2px solid var(--muted);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:24px;line-height:1;font-weight:700;color:var(--on-accent)}
+.h-item.on{border-color:var(--accent);box-shadow:inset 0 0 0 2px var(--accent)}
+.h-item.on .h-chk{background:var(--accent);border-color:var(--accent)}
+#selBar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px;padding:10px 12px;background:var(--surface);border:2px solid var(--accent);border-radius:12px}
+#selBar[hidden]{display:none}
+#selCnt{font-weight:600;font-size:16px;flex:1 1 100%}
+#selBar button{padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg);font-size:15px;min-height:44px}
+#selDel{background:#c62828!important;color:#fff!important;border-color:#c62828!important;font-weight:600}
+#selDel:disabled{opacity:.4}
+#hsel:disabled{opacity:.45}
 .h-item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
 .h-date{font-size:14px;font-weight:500}
 .h-cfg{font-size:12px;color:var(--muted)}
@@ -286,11 +297,13 @@ details.snd summary{cursor:pointer;padding:13px 0;font-family:var(--font-display
       <span id="hsum"></span>
     </div>
     <div class="hact" style="margin:10px 0">
+      <button type="button" id="hsel">Seleccionar</button>
       <button type="button" id="hcopy">Copiar registro</button>
       <button type="button" id="hexp">Exportar</button>
       <button type="button" id="himp">Importar</button>
       <button type="button" id="hclear">Borrar todo</button>
     </div>
+    <div id="selBar" hidden><span id="selCnt" aria-live="polite">0 seleccionadas</span><button type="button" id="selDel" disabled>Eliminar</button><button type="button" id="selAll">Seleccionar todo</button><button type="button" id="selCancel">Cancelar</button></div>
     <div id="delBox" role="alertdialog" aria-labelledby="delTitle" hidden>
       <p id="delTitle"></p>
       <small id="delSub"></small>
@@ -907,7 +920,13 @@ function dstr(iso){
 function cfgStr(e){return e.S+' series × '+e.E+' ejercicios · ejercicio '+fmtU(e.w)}
 function openDel(target){
   delTarget=target;
-  if(target==='all'){
+  if(target==='sel'){
+    var n=selCount();
+    if(!n){delTarget=null;return}
+    $('delTitle').textContent=n===1?'¿Borrar este entrenamiento?':'¿Borrar '+n+' entrenamientos?';
+    $('delSub').textContent='Se pierden '+(n===1?'el seleccionado':'los '+n+' seleccionados')+'. No se puede deshacer.';
+    try{ensureAudio();play(SND.ask)}catch(er){}
+  }else if(target==='all'){
     $('delTitle').textContent='¿Borrar todo el registro?';
     $('delSub').textContent='Se pierden '+hist.length+(hist.length===1?' entrenamiento':' entrenamientos')+'. No se puede deshacer.';
   }else{
@@ -922,8 +941,24 @@ function openDel(target){
   $('delNo').focus();
 }
 function closeDel(){delTarget=null;$('delBox').hidden=true}
+var selMode=false,sel={};
+function selCount(){var n=0;for(var k in sel)if(sel[k])n++;return n}
+function updSel(){
+  var n=selCount();
+  $('selCnt').textContent=n+(n===1?' seleccionada':' seleccionadas');
+  $('selDel').disabled=!n;
+  $('selAll').textContent=(hist.length&&n===hist.length)?'Quitar selección':'Seleccionar todo';
+}
+function setSelMode(on){
+  selMode=!!on;if(!selMode)sel={};
+  $('selBar').hidden=!selMode;
+  renderHist();
+}
 function renderHist(){
   var list=$('hlist'),h='';
+  var ids={};hist.forEach(function(e){ids[e.id]=1});for(var k in sel)if(!ids[k])delete sel[k];
+  if(selMode&&!hist.length){selMode=false;sel={};$('selBar').hidden=true}
+  $('hsel').disabled=!hist.length;
   if(!hist.length){
     list.innerHTML='<li class="empty">Aquí aparece cada entrenamiento al terminar: fecha, hora y duración.</li>';
     $('hsum').textContent='';
@@ -931,7 +966,10 @@ function renderHist(){
     var tot=0;
     hist.forEach(function(e){
       tot+=e.dur;
-      h+='<li class="h-item"><div><div class="h-date">'+dstr(e.ts)+'</div><div class="h-cfg">'+cfgStr(e)+'</div></div>'
+      var on=!!sel[e.id];
+      h+='<li class="h-item'+(selMode?' sm':'')+(selMode&&on?' on':'')+'"'+(selMode?' data-id="'+e.id+'" role="checkbox" aria-checked="'+on+'" tabindex="0"':'')+'>'
+        +(selMode?'<span class="h-chk" aria-hidden="true">'+(on?'&#10003;':'')+'</span>':'')
+        +'<div><div class="h-date">'+dstr(e.ts)+'</div><div class="h-cfg">'+cfgStr(e)+'</div></div>'
         +'<div class="h-dur">'+fmtDur(e.dur)+'</div>'
         +'<div class="h-foot"><span class="badge '+(e.done?'ok':'inc')+'">'+(e.done?'Completo':'Incompleto')+'</span>'
         +'<button type="button" class="h-del" data-id="'+e.id+'">Borrar</button></div></li>';
@@ -939,19 +977,44 @@ function renderHist(){
     list.innerHTML=h;
     $('hsum').textContent=hist.length+(hist.length===1?' entrenamiento':' entrenamientos')+' · '+fmtDur(tot)+' en total';
   }
+  updSel();
+}
+function toggleSel(li){
+  var id=li.getAttribute('data-id');
+  if(sel[id])delete sel[id];else sel[id]=1;
+  var on=!!sel[id];
+  li.classList.toggle('on',on);li.setAttribute('aria-checked',on);
+  li.querySelector('.h-chk').innerHTML=on?'&#10003;':'';
+  updSel();
 }
 $('hlist').addEventListener('click',function(e){
   var b=e.target.closest('.h-del');
-  if(!b)return;
-  openDel(parseInt(b.getAttribute('data-id'),10));
+  if(b){openDel(parseInt(b.getAttribute('data-id'),10));return}
+  if(!selMode)return;
+  var li=e.target.closest('.h-item');
+  if(li)toggleSel(li);
 });
+$('hlist').addEventListener('keydown',function(e){
+  if(!selMode||(e.key!==' '&&e.key!=='Enter'))return;
+  var li=e.target.closest&&e.target.closest('.h-item');
+  if(li&&e.target===li){e.preventDefault();toggleSel(li)}
+});
+$('hsel').onclick=function(){if(hist.length)setSelMode(true)};
+$('selCancel').onclick=function(){closeDel();setSelMode(false)};
+$('selAll').onclick=function(){
+  if(hist.length&&selCount()===hist.length)sel={};
+  else{sel={};hist.forEach(function(e){sel[e.id]=1})}
+  renderHist();
+};
+$('selDel').onclick=function(){openDel('sel')};
 $('hclear').onclick=function(){
   if(!hist.length){$('msg').textContent='No hay nada que borrar.';return}
   openDel('all');
 };
 $('delNo').onclick=closeDel;
 $('delYes').onclick=function(){
-  if(delTarget==='all'){hist=[];$('cpy').hidden=true;$('msg').textContent=''}
+  if(delTarget==='sel'){hist=hist.filter(function(x){return !sel[x.id]});sel={};selMode=false;$('selBar').hidden=true}
+  else if(delTarget==='all'){hist=[];$('cpy').hidden=true;$('msg').textContent=''}
   else if(delTarget!==null){var id=delTarget;hist=hist.filter(function(x){return x.id!==id})}
   lsSet(KEY_H,hist);closeDel();renderHist();
 };
