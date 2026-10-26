@@ -245,6 +245,25 @@ html.run.bar,html.run.bar body{height:var(--maxh)}
 html.run.bar .wrap{height:var(--maxh)}
 html.run .ctrls,html.run #finWrap{transition:transform .38s cubic-bezier(.22,.8,.3,1)}
 html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--bh,0px)));position:relative;z-index:5}
+#hlist .h-month{list-style:none;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;background:var(--bg);border:2px solid var(--line);border-radius:14px;padding:12px 14px;margin-top:6px}
+#hlist .h-month:first-child{margin-top:0}
+.hm-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.hm-name{font-size:17px;font-weight:700}
+.hm-name b{display:inline-block;font-weight:400;color:var(--muted);transition:transform .25s;margin-right:4px}
+.h-month.open .hm-name b{transform:rotate(90deg)}
+.hm-tot{font-family:var(--font-display);font-weight:600;font-size:24px;font-variant-numeric:tabular-nums}
+.hm-sub{font-size:13px;color:var(--muted);margin-top:3px}
+.hm-bar{height:8px;border-radius:6px;background:var(--line);margin-top:8px;overflow:hidden}
+.hm-bar i{display:block;height:100%;background:var(--accent);border-radius:6px}
+.h-item.mh{display:none}
+#limBox{position:fixed;inset:0;z-index:210;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.72)}
+#limBox[hidden]{display:none!important}
+#limCard{width:min(94vw,520px);max-height:94vh;overflow:auto;background:var(--surface);border:3px solid var(--accent);border-radius:24px;padding:clamp(18px,4vh,30px) clamp(16px,4vw,28px);text-align:center;box-sizing:border-box}
+#limCard p{margin:0 0 8px;font-weight:700;font-size:clamp(24px,6vw,36px);line-height:1.15}
+#limCard small{display:block;color:var(--muted);font-size:clamp(16px,4vw,22px);line-height:1.35;margin-bottom:18px}
+#limCard .lb{display:flex;flex-direction:column;gap:10px}
+#limCard .lb button{height:clamp(56px,9vh,80px);border-radius:16px;font-size:clamp(19px,4.6vw,28px);font-weight:600;border:2px solid var(--line);background:var(--bg)}
+#limCard .lb button.pri{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
 </style>
 </head>
 <body>
@@ -266,6 +285,8 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
   </div>
 
   <div id="finWrap" hidden><button id="finBtn" type="button" aria-label="Terminar sesión: mantén apretado 1,5 segundos"><span id="finFill" aria-hidden="true"></span><span id="finTxt"><span id="finMain"><span>Terminar</span><span>Sesión</span></span><span id="finSub">Mantén 2 segundos</span></span></button></div>
+
+  <div id="limBox" role="alertdialog" aria-modal="true" aria-labelledby="limTitle" hidden><div id="limCard"><p id="limTitle"></p><small id="limTxt"></small><div class="lb"><button type="button" id="limExp" class="pri">Exportar ahora</button><button type="button" id="limOk">Entendido</button></div></div></div>
 
   <div id="rstBox" role="alertdialog" aria-modal="true" aria-labelledby="rstTitle" hidden>
     <div id="rstCard">
@@ -738,7 +759,17 @@ function saveEntry(done){
   if(hist.length>500)hist.length=500;
   lsSet(KEY_H,hist);
   renderHist();
+  if(hist.length>=450)setTimeout(showLim,600);
 }
+function showLim(){
+  var n=hist.length;
+  $('limTitle').textContent=n>=500?'Registro lleno':'Registro casi lleno';
+  $('limTxt').textContent=n>=500?'Ya tienes 500 entrenamientos guardados. Al terminar el próximo se borra el más antiguo. Exporta tu registro para no perderlos.':'Llevas '+n+' de 500 entrenamientos. Al llegar a 500, los más antiguos se borran solos. Te recomiendo exportar tu registro.';
+  $('limBox').hidden=false;
+  try{play(SND.ask)}catch(e){}
+}
+$('limOk').onclick=function(){$('limBox').hidden=true};
+$('limExp').onclick=function(){$('limBox').hidden=true;try{$('openHist').click();setTimeout(function(){$('hexp').click()},80)}catch(e){}};
 
 function setPhase(i,silent,e0){
   var prev=ph[idx];
@@ -973,6 +1004,7 @@ function setSelMode(on){
   $('selBar').hidden=!selMode;
   renderHist();
 }
+var openM={};
 function renderHist(){
   var list=$('hlist'),h='';
   var ids={};hist.forEach(function(e){ids[e.id]=1});for(var k in sel)if(!ids[k])delete sel[k];
@@ -982,11 +1014,30 @@ function renderHist(){
     list.innerHTML='<li class="empty">Aquí aparece cada entrenamiento al terminar: fecha, hora y duración.</li>';
     $('hsum').textContent='';
   }else{
-    var tot=0;
-    hist.forEach(function(e){
+    var tot=0,MN=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    var sorted=hist.slice().sort(function(a,b){return (b.ts>a.ts)-(b.ts<a.ts)});
+    var months={},order=[],nowD=new Date(),curK=nowD.getFullYear()+'-'+nowD.getMonth();
+    sorted.forEach(function(e){
+      var d=new Date(e.ts),k=isNaN(d.getTime())?'x':d.getFullYear()+'-'+d.getMonth();
+      if(!months[k]){months[k]={k:k,n:0,t:0,days:{},y:d.getFullYear(),m:d.getMonth()};order.push(k)}
+      var M=months[k];M.n++;M.t+=e.dur;M.days[isNaN(d.getTime())?'x':d.getDate()]=1;
+    });
+    var maxT=1;order.forEach(function(k){if(months[k].t>maxT)maxT=months[k].t});
+    var lastK=null;
+    sorted.forEach(function(e){
       tot+=e.dur;
-      var on=!!sel[e.id];
-      h+='<li class="h-item'+(selMode?' sm':'')+(selMode&&on?' on':'')+'"'+(selMode?' data-id="'+e.id+'" role="checkbox" aria-checked="'+on+'" tabindex="0"':'')+'>'
+      var d=new Date(e.ts),k=isNaN(d.getTime())?'x':d.getFullYear()+'-'+d.getMonth();
+      if(k!==lastK){
+        lastK=k;var M=months[k],nd=Object.keys(M.days).length;
+        if(openM[k]===undefined)openM[k]=(k===curK||order[0]===k&&!months[curK]);
+        var isO=!!openM[k];
+        h+='<li class="h-month'+(isO?' open':'')+'" data-m="'+k+'" role="button" tabindex="0" aria-expanded="'+isO+'">'
+          +'<div class="hm-top"><span class="hm-name"><b aria-hidden="true">&#9654;</b>'+(k==='x'?'Sin fecha':MN[M.m]+' '+M.y)+'</span><span class="hm-tot">'+fmtDur(M.t)+'</span></div>'
+          +'<div class="hm-sub">'+M.n+(M.n===1?' entrenamiento':' entrenamientos')+' · '+nd+(nd===1?' día':' días')+' · prom. '+fmtDur(Math.round(M.t/M.n))+'</div>'
+          +'<div class="hm-bar"><i style="width:'+Math.max(3,Math.round(M.t/maxT*100))+'%"></i></div></li>';
+      }
+      var on=!!sel[e.id],hide=!openM[k];
+      h+='<li class="h-item'+(selMode?' sm':'')+(selMode&&on?' on':'')+(hide?' mh':'')+'" data-mk="'+k+'"'+(selMode?' data-id="'+e.id+'" role="checkbox" aria-checked="'+on+'" tabindex="0"':'')+'>'
         +(selMode?'<span class="h-chk" aria-hidden="true">'+(on?'&#10003;':'')+'</span>':'')
         +'<div><div class="h-date">'+dstr(e.ts)+'</div><div class="h-cfg">'+cfgStr(e)+'</div></div>'
         +'<div class="h-dur">'+fmtDur(e.dur)+'</div>'
@@ -1006,7 +1057,14 @@ function toggleSel(li){
   li.querySelector('.h-chk').innerHTML=on?'&#10003;':'';
   updSel();
 }
+function toggleMonth(li){
+  var k=li.getAttribute('data-m'),o=!openM[k];openM[k]=o;
+  li.classList.toggle('open',o);li.setAttribute('aria-expanded',o);
+  document.querySelectorAll('#hlist .h-item').forEach(function(x){if(x.getAttribute('data-mk')===k)x.classList.toggle('mh',!o)});
+}
 $('hlist').addEventListener('click',function(e){
+  var mo=e.target.closest('.h-month');
+  if(mo){toggleMonth(mo);return}
   var b=e.target.closest('.h-del');
   if(b){openDel(parseInt(b.getAttribute('data-id'),10));return}
   if(!selMode)return;
@@ -1014,6 +1072,7 @@ $('hlist').addEventListener('click',function(e){
   if(li)toggleSel(li);
 });
 $('hlist').addEventListener('keydown',function(e){
+  if((e.key===' '||e.key==='Enter')&&e.target.classList&&e.target.classList.contains('h-month')){e.preventDefault();toggleMonth(e.target);return}
   if(!selMode||(e.key!==' '&&e.key!=='Enter'))return;
   var li=e.target.closest&&e.target.closest('.h-item');
   if(li&&e.target===li){e.preventDefault();toggleSel(li)}
