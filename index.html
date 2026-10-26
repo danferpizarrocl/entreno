@@ -62,7 +62,7 @@ html{-webkit-text-size-adjust:100%;color-scheme:light dark}
 }
 body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:15px;line-height:1.45}
 *{box-sizing:border-box}
-.wrap{max-width:1000px;min-height:100dvh;box-sizing:border-box;margin:0 auto;padding-block:14px calc(14px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:14px}
+.wrap{max-width:1000px;min-height:100dvh;box-sizing:border-box;margin:0 auto;padding-block:calc(14px + env(safe-area-inset-top,0px)) calc(14px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:14px}
 h1{font-family:var(--font-display);font-weight:600;font-size:22px;letter-spacing:.06em;text-transform:uppercase;margin:0;color:var(--muted)}
 h2{font-family:var(--font-display);font-weight:600;font-size:18px;letter-spacing:.05em;text-transform:uppercase;margin:0}
 button,input,select,textarea{font:inherit;color:var(--fg)}
@@ -110,7 +110,7 @@ html.run .ctrls button svg{height:clamp(36px,7.5vh,90px)}
 #finSub{display:none}
 
 html.run,html.run body{height:100%;overflow:hidden}
-html.run .wrap{max-width:none;height:100%;padding-block:10px;gap:12px;--bigfs:min(34vw,19vh);--lnfs:min(11vw,5.6vh);--totfs:min(10vw,5vh);--phfs:min(7vw,3.4vh);--cd:min(62vw,30vh,460px)}
+html.run .wrap{max-width:none;height:100%;padding-block:calc(10px + env(safe-area-inset-top,0px)) calc(10px + env(safe-area-inset-bottom,0px));gap:12px;--bigfs:min(34vw,19vh);--lnfs:min(11vw,5.6vh);--totfs:min(10vw,5vh);--phfs:min(7vw,3.4vh);--cd:min(62vw,30vh,460px)}
 html.run #disp{flex:1 1 0;min-height:0;overflow:auto;display:flex;flex-direction:column;justify-content:center;padding:12px 14px}
 html.run #phase{font-size:max(22px,var(--phfs))}
 html.run #big{font-size:max(80px,var(--bigfs))}
@@ -184,7 +184,7 @@ html.run #disp{flex:0 1 auto}
 #cfgPanel .sgrid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;padding:4px 0 24px}
 #cfgPanel .sgrid button{font-size:24px;padding:18px 16px;border-radius:16px}
 .panel{position:fixed;inset:0;z-index:50;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch}
-.pin{max-width:640px;margin:0 auto;padding:14px max(16px,env(safe-area-inset-right,0px)) 40px max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:14px}
+.pin{max-width:640px;margin:0 auto;padding:calc(14px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(40px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:14px}
 .phead{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .phead button{padding:0 20px;height:44px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:var(--on-accent);font-size:16px;font-weight:500}
 html.pnl,html.pnl body{overflow:hidden}
@@ -237,6 +237,10 @@ details.snd summary{cursor:pointer;padding:13px 0;font-family:var(--font-display
 #cpy{width:100%;min-height:90px;border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:8px;font-size:13px;margin-top:8px}
 #msg{font-size:12px;color:var(--muted);min-height:16px}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (display-mode: fullscreen),(display-mode: standalone){
+  .wrap,html.run .wrap{padding-top:max(26px,calc(env(safe-area-inset-top,0px) + 12px));padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+  .pin{padding-top:max(26px,calc(env(safe-area-inset-top,0px) + 12px))}
+}
 </style>
 </head>
 <body>
