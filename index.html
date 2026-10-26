@@ -823,8 +823,6 @@ function enterFs(){
   }catch(e){}
 }
 function inFs(){return !!(document.fullscreenElement||document.webkitFullscreenElement)}
-var fsAuto=true;
-document.addEventListener('pointerup',function(){if(!fsAuto||isApp())return;fsAuto=false;if(!inFs())enterFs()},true);
 function exitFs(){
   try{
     if(document.fullscreenElement||document.webkitFullscreenElement){
