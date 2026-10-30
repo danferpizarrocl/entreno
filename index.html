@@ -793,16 +793,24 @@ function stop(ts,keep){
   if(keep)schedOn=false;else schedClear();
 }
 
-function saveEntry(done){
+function saveEntry(done,ask){
   var e={id:Date.now(),ts:new Date().toISOString(),dur:Math.round(accum/1000),S:cfg.S,E:cfg.E,w:TF.c_work.s,st:TF.c_str.s,r:TF.c_rest.s,sr:TF.c_srest.s,done:done};
   hist.unshift(e);
   if(hist.length>500)hist.length=500;
   lsSet(KEY_H,hist);
   renderHist();
-  if(hist.length>=450)setTimeout(showLim,600);
+  if(hist.length>=450)setTimeout(showLim,600);else if(ask)setTimeout(showExp,600);
+}
+function showExp(){
+  $('limTitle').textContent='Sesión guardada';
+  $('limTxt').textContent='¿Quieres exportar todos tus entrenamientos para guardarlos? Se copian y los pegas donde quieras.';
+  $('limExp').textContent='Exportar';$('limOk').textContent='Ahora no';
+  $('limBox').hidden=false;
+  try{play(SND.ask)}catch(e){}
 }
 function showLim(){
   var n=hist.length;
+  $('limExp').textContent='Exportar ahora';$('limOk').textContent='Entendido';
   $('limTitle').textContent=n>=500?'Registro lleno':'Registro casi lleno';
   $('limTxt').textContent=n>=500?'Ya tienes 500 entrenamientos guardados. Al terminar el próximo se borra el más antiguo. Exporta tu registro para no perderlos.':'Llevas '+n+' de 500 entrenamientos. Al llegar a 500, los más antiguos se borran solos. Te recomiendo exportar tu registro.';
   $('limBox').hidden=false;
@@ -817,7 +825,7 @@ function setPhase(i,silent,e0){
   if(!silent)transitionSound(prev,ph[idx]);
   $('big').classList.remove('warn');warned=false;
   if(!ph[idx]){
-    stop(e0,!!e0);paint();saveEntry(true);started=false;lock(false);setGo('play');return}
+    stop(e0,!!e0);paint();saveEntry(true,true);started=false;lock(false);setGo('play');return}
   rem=ph[idx].d*1000;end=(e0||Date.now())+rem;if(e0)rem=Math.max(0,end-Date.now());lastSec=-1;
   paint();
 }
@@ -912,7 +920,7 @@ function finishEarly(){
   stop();
   transitionSound(prev,undefined);
   idx=ph.length;rem=0;
-  paint();saveEntry(comp);
+  paint();saveEntry(comp,true);
   started=false;lock(false);setGo('play');
 }
 var HOLD_MS=1500,holdT=0,holdRaf=0,holdOn=false;
