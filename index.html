@@ -264,6 +264,18 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
 #limCard .lb{display:flex;flex-direction:column;gap:10px}
 #limCard .lb button{height:clamp(56px,9vh,80px);border-radius:16px;font-size:clamp(19px,4.6vw,28px);font-weight:600;border:2px solid var(--line);background:var(--bg)}
 #limCard .lb button.pri{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+#disp[data-phase="extra"]{--p-bg:#ff2bd6;--p-fg:#000000;--p-trk:#b81e9b}
+#xCard{margin-top:14px}
+#xAdd{padding:8px 12px;border:1px solid var(--accent);border-radius:10px;background:var(--accent);color:var(--on-accent);font-weight:600}
+.xrow{padding:12px 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.xl1,.xl2{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.xl2>label{font-size:13px;color:var(--muted);flex:0 0 auto}
+.xrow input,.xrow select{height:40px;border:1px solid var(--line);border-radius:9px;background:var(--bg);padding:0 8px;min-width:0}
+.xrow input.xn{flex:1 1 160px}
+.xrow input[type=number]{width:90px}
+.xrow select{flex:1 1 110px}
+.xdel,.xplay{height:40px;min-width:44px;border:1px solid var(--line);border-radius:9px;background:var(--surface);font-size:16px}
+.xnote{display:block;color:var(--muted);font-size:13px;line-height:1.35;padding:10px 0 8px}
 </style>
 </head>
 <body>
@@ -314,6 +326,12 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
     <div class="row"><label for="voiceSel">Voz</label><select id="voiceSel" style="flex:1 1 180px;min-width:0;height:36px;border:1px solid var(--line);border-radius:9px;background:var(--bg);padding:0 6px"><option value="">Automática</option></select></div>
   </section>
 
+  <section class="card" id="xCard" aria-label="Bloques extra">
+    <div class="row"><label>Bloques extra</label><button type="button" id="xAdd">+ Agregar bloque</button></div>
+    <div id="xList"></div>
+    <small class="xnote">Un bloque extra es una pausa o sección que tú pones entre los ejercicios, con su nombre, su tiempo y el sonido que elijas. Si no agregas ninguno, la sesión queda como siempre.</small>
+  </section>
+
   <details class="snd" id="sndBox">
     <summary>Probar sonidos</summary>
     <div class="sgrid" id="sgrid"></div>
@@ -360,6 +378,7 @@ var $=function(i){return document.getElementById(i)};
 var TF={c_pre:{min:0,st:5,s:10},c_pfin:{min:0,st:5,s:0},c_gap:{min:0,st:5,s:5},c_fin:{min:0,st:30,s:300},c_str:{min:0,st:30,s:300},c_work:{min:1,st:5,s:40},c_rest:{min:0,st:5,s:20},c_srest:{min:0,st:5,s:60}};
 var CNT=['c_sets','c_ex'];
 var allIds=['c_pre','c_gap','c_fin','c_str','c_work','c_rest','c_srest','c_sets','c_ex','u_pre','u_gap','u_fin','u_str','u_work','u_rest','u_srest'];
+var extras=[];
 var ph=[],idx=0,rem=0,end=0,running=false,started=false,timer=null,ac=null,lastSec=-1,cfg,warned=false;
 var accum=0,runStart=0,wl=null,hist=[],delTarget=null;
 var KEY_C='tempEntreno.cfg',KEY_H='tempEntreno.hist';
@@ -380,7 +399,7 @@ function fmtDur(sec){
 function fmtU(s){return s>=60&&s%60===0?(s/60)+' min':s+' s'}
 
 function saveCfg(){
-  var o={s:{},u:{},sets:cnt('c_sets'),ex:cnt('c_ex'),wake:$('wake').checked,voice:$('voiceOn').checked,vname:voicePref,vv:2};
+  var o={s:{},u:{},sets:cnt('c_sets'),ex:cnt('c_ex'),wake:$('wake').checked,voice:$('voiceOn').checked,vname:voicePref,vv:2,x:extras.map(function(x){return {n:x.n,s:x.s,u:x.u,a:x.a,r:x.r,snd:x.snd}})};
   Object.keys(TF).forEach(function(id){o.s[id]=TF[id].s;o.u[id]=unit(id)});
   lsSet(KEY_C,o);
 }
@@ -396,6 +415,11 @@ function loadCfg(){
   if(typeof o.wake==='boolean')$('wake').checked=o.wake;
   if(typeof o.voice==='boolean')$('voiceOn').checked=o.voice;
   if(o.vv===2&&typeof o.vname==='string')voicePref=o.vname;
+  if(Array.isArray(o.x)){
+    extras=o.x.slice(0,8).map(function(x){
+      return {n:String(x&&x.n||'').slice(0,24),s:Math.max(1,Math.round(+(x&&x.s)||30)),u:(x&&x.u==='min')?'min':'sec',a:Math.max(1,parseInt(x&&x.a,10)||1),r:Math.max(0,parseInt(x&&x.r,10)||0),snd:(x&&typeof x.snd==='string')?x.snd:'restStart'};
+    });
+  }
 }
 
 function build(){
@@ -409,6 +433,9 @@ function build(){
   for(var s=1;s<=S;s++){
     for(var e=1;e<=E;e++){
       ph.push({k:'work',d:w,s:s,e:e});
+      extras.forEach(function(x){
+        if(x.s>0&&Math.min(x.a,E)===e&&(x.r===0||x.r===s))ph.push({k:'extra',d:x.s,s:s,e:e,n:x.n||'Bloque extra',snd:x.snd});
+      });
       if(e<E&&r>0)ph.push({k:'rest',d:r,s:s,e:e});
     }
     if(s<S&&sr>0)ph.push({k:'srest',d:sr,s:s,e:E});
@@ -488,6 +515,12 @@ var SLABEL=[
 function beepTransition(prev,next){
   if(!prev)return;
   if(!next){play(SND.cycleEnd);return}
+  if(next.k==='extra'){
+    if(prev.k==='work'&&prev.e===cfg.E){play(SND.seriesEnd);if(SND[next.snd])play(SND[next.snd],1.3)}
+    else if(SND[next.snd])play(SND[next.snd]);
+    return;
+  }
+  if(prev.k==='extra'){play(SND.quick);return}
   if(prev.k==='stretch'){play(SND.stretchEnd);if(next.k==='work')play(SND.seriesStart,1.6)}
   else if(prev.k==='prep'){play(next.k==='work'?SND.seriesStart:SND.quick)}
   else if(prev.k==='work'){
@@ -601,6 +634,12 @@ function sClips(seq,t){
 function sBeepTransition(prev,next,t){
   if(!prev)return;
   if(!next){sPlay(SND.cycleEnd,t);return}
+  if(next.k==='extra'){
+    if(prev.k==='work'&&prev.e===cfg.E){sPlay(SND.seriesEnd,t);if(SND[next.snd])sPlay(SND[next.snd],t+1.3)}
+    else if(SND[next.snd])sPlay(SND[next.snd],t);
+    return;
+  }
+  if(prev.k==='extra'){sPlay(SND.quick,t);return}
   if(prev.k==='stretch'){sPlay(SND.stretchEnd,t);if(next.k==='work')sPlay(SND.seriesStart,t+1.6)}
   else if(prev.k==='prep'){sPlay(next.k==='work'?SND.seriesStart:SND.quick,t)}
   else if(prev.k==='work'){
@@ -614,6 +653,7 @@ function sBeepTransition(prev,next,t){
 }
 
 function sTransition(prev,next,t){
+  if(next&&next.k==='extra'){sBeepTransition(prev,next,t);return}
   var seq=announceSeq(next);
   if($('voiceOn').checked&&recSelected()&&haveAll(seq))sClips(seq,t);else sBeepTransition(prev,next,t);
 }
@@ -668,7 +708,7 @@ function kaStop(){
 }
 function transitionSound(prev,next){
   if(!prev)return;
-  if(voiceActive()){say(announceSeq(next),announceText(next),function(){beepTransition(prev,next)})}
+  if(voiceActive()&&!(next&&next.k==='extra')){say(announceSeq(next),announceText(next),function(){beepTransition(prev,next)})}
   else{beepTransition(prev,next)}
 }
 var names={fstretch:'Estiramiento final',stretch:'Estiramiento',prep:'Prepárate',work:'Ejercicio',rest:'Descanso',srest:'Descanso entre series'};
@@ -682,13 +722,13 @@ function paint(){
     setLines('Buen trabajo','',false);$('bar').style.width='100%';return;
   }
   setLook(p.k);
-  $('phase').textContent=names[p.k];
+  $('phase').textContent=p.k==='extra'?p.n:names[p.k];
   var secs=Math.max(0,Math.ceil(rem/1000));
   $('big').textContent=secs>=60?fmt(secs):String(secs);
   if(p.k==='fstretch'){setLines('Serie '+cfg.S+' de '+cfg.S,'Ejercicio '+cfg.E+' de '+cfg.E,true)}
   else if(p.k==='prep'&&p.to==='fstretch'){setLines('Serie '+cfg.S+' de '+cfg.S,'Ejercicio '+cfg.E+' de '+cfg.E,true)}
   else if(p.k==='prep'||p.k==='stretch'){setLines('Serie 1 de '+cfg.S,'Ejercicio 1 de '+cfg.E,true)}
-  else if(p.k==='work'||p.k==='rest'){setLines('Serie '+p.s+' de '+cfg.S,'Ejercicio '+p.e+' de '+cfg.E,false)}
+  else if(p.k==='work'||p.k==='rest'||p.k==='extra'){setLines('Serie '+p.s+' de '+cfg.S,'Ejercicio '+p.e+' de '+cfg.E,false)}
   else{setLines('Serie '+(p.s+1)+' de '+cfg.S,'Ejercicio 1 de '+cfg.E,true)}
   $('bar').style.width=(100*(1-rem/(p.d*1000)))+'%';
   if(started){
@@ -799,7 +839,7 @@ function tick(){
   if(s!==lastSec){lastSec=s;if(!schedOn&&s<=3&&s>=1)play(SND.tick)}
   paint();
 }
-function refresh(){cfg=build();idle();saveCfg()}
+function refresh(){cfg=build();idle();saveCfg();renderX()}
 
 $('go').onclick=function(){
   ensureAudio();
@@ -958,6 +998,60 @@ Object.keys(TF).forEach(function(id){
   $('u_'+id.slice(2)).addEventListener('change',function(){show(id);saveCfg()});
 });
 CNT.forEach(function(id){$(id).addEventListener('input',function(){if(!started)refresh()})});
+
+var XSND=[['','Sin sonido'],['quick','Pitido corto'],['restStart','Grave corto (inicio de descanso)'],['seriesStart','Triple pitido (inicio de serie)'],['seriesEnd','Campanita descendente (fin de serie)'],['stretchEnd','Campana (fin de estiramiento)'],['restEnd','Pitido agudo (fin de descanso)'],['seriesRestEnd','Doble tono (descanso entre series)'],['fiveSec','Aviso de 5 segundos'],['cycleEnd','Fanfarria (ciclo completo)']];
+function escA(t){return String(t).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;')}
+function renderX(){
+  var box=$('xList');if(!box)return;
+  var S=cnt('c_sets'),E=cnt('c_ex'),h='';
+  extras.forEach(function(x,i){
+    if(x.a>E)x.a=E;if(x.r>S)x.r=0;
+    var o='',j;
+    var dv=x.u==='min'?Math.round(x.s/60*100)/100:x.s;
+    var oa='';for(j=1;j<=E;j++)oa+='<option value="'+j+'"'+(x.a===j?' selected':'')+'>'+j+'</option>';
+    var or='<option value="0"'+(x.r===0?' selected':'')+'>todas las series</option>';for(j=1;j<=S;j++)or+='<option value="'+j+'"'+(x.r===j?' selected':'')+'>solo la serie '+j+'</option>';
+    var os='';XSND.forEach(function(q){os+='<option value="'+q[0]+'"'+(x.snd===q[0]?' selected':'')+'>'+q[1]+'</option>'});
+    h+='<div class="xrow" data-i="'+i+'">'
+      +'<div class="xl1"><input class="xn" data-f="n" type="text" maxlength="24" placeholder="Nombre (ej. Agua)" aria-label="Nombre del bloque" value="'+escA(x.n)+'"><button type="button" class="xdel" aria-label="Quitar bloque">&#10005;</button></div>'
+      +'<div class="xl2"><label>Duración</label><input type="number" data-f="s" step="any" min="1" aria-label="Duración" value="'+dv+'"><select data-f="u" aria-label="Unidad"><option value="sec"'+(x.u==='sec'?' selected':'')+'>seg</option><option value="min"'+(x.u==='min'?' selected':'')+'>min</option></select></div>'
+      +'<div class="xl2"><label>Después del ejercicio</label><select data-f="a" aria-label="Después del ejercicio">'+oa+'</select><select data-f="r" aria-label="En qué series">'+or+'</select></div>'
+      +'<div class="xl2"><label>Sonido</label><select data-f="snd" aria-label="Sonido del bloque">'+os+'</select><button type="button" class="xplay" aria-label="Probar sonido">&#9654;</button></div>'
+      +'</div>';
+  });
+  box.innerHTML=h;
+}
+function xChanged(){if(started)return;cfg=build();idle();saveCfg()}
+$('xAdd').onclick=function(){
+  if(started)return;
+  if(extras.length>=8){$('xAdd').textContent='Máximo 8 bloques';setTimeout(function(){$('xAdd').textContent='+ Agregar bloque'},1800);return}
+  extras.push({n:'',s:30,u:'sec',a:1,r:0,snd:'restStart'});
+  renderX();xChanged();
+  var ins=$('xList').querySelectorAll('.xn');if(ins.length)ins[ins.length-1].focus();
+};
+$('xList').addEventListener('input',function(e){
+  var t=e.target,row=t.closest('.xrow');if(!row||started)return;
+  var x=extras[+row.getAttribute('data-i')],f=t.getAttribute('data-f');if(!x)return;
+  if(f==='n'){x.n=t.value.slice(0,24)}
+  else if(f==='s'){var v=parseFloat(t.value);if(isNaN(v))return;x.s=Math.max(1,Math.round(v*(x.u==='min'?60:1)))}
+  else return;
+  xChanged();
+});
+$('xList').addEventListener('change',function(e){
+  var t=e.target,row=t.closest('.xrow');if(!row||started)return;
+  var x=extras[+row.getAttribute('data-i')],f=t.getAttribute('data-f');if(!x)return;
+  if(f==='u'){x.u=t.value;var inp=row.querySelector('input[data-f=s]');inp.value=x.u==='min'?Math.round(x.s/60*100)/100:x.s}
+  else if(f==='a'){x.a=parseInt(t.value,10)||1}
+  else if(f==='r'){x.r=parseInt(t.value,10)||0}
+  else if(f==='snd'){x.snd=t.value;if(SND[x.snd]){ensureAudio();play(SND[x.snd])}}
+  else return;
+  xChanged();
+});
+$('xList').addEventListener('click',function(e){
+  var row=e.target.closest('.xrow');if(!row||started)return;
+  var i=+row.getAttribute('data-i'),x=extras[i];if(!x)return;
+  if(e.target.closest('.xdel')){extras.splice(i,1);renderX();xChanged();return}
+  if(e.target.closest('.xplay')){ensureAudio();if(SND[x.snd])play(SND[x.snd])}
+});
 $('wake').addEventListener('change',function(){saveCfg();if(!$('wake').checked)wlOff();else if(running)wlOn()});
 
 var dfmt;
@@ -1159,6 +1253,7 @@ hist=lsGet(KEY_H)||[];
 if(!Array.isArray(hist))hist=[];
 loadCfg();
 Object.keys(TF).forEach(show);
+renderX();
 cfg=build();idle();
 renderHist();
 if(!('speechSynthesis' in window)&&!(window.AudioContext||window.webkitAudioContext)){$('voiceOn').checked=false;$('voiceOn').disabled=true}
