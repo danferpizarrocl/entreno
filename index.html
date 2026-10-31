@@ -276,9 +276,15 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
 .xrow select{flex:1 1 110px}
 .xdel,.xplay{height:40px;min-width:44px;border:1px solid var(--line);border-radius:9px;background:var(--surface);font-size:16px}
 .xnote{display:block;color:var(--muted);font-size:13px;line-height:1.35;padding:10px 0 8px}
+#splash{position:fixed;inset:0;z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:#d32f2f;color:#ffffff;transition:opacity .45s ease;cursor:pointer;padding:24px;text-align:center}
+#splash.off{opacity:0;pointer-events:none}
+#splash img{width:112px;height:112px;border-radius:24px}
+#spName{font-family:var(--font-display);font-weight:700;font-size:26px;letter-spacing:.04em;text-transform:uppercase}
+#spVer{font-size:15px;opacity:.85;font-variant-numeric:tabular-nums}
 </style>
 </head>
 <body>
+<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v39</div></div>
 <main class="wrap">
   <div id="topbar"><h1 id="ttl">Kettlebell Training</h1><div class="ibtns"><button type="button" id="openHist" aria-label="Registro de entrenamientos"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3" width="13" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 7h4M3 12h4M3 17h4M10 8h6M10 12h6M10 16h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><button type="button" id="openCfg" aria-label="Ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div></div>
 
@@ -1276,6 +1282,17 @@ decodeClips();
 </script>
 <script>
 if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}
+</script>
+<script>
+(function(){
+  var APP_VERSION='v39';
+  var sp=document.getElementById('splash');
+  if(!sp)return;
+  document.getElementById('spVer').textContent=APP_VERSION;
+  var t=setTimeout(hide,1500);
+  function hide(){clearTimeout(t);sp.classList.add('off');setTimeout(function(){sp.hidden=true;sp.remove()},500)}
+  sp.addEventListener('pointerdown',hide);
+})();
 </script>
 </body>
 </html>
