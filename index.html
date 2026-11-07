@@ -283,8 +283,8 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
 #spVer{font-size:15px;opacity:.85;font-variant-numeric:tabular-nums}
 #disp{position:relative}
 .hb{position:absolute;top:22%;width:58px;height:58px;border-radius:50%;border:3px solid #000;background:#1f6bff;color:#fff;font:800 32px system-ui;line-height:1;display:flex;align-items:center;justify-content:center;padding:0;z-index:5;box-shadow:0 0 0 3px #fff,0 6px 14px rgba(0,0,0,.35);transition:transform .15s ease;-webkit-tap-highlight-color:transparent;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
-#addSet{right:14px}
-#remSet{left:14px}
+#addSet{right:10px}
+#remSet{left:10px}
 .hb[hidden]{display:none!important}
 .hb.press{transform:scale(.9);background:#0b3fb3}
 #clock{margin-top:10px;display:flex;justify-content:space-between;gap:8px;font:700 14px system-ui;border-top:2px solid rgba(0,0,0,.25);padding-top:8px}
@@ -294,7 +294,7 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
 </style>
 </head>
 <body>
-<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v41</div></div>
+<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v42</div></div>
 <main class="wrap">
   <div id="topbar"><h1 id="ttl">Kettlebell Training</h1><div class="ibtns"><button type="button" id="openHist" aria-label="Registro de entrenamientos"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3" width="13" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 7h4M3 12h4M3 17h4M10 8h6M10 12h6M10 16h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><button type="button" id="openCfg" aria-label="Ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div></div>
 
@@ -356,7 +356,7 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
     <summary>Probar sonidos</summary>
     <div class="sgrid" id="sgrid"></div>
   </details>
-  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 41</small>
+  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 42</small>
   </div></div>
 
   <div class="panel" id="histPanel" role="dialog" aria-label="Registro" hidden><div class="pin"><div class="phead"><h2>Registro</h2><button type="button" id="histClose">Cerrar</button></div>
@@ -741,7 +741,7 @@ function setLook(kind){$('disp').setAttribute('data-phase',kind)}
 function totIdle(){$('totMain').textContent='Duración total '+fmtDur(cfg.total);$('totSub').textContent=cfg.S+' series × '+cfg.E+' ejercicios'}
 function paint(){
   var p=ph[idx];
-  try{$('addSet').hidden=!canAdd();$('remSet').hidden=!canRemove();$('clock').hidden=!started}catch(e){}
+  try{$('addSet').hidden=!canAdd();$('remSet').hidden=!canRemove();$('clock').hidden=!started;placeSetBtns()}catch(e){}
   if(!p){
     totIdle();setLook('done');$('big').classList.remove('warn');
     $('phase').textContent='Entrenamiento terminado';$('big').textContent='0:00';
@@ -891,7 +891,7 @@ function addOneSet(){
   cfg=build();
   paint();
   if(running)schedAll();
-  try{play(SND.quick)}catch(e){}
+  try{play(SND[addSnd]||SND.seriesStart)}catch(e){}
 }
 function canRemove(){
   if(!started)return false;
@@ -909,24 +909,31 @@ function removeOneSet(){
   if(running)schedAll();
   try{play(SND.quick)}catch(e){}
 }
-function hookHold(id,check,action){
-  var btn=$(id),tm=0;
-  function cancel(){clearTimeout(tm);tm=0;btn.classList.remove('press')}
+function hookTap(id,check,action){
+  var btn=$(id),last=0,armT=0;
   btn.addEventListener('pointerdown',function(e){
     if(!check())return;
     e.preventDefault();
-    try{btn.setPointerCapture(e.pointerId)}catch(err){}
-    btn.classList.add('press');
-    clearTimeout(tm);
-    tm=setTimeout(function(){tm=0;cancel();action()},900);
+    var now=Date.now();
+    clearTimeout(armT);
+    if(last&&now-last<=500){last=0;btn.classList.remove('press');action();return}
+    last=now;btn.classList.add('press');
+    armT=setTimeout(function(){last=0;btn.classList.remove('press')},500);
   });
-  ['pointerup','pointercancel','lostpointercapture'].forEach(function(ev){btn.addEventListener(ev,cancel)});
   btn.addEventListener('contextmenu',function(e){e.preventDefault()});
   btn.addEventListener('selectstart',function(e){e.preventDefault()});
   btn.addEventListener('click',function(e){e.preventDefault()});
 }
-hookHold('addSet',canAdd,addOneSet);
-hookHold('remSet',canRemove,removeOneSet);
+hookTap('addSet',canAdd,addOneSet);
+hookTap('remSet',canRemove,removeOneSet);
+function placeSetBtns(){
+  try{
+    var d=$('disp'),l=$('lnS');
+    var top=l.offsetTop+l.offsetHeight/2-29;
+    $('addSet').style.top=top+'px';$('remSet').style.top=top+'px';
+  }catch(e){}
+}
+window.addEventListener('resize',placeSetBtns);
 
 $('go').onclick=function(){
   ensureAudio();
@@ -1364,7 +1371,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',function(){navig
 </script>
 <script>
 (function(){
-  var APP_VERSION='v41';
+  var APP_VERSION='v42';
   var sp=document.getElementById('splash');
   if(!sp)return;
   document.getElementById('spVer').textContent=APP_VERSION;
