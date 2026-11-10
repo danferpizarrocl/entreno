@@ -262,6 +262,64 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
 .hm-bar{height:8px;border-radius:6px;background:var(--line);margin-top:8px;overflow:hidden}
 .hm-bar i{display:block;height:100%;background:var(--accent);border-radius:6px}
 .h-item.mh{display:none}
+.pz{display:inline-block;background:#000;color:#fff;border-radius:10px;padding:0 14px;letter-spacing:.08em}
+.tp{display:inline-block;font-size:11px;font-weight:600;padding:1px 7px;border-radius:999px;margin-right:6px;vertical-align:1px;border:1px solid currentColor}
+.tp.c{color:var(--accent)}
+.tp.f{color:var(--muted)}
+.rseg{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:4px;gap:4px}
+.rseg button{flex:1;height:48px;border:none;border-radius:9px;background:transparent;color:var(--muted);font-size:16px;font-weight:600}
+.rseg button.on{background:var(--accent);color:var(--on-accent)}
+.rchips{display:flex;gap:8px;flex-wrap:wrap}
+.rchips button{height:46px;padding:0 16px;border-radius:11px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:16px;font-weight:600}
+.rchips button.on{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.rstep{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}
+.rstep .rn{font-size:30px;font-weight:700;font-variant-numeric:tabular-nums}
+.rstep button{width:52px;height:52px;border-radius:50%;border:2px solid var(--accent);background:var(--surface);color:var(--accent);font-size:28px;font-weight:700;padding:0}
+.rgo{height:68px;border-radius:16px;border:2px solid #000;background:var(--accent);color:var(--on-accent);font-size:22px;font-weight:700}
+#runScr{position:fixed;inset:0;z-index:120;display:flex;flex-direction:column;gap:12px;padding:calc(12px + env(safe-area-inset-top,0px)) max(14px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));background:#FFD60A;color:#000;transition:background-color .6s ease,color .3s ease;font-family:var(--font-display)}
+#runScr[hidden]{display:none}
+#rsTop{display:flex;justify-content:space-between;font-weight:600;font-size:22px;letter-spacing:.06em;text-transform:uppercase}
+#rsMain{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:4px}
+#rsPz{min-height:36px;font-size:24px;font-weight:700}
+#rsPhase{font-size:30px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+#rsBig{font-size:min(34vw,22vh);font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+#rsBig.l{font-size:min(23vw,15vh)}
+#rsSub{font-size:30px;font-weight:600}
+#rsBar{position:relative;width:100%;max-width:560px;height:14px;border-radius:7px;background:rgba(0,0,0,.2);margin:26px 0 24px}
+#rsBar i{position:absolute;left:0;top:0;bottom:0;border-radius:7px;background:currentColor;width:0}
+#rsBar b{position:absolute;top:-3px;bottom:-3px;width:2px;background:currentColor;opacity:.7}
+#rsBar u{position:absolute;top:20px;font-size:14px;text-decoration:none;transform:translateX(-50%);font-weight:600}
+#rsClock{display:flex;justify-content:space-around;width:100%;max-width:560px;border-top:2px solid currentColor;padding-top:10px;font-size:19px;font-weight:600}
+#rsClock span{display:flex;flex-direction:column;align-items:center}
+#rsClock b{font-size:32px;font-variant-numeric:tabular-nums}
+#runScr.wt #rsBar{background:rgba(255,255,255,.3)}
+#rsCtrl{display:flex;gap:10px;height:max(96px,13vh)}
+.rb{flex:1;border-radius:20px;border:3px solid #000;background:#FFD60A;color:#000;display:flex;align-items:center;justify-content:center;padding:0}
+.rb svg{width:46px;height:46px}
+#rsEnd{position:relative;overflow:hidden;height:max(110px,14vh);border:3px solid #000;border-radius:22px;background:#ff0a3c;color:#000;font-family:var(--font-display);font-weight:700;font-size:44px;letter-spacing:.05em;text-transform:uppercase;user-select:none;-webkit-user-select:none;touch-action:none;padding:0 10px;line-height:1}
+#rsEnd *{pointer-events:none}
+#rsFill{position:absolute;left:0;top:0;bottom:0;width:100%;background:rgba(0,0,0,.24);transform:scaleX(0);transform-origin:0 50%}
+#rsEnd .t{position:relative;display:block}
+#rsEnd small{display:block;font-size:20px;letter-spacing:.04em;margin-top:4px;position:relative}
+#runScr.done #rsCtrl,#runScr.done #rsEnd{display:none}
+#rsClose{display:none;height:max(96px,13vh);border-radius:20px;border:3px solid #000;background:#FFD60A;color:#000;font-family:var(--font-display);font-size:40px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+#runScr.done #rsClose{display:block}
+@media (orientation:landscape) and (max-height:600px){
+  #runScr{display:grid;grid-template-columns:1fr minmax(220px,32%);grid-template-rows:auto 1fr auto;column-gap:14px}
+  #runScr[hidden]{display:none}
+  #rsTop{grid-column:1/3}
+  #rsMain{grid-column:1;grid-row:2/4}
+  #rsCtrl{grid-column:2;grid-row:2;height:auto}
+  #rsEnd,#rsClose{grid-column:2;grid-row:3;height:max(80px,22vh)}
+  #rsBig{font-size:min(24vw,27vh)}
+  #rsBig.l{font-size:min(17vw,20vh)}
+  #rsPhase{font-size:22px}
+  #rsPz{min-height:30px;font-size:20px}
+  #rsSub{font-size:22px}
+  #rsBar{margin:10px 0 24px}
+  #rsClock{font-size:15px;padding-top:6px}
+  #rsClock b{font-size:22px}
+}
 #limBox{position:fixed;inset:0;z-index:210;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.72)}
 #limBox[hidden]{display:none!important}
 #limCard{width:min(94vw,520px);max-height:94vh;overflow:auto;background:var(--surface);border:3px solid var(--accent);border-radius:24px;padding:clamp(18px,4vh,30px) clamp(16px,4vw,28px);text-align:center;box-sizing:border-box}
@@ -300,9 +358,9 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
 </style>
 </head>
 <body>
-<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v46</div></div>
+<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v47</div></div>
 <main class="wrap">
-  <div id="topbar"><h1 id="ttl">Kettlebell Training</h1><div class="ibtns"><button type="button" id="openHist" aria-label="Registro de entrenamientos"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3" width="13" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 7h4M3 12h4M3 17h4M10 8h6M10 12h6M10 16h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><button type="button" id="openCfg" aria-label="Ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div></div>
+  <div id="topbar"><h1 id="ttl">Kettlebell Training</h1><div class="ibtns"><button type="button" id="openRun" aria-label="Carrera"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="15" cy="4.5" r="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11 21l2-6-2.5-2 1.5-4 3 1 2-1.5M9 9l-2 2-3 1M9.5 13.5L8 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" id="openHist" aria-label="Registro de entrenamientos"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3" width="13" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 7h4M3 12h4M3 17h4M10 8h6M10 12h6M10 16h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><button type="button" id="openCfg" aria-label="Ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div></div>
 
   <section id="disp" data-phase="prep" aria-label="Cronómetro">
     <div id="phase" aria-live="polite">Listo para empezar</div>
@@ -322,6 +380,37 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
   </div>
 
   <div id="finWrap" hidden><button id="finBtn" type="button" aria-label="Terminar sesión: mantén apretado 1,5 segundos"><span id="finFill" aria-hidden="true"></span><span id="finTxt"><span id="finMain"><span>Terminar</span><span>Sesión</span></span><span id="finSub">Mantén 2 segundos</span></span></button></div>
+
+  <div class="panel" id="runMenu" role="dialog" aria-label="Carrera" hidden><div class="pin">
+    <div class="phead"><h2>Carrera</h2><button type="button" id="rmClose">Cerrar</button></div>
+    <div class="rseg"><button type="button" id="rmC">Cronómetro</button><button type="button" id="rmT" class="on">Temporizador</button></div>
+    <section class="card" id="rmDur">
+      <h2>Duración</h2>
+      <div class="rchips" id="rmChips"><button type="button" data-m="20">20 min</button><button type="button" data-m="30">30 min</button><button type="button" data-m="45">45 min</button><button type="button" data-m="60">60 min</button></div>
+      <div class="rstep"><span>Otro tiempo (min)</span><span style="display:flex;align-items:center;gap:12px"><button type="button" id="rmMinus" aria-label="Menos 5 minutos">&minus;</button><span class="rn" id="rmN">30</span><button type="button" id="rmPlus" aria-label="Más 5 minutos">+</button></span></div>
+    </section>
+    <section class="card">
+      <h2>Avisos</h2>
+      <small class="xnote">Cada 5 minutos suena un pitido, y el tono sube de a poco. La pantalla cambia de color en cada bloque y se pone roja al terminar.</small>
+      <label class="wake"><input type="checkbox" id="rVib"><span>Vibrar en cada aviso<small>Solo funciona en algunos celulares Android.</small></span></label>
+    </section>
+    <button type="button" class="rgo" id="rmGo">Iniciar carrera</button>
+  </div></div>
+
+  <div id="runScr" hidden>
+    <div id="rsTop"><span id="rsMode">Carrera</span><span id="rsGoal"></span></div>
+    <div id="rsMain">
+      <div id="rsPz" aria-live="off"></div>
+      <div id="rsPhase">Faltan</div>
+      <div id="rsBig">0:00</div>
+      <div id="rsSub">Llevas 0:00</div>
+      <div id="rsBar"><i></i></div>
+      <div id="rsClock"><span><small>Inicio de carrera</small><b id="rcStart">--:--</b></span><span><small id="rcEL">Término previsto</small><b id="rcEnd">--:--</b></span></div>
+    </div>
+    <div id="rsCtrl"><button type="button" class="rb" id="rsGo" aria-label="Pausar"></button></div>
+    <button type="button" id="rsEnd" aria-label="Terminar carrera: mantén apretado"><span id="rsFill" aria-hidden="true"></span><span class="t">Terminar<small id="rsHold">Mantén 2 segundos</small></span></button>
+    <button type="button" id="rsClose">Cerrar</button>
+  </div>
 
   <div id="limBox" role="alertdialog" aria-modal="true" aria-labelledby="limTitle" hidden><div id="limCard"><p id="limTitle"></p><small id="limTxt"></small><div class="lb"><button type="button" id="limExp" class="pri">Exportar ahora</button><button type="button" id="limOk">Entendido</button></div></div></div>
 
@@ -362,7 +451,7 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
     <summary>Probar sonidos</summary>
     <div class="sgrid" id="sgrid"></div>
   </details>
-  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 46</small>
+  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 47</small>
   </div></div>
 
   <div class="panel" id="histPanel" role="dialog" aria-label="Registro" hidden><div class="pin"><div class="phead"><h2>Registro</h2><button type="button" id="histClose">Cerrar</button></div>
@@ -808,7 +897,7 @@ function animRun(A,on){
   }catch(e){}
 }
 function lock(on){var A=animPrep();lockNow(on);animRun(A,on)}
-function lockNow(on){allIds.forEach(function(i){$(i).disabled=on});document.querySelectorAll('.stp button').forEach(function(b){b.disabled=on});$('wake').disabled=on;$('topbar').hidden=on;$('cfgPanel').hidden=true;$('histPanel').hidden=true;document.documentElement.classList.remove('pnl');$('finWrap').hidden=!on;document.documentElement.classList.toggle('run',on);if(!on)exitFs()}
+function lockNow(on){pzOff();allIds.forEach(function(i){$(i).disabled=on});document.querySelectorAll('.stp button').forEach(function(b){b.disabled=on});$('wake').disabled=on;$('topbar').hidden=on;$('cfgPanel').hidden=true;$('histPanel').hidden=true;document.documentElement.classList.remove('pnl');$('finWrap').hidden=!on;document.documentElement.classList.toggle('run',on);if(!on)exitFs()}
 
 function wlOn(){
   if(!$('wake').checked)return;
@@ -822,7 +911,7 @@ function wlOff(){try{if(wl){wl.release();wl=null}}catch(e){}}
 document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible'&&running)wlOn()});
 
 function elapsedMs(){return accum+(running&&runStart?Date.now()-runStart:0)}
-function beginRun(){runStart=Date.now();running=true;if(timer)clearInterval(timer);timer=setInterval(tick,100);wlOn();kaStart()}
+function beginRun(){pzOff();runStart=Date.now();running=true;if(timer)clearInterval(timer);timer=setInterval(tick,100);wlOn();kaStart()}
 function stop(ts,keep){
   if(running&&runStart){accum+=(ts||Date.now())-runStart;runStart=0}
   running=false;if(timer){clearInterval(timer);timer=null}
@@ -854,7 +943,7 @@ function showLim(){
   try{play(SND.ask)}catch(e){}
 }
 $('limOk').onclick=function(){$('limBox').hidden=true};
-$('limExp').onclick=function(){$('limBox').hidden=true;try{$('openHist').click();setTimeout(function(){$('hexp').click()},80)}catch(e){}};
+$('limExp').onclick=function(){$('limBox').hidden=true;try{if(R&&R.on&&R.fin)$('rsClose').click()}catch(e){}try{$('openHist').click();setTimeout(function(){$('hexp').click()},80)}catch(e){}};
 
 function setPhase(i,silent,e0){
   var prev=ph[idx];
@@ -948,7 +1037,7 @@ $('go').onclick=function(){
     addSets=0;cfg=build();started=true;startWall=Date.now();accum=0;lock(true);enterFs();idx=0;setPhase(0,true);beginRun();setGo('pause');schedAll();
     if(voiceActive())say(announceSeq(ph[0]),announceText(ph[0]),null);
     return}
-  if(running){stop();stopSpeech();setGo('resume');play(SND.pause)}
+  if(running){stop();stopSpeech();setGo('resume');play(SND.pause);pzOn()}
   else{end=Date.now()+rem;beginRun();setGo('pause');schedAll();play(SND.resume)}
 };
 $('skip').onclick=function(){
@@ -1167,7 +1256,8 @@ function dstr(iso){
   if(isNaN(d.getTime()))return iso;
   return dfmt?dfmt.format(d):d.toLocaleString();
 }
-function cfgStr(e){return e.S+' series × '+e.E+' ejercicios · ejercicio '+fmtU(e.w)}
+function fmtHM(sec){var tm=Math.floor(sec/60),h=Math.floor(tm/60),m=tm%60;return h?h+' h '+m+' min':m+' min'}
+function cfgStr(e){if(e.t==='c')return (e.m==='t'&&e.g)?'Temporizador '+Math.round(e.g/60)+' min':'Cronómetro';return e.S+' series × '+e.E+' ejercicios · ejercicio '+fmtU(e.w)}
 function openDel(target){
   delTarget=target;
   if(target==='sel'){
@@ -1214,18 +1304,18 @@ function renderHist(){
     list.innerHTML='<li class="empty">Aquí aparece cada entrenamiento al terminar: fecha, hora y duración.</li>';
     $('hsum').textContent='';
   }else{
-    var tot=0,MN=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    var tot=0,totR=0,MN=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
     var sorted=hist.slice().sort(function(a,b){return (b.ts>a.ts)-(b.ts<a.ts)});
     var months={},order=[],nowD=new Date(),curK=nowD.getFullYear()+'-'+nowD.getMonth();
     sorted.forEach(function(e){
       var d=new Date(e.ts),k=isNaN(d.getTime())?'x':d.getFullYear()+'-'+d.getMonth();
-      if(!months[k]){months[k]={k:k,n:0,t:0,days:{},y:d.getFullYear(),m:d.getMonth()};order.push(k)}
-      var M=months[k];M.n++;M.t+=e.dur;M.days[isNaN(d.getTime())?'x':d.getDate()]=1;
+      if(!months[k]){months[k]={k:k,n:0,t:0,f:0,r:0,days:{},y:d.getFullYear(),m:d.getMonth()};order.push(k)}
+      var M=months[k];M.n++;M.t+=e.dur;if(e.t==='c')M.r+=e.dur;else M.f+=e.dur;M.days[isNaN(d.getTime())?'x':d.getDate()]=1;
     });
     var maxT=1;order.forEach(function(k){if(months[k].t>maxT)maxT=months[k].t});
     var lastK=null;
     sorted.forEach(function(e){
-      tot+=e.dur;
+      tot+=e.dur;if(e.t==='c')totR+=e.dur;
       var d=new Date(e.ts),k=isNaN(d.getTime())?'x':d.getFullYear()+'-'+d.getMonth();
       if(k!==lastK){
         lastK=k;var M=months[k],nd=Object.keys(M.days).length;
@@ -1234,18 +1324,19 @@ function renderHist(){
         h+='<li class="h-month'+(isO?' open':'')+'" data-m="'+k+'" role="button" tabindex="0" aria-expanded="'+isO+'">'
           +'<div class="hm-top"><span class="hm-name"><b aria-hidden="true">&#9654;</b>'+(k==='x'?'Sin fecha':MN[M.m]+' '+M.y)+'</span><span class="hm-tot">'+fmtDur(M.t)+'</span></div>'
           +'<div class="hm-sub">'+M.n+(M.n===1?' entrenamiento':' entrenamientos')+' · '+nd+(nd===1?' día':' días')+' · prom. '+fmtDur(Math.round(M.t/M.n))+'</div>'
+          +(M.r>0?'<div class="hm-sub">Fuerza '+fmtHM(M.f)+' · Carrera '+fmtHM(M.r)+'</div>':'')
           +'<div class="hm-bar"><i style="width:'+Math.max(3,Math.round(M.t/maxT*100))+'%"></i></div></li>';
       }
       var on=!!sel[e.id],hide=!openM[k];
       h+='<li class="h-item'+(selMode?' sm':'')+(selMode&&on?' on':'')+(hide?' mh':'')+'" data-mk="'+k+'"'+(selMode?' data-id="'+e.id+'" role="checkbox" aria-checked="'+on+'" tabindex="0"':'')+'>'
         +(selMode?'<span class="h-chk" aria-hidden="true">'+(on?'&#10003;':'')+'</span>':'')
-        +'<div><div class="h-date">'+dstr(e.ts)+'</div><div class="h-cfg">'+cfgStr(e)+'</div></div>'
+        +'<div><div class="h-date"><span class="tp '+(e.t==='c'?'c">Carrera':'f">Fuerza')+'</span>'+dstr(e.ts)+'</div><div class="h-cfg">'+cfgStr(e)+'</div></div>'
         +'<div class="h-dur">'+fmtDur(e.dur)+'</div>'
         +'<div class="h-foot"><span class="badge '+(e.done?'ok':'inc')+'">'+(e.done?'Completo':'Incompleto')+'</span>'
         +'<button type="button" class="h-del" data-id="'+e.id+'">Borrar</button></div></li>';
     });
     list.innerHTML=h;
-    $('hsum').textContent=hist.length+(hist.length===1?' entrenamiento':' entrenamientos')+' · '+fmtDur(tot)+' en total';
+    $('hsum').textContent=hist.length+(hist.length===1?' entrenamiento':' entrenamientos')+' · '+fmtDur(tot)+' en total'+(totR>0?' · Fuerza '+fmtHM(tot-totR)+' · Carrera '+fmtHM(totR):'');
   }
   updSel();
 }
@@ -1327,6 +1418,7 @@ $('impChk').onclick=function(){
     if(!e||typeof e!=='object'||!isFinite(e.id)||typeof e.ts!=='string'||isNaN(Date.parse(e.ts))||!isFinite(e.dur)||e.dur<0){bad++;return}
     var n=function(v){return isFinite(v)?Math.max(0,Math.round(v)):0};
     var c={id:Math.round(e.id),ts:e.ts,dur:n(e.dur),S:n(e.S),E:n(e.E),w:n(e.w),st:n(e.st),r:n(e.r),sr:n(e.sr),done:!!e.done};
+    if(e.t==='c'){c.t='c';c.m=e.m==='t'?'t':'c';c.g=n(e.g)}
     good.push(c);if(!have[c.id]){have[c.id]=1;fresh++}
   });
   if(!good.length){info.textContent='No encontré entrenamientos válidos en ese texto.';return}
@@ -1346,14 +1438,188 @@ $('impYes').onclick=function(){
 };
 $('hcopy').onclick=function(){
   if(!hist.length){$('msg').textContent='Todavía no hay entrenamientos para copiar.';return}
-  var lines=hist.map(function(e){return dstr(e.ts)+' · '+fmtDur(e.dur)+' · '+cfgStr(e)+' · '+(e.done?'completo':'incompleto')});
-  var txt=lines.join('\n');
+  var MN2=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  var srt=hist.slice().sort(function(a,b){return (b.ts>a.ts)-(b.ts<a.ts)}),grp={},ord=[];
+  srt.forEach(function(e){var d=new Date(e.ts),k=isNaN(d.getTime())?'x':d.getFullYear()+'-'+d.getMonth();if(!grp[k]){grp[k]={d:d,f:[],c:[]};ord.push(k)}grp[k][e.t==='c'?'c':'f'].push(e)});
+  var out=[];
+  function ln(e){return dstr(e.ts)+' · '+fmtDur(e.dur)+' · '+cfgStr(e)+' · '+(e.done?'completo':'incompleto')}
+  ord.forEach(function(k){
+    var G=grp[k],tf=0,tc=0;G.f.forEach(function(e){tf+=e.dur});G.c.forEach(function(e){tc+=e.dur});
+    out.push('== '+(k==='x'?'Sin fecha':MN2[G.d.getMonth()]+' '+G.d.getFullYear())+' ==');
+    out.push('Total '+fmtHM(tf+tc)+' · Fuerza '+fmtHM(tf)+' · Carrera '+fmtHM(tc));
+    if(G.c.length){out.push('','CARRERA');G.c.forEach(function(e){out.push(ln(e))})}
+    if(G.f.length){out.push('','FUERZA (pesa rusa)');G.f.forEach(function(e){out.push(ln(e))})}
+    out.push('');
+  });
+  var txt=out.join('\n').trim();
   var ta=$('cpy');
   function fallback(){ta.value=txt;ta.hidden=false;ta.focus();ta.select();$('msg').textContent='Selecciona el texto y cópialo.'}
   try{
     navigator.clipboard.writeText(txt).then(function(){ta.hidden=true;$('msg').textContent='Registro copiado.'},fallback);
   }catch(e){fallback()}
 };
+
+/* ===== Pausa visible (pesas) ===== */
+var pzStart=0,pzT=0,pzLast=-1;
+function pzTick(){
+  if(!pzStart)return;
+  var s=Math.floor((Date.now()-pzStart)/1000);
+  if(s!==pzLast){pzLast=s;$('phase').innerHTML='<span class="pz">EN PAUSA · '+fmtDur(s)+'</span>'}
+  try{var d=new Date();$('ckNow').textContent=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}catch(e){}
+}
+function pzOn(){pzStart=Date.now();pzLast=-1;try{$('phase').setAttribute('aria-live','off')}catch(e){}pzTick();if(pzT)clearInterval(pzT);pzT=setInterval(pzTick,500)}
+function pzOff(){
+  if(pzT){clearInterval(pzT);pzT=0}
+  if(pzStart){pzStart=0;try{$('phase').setAttribute('aria-live','polite')}catch(e){}try{if(ph[idx])$('phase').textContent=ph[idx].k==='extra'?ph[idx].n:names[ph[idx].k]}catch(e){}}
+}
+
+/* ===== Carrera ===== */
+var KEY_R='tempEntreno.run';
+var RPAL=[['#FFD60A',1],['#FF9F1C',1],['#FF5A5F',0],['#E63975',0],['#B5179E',0],['#7209B7',0],['#3A0CA3',0],['#1F6BFF',0],['#00B4D8',1],['#06D6A0',1],['#3FB950',1],['#8AC926',1]];
+var rc=lsGet(KEY_R)||{},rMode=rc.m==='c'?'c':'t',rMin=(isFinite(rc.min)&&rc.min>=5)?Math.min(600,Math.round(rc.min)):30,rVibOn=!!rc.v;
+var R={on:false,fin:false,run:false};
+function rSave(){lsSet(KEY_R,{m:rMode,min:rMin,v:rVibOn})}
+function hm2(ms){var d=new Date(ms);return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}
+function rEl(){return R.acc+(R.run?Date.now()-R.t0:0)}
+function rmPaint(){
+  $('rmC').classList.toggle('on',rMode==='c');$('rmT').classList.toggle('on',rMode==='t');
+  $('rmDur').hidden=rMode!=='t';
+  $('rmN').textContent=rMin;
+  [].forEach.call(document.querySelectorAll('#rmChips button'),function(b){b.classList.toggle('on',+b.getAttribute('data-m')===rMin)});
+  $('rVib').checked=rVibOn;
+}
+$('openRun').onclick=function(){ensureAudio();rmPaint();openP('runMenu')};
+$('rmClose').onclick=function(){closeP('runMenu')};
+$('rmC').onclick=function(){rMode='c';rSave();rmPaint()};
+$('rmT').onclick=function(){rMode='t';rSave();rmPaint()};
+$('rmChips').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;rMin=+b.getAttribute('data-m');rSave();rmPaint()});
+$('rmMinus').onclick=function(){rMin=Math.max(5,(Math.ceil(rMin/5)-1)*5);rSave();rmPaint()};
+$('rmPlus').onclick=function(){rMin=Math.min(600,(Math.floor(rMin/5)+1)*5);rSave();rmPaint()};
+$('rVib').addEventListener('change',function(){rVibOn=$('rVib').checked;rSave();if(rVibOn&&navigator.vibrate)try{navigator.vibrate(120)}catch(e){}});
+function rGoIcon(t){$('rsGo').innerHTML=GOI[t];$('rsGo').setAttribute('aria-label',GOL[t])}
+function rBuild(){
+  $('runScr').classList.remove('done');
+  var t=R.mode==='t';
+  $('rsMode').textContent=t?'Temporizador':'Cronómetro';
+  $('rsGoal').textContent=t?Math.round(R.goal/60)+' min':'';
+  var h='<i></i>';
+  if(t){var nm=Math.ceil(R.goal/300)-1,step=Math.max(1,Math.ceil(nm/12));for(var k=1;k*300<R.goal;k++){var l=k*300/R.goal*100;h+='<b style="left:'+l+'%"></b>'+(k%step===0?'<u style="left:'+l+'%">'+(k*5)+'</u>':'')}}
+  $('rsBar').innerHTML=h;
+  $('rsPz').innerHTML='';
+  $('rcEL').textContent=t?'Término previsto':'Término';
+  rGoIcon('pause');
+  $('rsFill').style.transform='scaleX(0)';
+  $('rsHold').textContent=holdLabel().replace('.',',');
+}
+function rColor(){
+  var s=$('runScr'),bg,dark;
+  if(R.fin){bg='#ff0a3c';dark=true}
+  else{var p=RPAL[Math.floor(rEl()/300000)%12];bg=p[0];dark=!!p[1]}
+  s.style.backgroundColor=bg;s.style.color=dark?'#000':'#fff';s.classList.toggle('wt',!dark);
+}
+function rPaint(){
+  var e=Math.floor(rEl()/1000),g=R.goal,t=R.mode==='t';
+  var big=t?fmtDur(Math.max(0,g-e)):fmtDur(e);
+  var B=$('rsBig');B.textContent=big;B.classList.toggle('l',big.length>5);
+  var blk=Math.floor(e/300);
+  $('rsPhase').textContent=t?'Faltan':'Llevas';
+  $('rsSub').textContent=t?'Llevas '+fmtDur(e)+' · Bloque '+(blk+1)+' de '+Math.ceil(g/300):'Bloque '+(blk+1)+' · aviso cada 5 min';
+  $('rsBar').firstChild.style.width=(t?Math.min(100,e/g*100):(e%300)/300*100)+'%';
+  $('rcStart').textContent=hm2(R.start);
+  if(R.run){$('rcEnd').textContent=t?hm2(Date.now()+Math.max(0,g-e)*1000):'--:--'}
+}
+function rBeep(b){
+  var f=Math.min(1568,660+55*Math.min(b,16));
+  try{play([[f,.4,0,'sine',.45]])}catch(e){}
+  if(rVibOn&&navigator.vibrate)try{navigator.vibrate(250)}catch(e){}
+}
+function rTick(){
+  if(!R.on||!R.run||R.fin)return;
+  var e=rEl();
+  if(R.mode==='t'&&e>=R.goal*1000){rFinish(true);return}
+  var b=Math.floor(e/300000);
+  if(b>R.blk){R.blk=b;rBeep(b);rColor()}
+  rPaint();
+}
+function rPz(){var s=Math.floor((Date.now()-R.pz)/1000);if(s!==R.pzl){R.pzl=s;$('rsPz').innerHTML='<span class="pz">EN PAUSA · '+fmtDur(s)+'</span>'}}
+function rMedia(){
+  try{if('mediaSession' in navigator){
+    navigator.mediaSession.metadata=new MediaMetadata({title:'Carrera',artist:'Kettlebell Training'});
+    navigator.mediaSession.playbackState='playing';
+    navigator.mediaSession.setActionHandler('pause',function(){if(R.on&&R.run&&!R.fin)rToggle()});
+    navigator.mediaSession.setActionHandler('play',function(){if(R.on&&!R.run&&!R.fin)rToggle()});
+  }}catch(e){}
+}
+function rToggle(){
+  if(!R.on||R.fin)return;
+  ensureAudio();
+  if(R.run){
+    R.acc=rEl();R.run=false;R.pz=Date.now();R.pzl=-1;rPz();
+    if(R.pt)clearInterval(R.pt);R.pt=setInterval(rPz,500);
+    rGoIcon('resume');play(SND.pause);
+  }else{
+    R.run=true;R.t0=Date.now();
+    if(R.pt){clearInterval(R.pt);R.pt=0}
+    $('rsPz').innerHTML='';
+    rGoIcon('pause');play(SND.resume);rPaint();
+  }
+}
+$('rsGo').onclick=rToggle;
+$('rmGo').onclick=function(){
+  ensureAudio();rSave();closeP('runMenu');
+  var now=Date.now();
+  R={on:true,mode:rMode,goal:rMode==='t'?rMin*60:0,run:true,start:now,acc:0,t0:now,blk:0,fin:false,pz:0,pzl:-1,pt:0,tm:0};
+  rBuild();$('runScr').hidden=false;rColor();rPaint();
+  $('rcEnd').textContent=R.mode==='t'?hm2(now+R.goal*1000):'--:--';
+  wlOn();kaStart();rMedia();
+  R.tm=setInterval(rTick,200);
+  try{play(SND.seriesStart)}catch(e){}
+};
+function showRunExp(){
+  $('limTitle').textContent='Carrera guardada';
+  $('limTxt').textContent='¿Quieres exportar todos tus entrenamientos (carreras y fuerza) para guardarlos? Se copian y los pegas donde quieras.';
+  $('limExp').textContent='Exportar';$('limOk').textContent='Ahora no';
+  $('limBox').hidden=false;
+  try{play(SND.ask)}catch(e){}
+}
+function rFinish(done){
+  if(!R.on||R.fin)return;
+  var e=rEl(),t=R.mode==='t';
+  R.acc=e;R.run=false;R.fin=true;
+  clearInterval(R.tm);R.tm=0;if(R.pt){clearInterval(R.pt);R.pt=0}
+  wlOff();kaStop();
+  var sec=Math.round(e/1000);if(t&&done)sec=R.goal;
+  $('runScr').classList.add('done');rColor();
+  $('rsPz').innerHTML='';
+  $('rsPhase').textContent='Carrera terminada';
+  var big=fmtDur(sec);var B=$('rsBig');B.textContent=big;B.classList.toggle('l',big.length>5);
+  $('rsSub').textContent='Tiempo total';
+  $('rsBar').firstChild.style.width='100%';
+  $('rcEL').textContent='Término';$('rcEnd').textContent=hm2(Date.now());
+  try{play(SND.seriesEnd)}catch(x){}
+  if(rVibOn&&navigator.vibrate)try{navigator.vibrate([300,150,300])}catch(x){}
+  if(sec>=5){
+    hist.unshift({id:Date.now(),ts:new Date(R.start).toISOString(),dur:sec,t:'c',m:R.mode,g:R.goal,done:!!done});
+    if(hist.length>500)hist.length=500;
+    lsSet(KEY_H,hist);renderHist();
+    if(hist.length>=450)setTimeout(showLim,600);else setTimeout(showRunExp,600);
+  }
+}
+$('rsClose').onclick=function(){$('runScr').hidden=true;R={on:false,fin:false,run:false}};
+var rHT=0,rHraf=0,rHon=false;
+function rhReset(){rHon=false;if(rHraf){cancelAnimationFrame(rHraf);rHraf=0}$('rsFill').style.transform='scaleX(0)'}
+function rhStep(){
+  if(!rHon)return;
+  var el=Date.now()-rHT,p=Math.min(1,el/HOLD_MS);
+  $('rsFill').style.transform='scaleX('+p+')';
+  if(el>=HOLD_MS){rhReset();rFinish(R.mode==='c');return}
+  rHraf=requestAnimationFrame(rhStep);
+}
+var rEnd=$('rsEnd');
+rEnd.addEventListener('pointerdown',function(e){e.preventDefault();try{rEnd.setPointerCapture(e.pointerId)}catch(x){}if(R.on&&!R.fin&&!rHon){rHon=true;rHT=Date.now();rHraf=requestAnimationFrame(rhStep)}});
+['pointerup','pointercancel','touchend','touchcancel','mouseup','blur'].forEach(function(ev){rEnd.addEventListener(ev,rhReset)});
+rEnd.addEventListener('touchstart',function(e){e.preventDefault()},{passive:false});
+document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible'&&R.on&&!R.fin){wlOn();if(R.run)rTick()}});
 
 hist=lsGet(KEY_H)||[];
 if(!Array.isArray(hist))hist=[];
@@ -1377,7 +1643,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',function(){navig
 </script>
 <script>
 (function(){
-  var APP_VERSION='v46';
+  var APP_VERSION='v47';
   var sp=document.getElementById('splash');
   if(!sp)return;
   document.getElementById('spVer').textContent=APP_VERSION;
