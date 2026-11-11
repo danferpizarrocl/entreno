@@ -157,8 +157,8 @@ html.run #disp{flex:0 1 auto}
 #topbar{display:flex;align-items:center;justify-content:space-between;gap:10px}
 #topbar h1{font-size:16px}
 #ttl{text-transform:none}
-.ibtns{display:flex;gap:12px;flex:none}
-.ibtns button{width:clamp(48px,8vh,86px);height:clamp(48px,8vh,86px);border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--fg);display:flex;align-items:center;justify-content:center;padding:0}
+.ibtns{display:flex;gap:clamp(6px,2vw,12px);flex:none}
+.ibtns button{width:clamp(40px,min(8vh,13vw),86px);height:clamp(40px,min(8vh,13vw),86px);border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--fg);display:flex;align-items:center;justify-content:center;padding:0}
 .ibtns svg{width:55%;height:55%}
 @media (max-height:700px) and (orientation:portrait){#finMain{font-size:clamp(34px,min(14vw,7.5vh),150px)}}
 @media (orientation:landscape) and (min-height:500px){
@@ -168,27 +168,27 @@ html.run #disp{flex:0 1 auto}
   html.run #clock b{font-size:clamp(18px,3.4vh,26px)}
 }
 @media (max-height:500px){#totSub{display:none}.track{margin:4px 0 2px}#lines{gap:2px;margin:2px 0}.wrap{padding-block:6px;gap:8px}#disp{padding:6px 14px}#big{font-size:clamp(40px,15vh,120px);margin:0}.ln{font-size:clamp(18px,5.6vh,60px)}#totMain{font-size:clamp(18px,4.8vh,40px)}.ctrls button{min-height:clamp(44px,12vh,90px)}.ibtns button{width:44px;height:44px}}
-#cfgPanel .pin{max-width:1000px;gap:22px}
+#cfgPanel .pin,#frzPanel .pin{max-width:1000px;gap:22px}
 #cfgTot{position:sticky;top:0;z-index:5;text-align:center;padding:14px 16px;border-radius:22px;background:var(--surface);border:2px solid var(--accent);box-shadow:0 6px 18px rgba(0,0,0,.18)}
 #cfgTotMain{font-family:var(--font-display);font-weight:600;font-size:clamp(34px,9vw,64px);line-height:1.1;letter-spacing:.02em;font-variant-numeric:tabular-nums}
 #cfgTotSub{font-size:clamp(18px,4vw,26px);margin-top:4px;opacity:.8}
-#cfgPanel .phead h2{font-size:34px}
-#cfgPanel .phead button{height:76px;padding:0 36px;font-size:28px;border-radius:16px}
-#cfgPanel .card{padding:8px 24px;border-radius:22px}
-#cfgPanel .row{padding:18px 0;gap:12px 18px}
-#cfgPanel .row label{flex:1 1 260px;font-size:26px}
-#cfgPanel .stp{gap:10px}
-#cfgPanel .stp button{width:60px;height:60px;font-size:34px;border-radius:14px}
-#cfgPanel .stp input{width:104px;height:60px;font-size:28px;border-radius:14px}
-#cfgPanel .stp select{width:108px;height:60px;font-size:24px;border-radius:14px;padding:0 8px}
-#cfgPanel #voiceSel{height:60px!important;font-size:24px;border-radius:14px!important;flex:1 1 260px!important}
-#cfgPanel .wake{gap:18px;padding:18px 0;font-size:26px}
-#cfgPanel .wake input{width:38px;height:38px;margin-top:4px}
-#cfgPanel .wake small{font-size:21px;margin-top:4px}
-#cfgPanel details.snd{padding:0 24px;border-radius:22px}
-#cfgPanel details.snd summary{font-size:32px;padding:22px 0}
-#cfgPanel .sgrid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;padding:4px 0 24px}
-#cfgPanel .sgrid button{font-size:24px;padding:18px 16px;border-radius:16px}
+#cfgPanel .phead h2,#frzPanel .phead h2{font-size:34px}
+#cfgPanel .phead button,#frzPanel .phead button{height:76px;padding:0 36px;font-size:28px;border-radius:16px}
+#cfgPanel .card,#frzPanel .card{padding:8px 24px;border-radius:22px}
+#cfgPanel .row,#frzPanel .row{padding:18px 0;gap:12px 18px}
+#cfgPanel .row label,#frzPanel .row label{flex:1 1 260px;font-size:26px}
+#cfgPanel .stp,#frzPanel .stp{gap:10px}
+#cfgPanel .stp button,#frzPanel .stp button{width:60px;height:60px;font-size:34px;border-radius:14px}
+#cfgPanel .stp input,#frzPanel .stp input{width:104px;height:60px;font-size:28px;border-radius:14px}
+#cfgPanel .stp select,#frzPanel .stp select{width:108px;height:60px;font-size:24px;border-radius:14px;padding:0 8px}
+#cfgPanel #voiceSel,#frzPanel #voiceSel{height:60px!important;font-size:24px;border-radius:14px!important;flex:1 1 260px!important}
+#cfgPanel .wake,#frzPanel .wake{gap:18px;padding:18px 0;font-size:26px}
+#cfgPanel .wake input,#frzPanel .wake input{width:38px;height:38px;margin-top:4px}
+#cfgPanel .wake small,#frzPanel .wake small{font-size:21px;margin-top:4px}
+#cfgPanel details.snd,#frzPanel details.snd{padding:0 24px;border-radius:22px}
+#cfgPanel details.snd summary,#frzPanel details.snd summary{font-size:32px;padding:22px 0}
+#cfgPanel .sgrid,#frzPanel .sgrid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;padding:4px 0 24px}
+#cfgPanel .sgrid button,#frzPanel .sgrid button{font-size:24px;padding:18px 16px;border-radius:16px}
 .panel{position:fixed;inset:0;z-index:50;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch}
 .pin{max-width:640px;margin:0 auto;padding:calc(14px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(40px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:14px}
 .phead{display:flex;align-items:center;justify-content:space-between;gap:10px}
@@ -270,6 +270,11 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
 .rseg{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:4px;gap:4px}
 .rseg button{flex:1;height:48px;border:none;border-radius:9px;background:transparent;color:var(--muted);font-size:16px;font-weight:600}
 .rseg button.on{background:var(--accent);color:var(--on-accent)}
+.rtbigs{display:flex;flex-direction:column;gap:12px;padding:10px 0}
+.rtbig{height:96px;border-radius:18px;border:2px solid var(--line);background:var(--bg);color:var(--fg);font-size:30px;font-weight:700}
+.rtbig.on{background:#ff0a3c;border-color:#000;color:#fff}
+.neon{background:#39ff14!important;color:#000!important}
+.rback{height:52px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font-size:18px;font-weight:600}
 .rchips{display:flex;gap:8px;flex-wrap:wrap}
 .rchips button{height:46px;padding:0 16px;border-radius:11px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:16px;font-weight:600}
 .rchips button.on{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
@@ -362,9 +367,9 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
 </style>
 </head>
 <body>
-<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v51</div></div>
+<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v52</div></div>
 <main class="wrap">
-  <div id="topbar"><h1 id="ttl">Kettlebell Training</h1><div class="ibtns"><button type="button" id="openRt" aria-label="Rutina completa"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15"/><path d="M11 12 5.12 2.2"/><path d="m13 12 5.88-9.8"/><path d="M8 7h8"/><circle cx="12" cy="17" r="5"/><path d="M12 18v-2h-.5"/></svg></button><button type="button" id="openRun" aria-label="Carrera"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z"/></svg></button><button type="button" id="openHist" aria-label="Registro de entrenamientos"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3" width="13" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 7h4M3 12h4M3 17h4M10 8h6M10 12h6M10 16h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><button type="button" id="openCfg" aria-label="Ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div></div>
+  <div id="topbar"><h1 id="ttl">Kettlebell Training</h1><div class="ibtns"><button type="button" id="openRt" aria-label="Rutina completa"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15"/><path d="M11 12 5.12 2.2"/><path d="m13 12 5.88-9.8"/><path d="M8 7h8"/><circle cx="12" cy="17" r="5"/><path d="M12 18v-2h-.5"/></svg></button><button type="button" id="openFrz" aria-label="Fuerza"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path fill-rule="evenodd" d="M6.6 11V7a5.4 5.4 0 0 1 10.8 0v4zM9.2 11V7a2.8 2.8 0 0 1 5.6 0v4z"/><circle cx="12" cy="15.3" r="6.9"/></svg></button><button type="button" id="openRun" aria-label="Carrera"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z"/></svg></button><button type="button" id="openHist" aria-label="Registro de entrenamientos"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3" width="13" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 7h4M3 12h4M3 17h4M10 8h6M10 12h6M10 16h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><button type="button" id="openCfg" aria-label="Ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div></div>
 
   <section id="disp" data-phase="prep" aria-label="Cronómetro">
     <div id="phase" aria-live="polite">Listo para empezar</div>
@@ -389,16 +394,9 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
     <div class="phead"><h2>Rutina completa</h2><button type="button" id="rtClose">Cerrar</button></div>
     <section class="card">
       <h2>¿Qué va primero?</h2>
-      <div class="rseg"><button type="button" id="rtOF">Fuerza primero</button><button type="button" id="rtOC">Trote primero</button></div>
-      <small class="xnote">Al terminar la primera parte te pregunto si sigues con la segunda.</small>
+      <div class="rtbigs"><button type="button" class="rtbig" id="rtBF">Fuerza</button><button type="button" class="rtbig" id="rtBC">Cardio</button></div>
+      <small class="xnote">Al elegir, te llevo a configurar esa parte y después la otra. Al terminar la primera parte te pregunto si sigues con la segunda.</small>
     </section>
-    <section class="card">
-      <h2>Qué se va a hacer</h2>
-      <div class="rstep"><span>Fuerza</span><span id="rtSF"></span></div>
-      <div class="rstep"><span>Trote</span><span id="rtSR"></span></div>
-      <small class="xnote">Para cambiar la fuerza usa la pantalla principal y Ajustes; para el trote, el botón del corredor.</small>
-    </section>
-    <button type="button" class="rgo" id="rtGo">Iniciar rutina</button>
   </div></div>
 
   <div class="panel" id="runMenu" role="dialog" aria-label="Carrera" hidden><div class="pin">
@@ -421,6 +419,7 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
       <label class="wake"><input type="checkbox" id="rVib"><span>Vibrar en cada aviso<small>Solo funciona en algunos celulares Android.</small></span></label>
     </section>
     <button type="button" class="rgo" id="rmGo">Iniciar carrera</button>
+    <button type="button" class="rback" id="rmBack" hidden>Volver</button>
   </div></div>
 
   <div id="runScr" hidden>
@@ -449,7 +448,7 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
     </div>
   </div>
 
-  <div class="panel" id="cfgPanel" role="dialog" aria-label="Ajustes" hidden><div class="pin"><div class="phead"><h2>Ajustes</h2><button type="button" id="cfgClose">Listo</button></div>
+  <div class="panel" id="frzPanel" role="dialog" aria-label="Fuerza" hidden><div class="pin"><div class="phead"><h2>Fuerza</h2><button type="button" id="frzClose">Listo</button></div>
   <div id="cfgTot" aria-live="polite"><div id="cfgTotMain"></div><div id="cfgTotSub"></div></div>
   <section class="card" id="cfgCard" aria-label="Configuración">
     <div class="row"><label for="c_pre">Preparación antes del estiramiento</label><div class="stp"><button type="button" data-t="c_pre" data-d="-1" aria-label="Menos">−</button><input type="number" id="c_pre" value="10" step="any"><button type="button" data-t="c_pre" data-d="1" aria-label="Más">+</button><select id="u_pre" aria-label="Unidad de la preparación antes del estiramiento"><option value="sec">seg</option><option value="min">min</option></select></div></div>
@@ -462,23 +461,32 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
     <div class="row"><label for="c_fin">Estiramiento final</label><div class="stp"><button type="button" data-t="c_fin" data-d="-1" aria-label="Menos">−</button><input type="number" id="c_fin" value="300" step="any"><button type="button" data-t="c_fin" data-d="1" aria-label="Más">+</button><select id="u_fin" aria-label="Unidad del estiramiento final"><option value="sec">seg</option><option value="min">min</option></select></div></div>
     <div class="row"><label for="c_sets">Series</label><div class="stp"><button type="button" data-t="c_sets" data-d="-1" aria-label="Menos">−</button><input type="number" id="c_sets" value="3" min="1"><button type="button" data-t="c_sets" data-d="1" aria-label="Más">+</button></div></div>
     <div class="row"><label for="c_ex">Ejercicios por serie</label><div class="stp"><button type="button" data-t="c_ex" data-d="-1" aria-label="Menos">−</button><input type="number" id="c_ex" value="4" min="1"><button type="button" data-t="c_ex" data-d="1" aria-label="Más">+</button></div></div>
-    <label class="wake"><input type="checkbox" id="wake" checked><span>Mantener la pantalla encendida<small>Evita que el celular se apague mientras corre el temporizador.</small></span></label>
-    <label class="wake"><input type="checkbox" id="voiceOn" checked><span>Voz que anuncia las fases<small>Voz grabada o la del aparato. Si no puede hablar, suenan los pitidos de siempre.</small></span></label>
-    <div class="row"><label for="voiceSel">Voz</label><select id="voiceSel" style="flex:1 1 180px;min-width:0;height:36px;border:1px solid var(--line);border-radius:9px;background:var(--bg);padding:0 6px"><option value="">Automática</option></select></div>
   </section>
-
+  <button type="button" class="rgo neon" id="frzNext" hidden>Configurar rutina de cardio</button>
   <section class="card" id="xCard" aria-label="Bloques extra">
     <div class="row"><label>Bloques extra</label><button type="button" id="xAdd">+ Agregar bloque</button></div>
     <div id="xList"></div>
     <div class="row" style="margin-top:8px"><label for="addSnd">Sonido de serie extra</label><select id="addSnd" aria-label="Sonido de serie extra"></select></div>
     <small class="xnote">Un bloque extra es una pausa o sección que tú pones entre los ejercicios, con su nombre, su tiempo y el sonido que elijas. Si no agregas ninguno, la sesión queda como siempre.</small>
   </section>
+  <button type="button" class="rgo neon" id="frzStart" hidden>Iniciar rutina completa</button>
+  <button type="button" class="rback" id="frzBack" hidden>Volver</button>
+  </div></div>
+
+  <div class="panel" id="cfgPanel" role="dialog" aria-label="Ajustes" hidden><div class="pin"><div class="phead"><h2>Ajustes</h2><button type="button" id="cfgClose">Listo</button></div>
+
+  <section class="card" id="cfgCard2" aria-label="Opciones">
+    <label class="wake"><input type="checkbox" id="wake" checked><span>Mantener la pantalla encendida<small>Evita que el celular se apague mientras corre el temporizador.</small></span></label>
+    <label class="wake"><input type="checkbox" id="voiceOn" checked><span>Voz que anuncia las fases<small>Voz grabada o la del aparato. Si no puede hablar, suenan los pitidos de siempre.</small></span></label>
+    <div class="row"><label for="voiceSel">Voz</label><select id="voiceSel" style="flex:1 1 180px;min-width:0;height:36px;border:1px solid var(--line);border-radius:9px;background:var(--bg);padding:0 6px"><option value="">Automática</option></select></div>
+  </section>
+
 
   <details class="snd" id="sndBox">
     <summary>Probar sonidos</summary>
     <div class="sgrid" id="sgrid"></div>
   </details>
-  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 51</small>
+  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 52</small>
   </div></div>
 
   <div class="panel" id="histPanel" role="dialog" aria-label="Registro" hidden><div class="pin"><div class="phead"><h2>Registro</h2><button type="button" id="histClose">Cerrar</button></div>
@@ -924,7 +932,7 @@ function animRun(A,on){
   }catch(e){}
 }
 function lock(on){var A=animPrep();lockNow(on);animRun(A,on)}
-function lockNow(on){pzOff();allIds.forEach(function(i){$(i).disabled=on});document.querySelectorAll('.stp button').forEach(function(b){b.disabled=on});$('wake').disabled=on;$('topbar').hidden=on;$('cfgPanel').hidden=true;$('histPanel').hidden=true;document.documentElement.classList.remove('pnl');$('finWrap').hidden=!on;document.documentElement.classList.toggle('run',on);if(!on)exitFs()}
+function lockNow(on){pzOff();allIds.forEach(function(i){$(i).disabled=on});document.querySelectorAll('.stp button').forEach(function(b){b.disabled=on});$('wake').disabled=on;$('topbar').hidden=on;$('cfgPanel').hidden=true;$('frzPanel').hidden=true;$('histPanel').hidden=true;document.documentElement.classList.remove('pnl');$('finWrap').hidden=!on;document.documentElement.classList.toggle('run',on);if(!on)exitFs()}
 
 function wlOn(){
   if(!$('wake').checked)return;
@@ -1523,8 +1531,8 @@ function rmPaint(){
   $('rpN').textContent=rPrep?rPrep:'Sin';
   [].forEach.call(document.querySelectorAll('#rpChips button'),function(b){b.classList.toggle('on',+b.getAttribute('data-p')===rPrep)});
 }
-$('openRun').onclick=function(){ensureAudio();rmPaint();openP('runMenu')};
-$('rmClose').onclick=function(){closeP('runMenu')};
+$('openRun').onclick=function(){ensureAudio();cfNormal();rmPaint();openP('runMenu')};
+$('rmClose').onclick=function(){cfNormal();closeP('runMenu')};
 $('rmC').onclick=function(){rMode='c';rSave();rmPaint()};
 $('rmT').onclick=function(){rMode='t';rSave();rmPaint()};
 $('rmChips').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;rMin=+b.getAttribute('data-m');rSave();rmPaint()});
@@ -1536,12 +1544,7 @@ $('rpPlus').onclick=function(){rPrep=Math.min(120,(Math.floor(rPrep/5)+1)*5);rSa
 $('rVib').addEventListener('change',function(){rVibOn=$('rVib').checked;rSave();if(rVibOn&&navigator.vibrate)try{navigator.vibrate(120)}catch(e){}});
 
 /* ===== Rutina completa ===== */
-function rtLbl(w){return w==='f'?'Fuerza':'Trote'}
-function rtPaint(){
-  $('rtOF').classList.toggle('on',rtOrd==='f');$('rtOC').classList.toggle('on',rtOrd==='c');
-  $('rtSF').textContent=cfg.S+' series × '+cfg.E+' ejercicios';
-  $('rtSR').textContent=(rMode==='t'?'Temporizador '+rMin+' min':'Cronómetro')+(rPrep?' · prepárate '+rPrep+' s':'');
-}
+function rtLbl(w){return w==='f'?'Fuerza':'Cardio'}
 function rtStart(w){
   if(w==='c'){
     try{$('runScr').hidden=true}catch(e){}
@@ -1584,23 +1587,54 @@ function rtSummary(){
   limMode='sum';
   $('limTitle').textContent=all?'Rutina completa terminada':'Rutina terminada';
   var x='Inicio de rutina: <b>'+hm2(RT.t0)+'</b><br>Término de rutina: <b>'+hm2(RT.last||Date.now())+'</b><br>Tiempo total de ejercicio: <b>'+fmtDur(tot)+'</b>';
-  if(P.length>1)x+='<br>Fuerza '+fmtDur(f)+' · Trote '+fmtDur(c);
+  if(P.length>1)x+='<br>Fuerza '+fmtDur(f)+' · Cardio '+fmtDur(c);
   $('limTxt').innerHTML=x;
   $('limExp').textContent='Exportar ahora';$('limOk').textContent='Cerrar';
   $('limBox').hidden=false;
   try{play(SND.ask)}catch(e){}
 }
-$('openRt').onclick=function(){ensureAudio();rtPaint();openP('rtMenu')};
-$('rtClose').onclick=function(){closeP('rtMenu')};
-$('rtOF').onclick=function(){rtOrd='f';rSave();rtPaint()};
-$('rtOC').onclick=function(){rtOrd='c';rSave();rtPaint()};
-$('rtGo').onclick=function(){
+var CF={on:false,first:'f'};
+function rtBPaint(){$('rtBF').classList.toggle('on',CF.on&&CF.first==='f');$('rtBC').classList.toggle('on',CF.on&&CF.first==='c')}
+function cfShow(w){
+  closeP('rtMenu');closeP('frzPanel');closeP('runMenu');
+  if(w==='menu'){rtBPaint();openP('rtMenu');return}
+  var nx=w===CF.first;
+  if(w==='f'){
+    $('frzClose').textContent='Cerrar';
+    $('frzNext').hidden=!nx;$('frzStart').hidden=nx;$('frzBack').hidden=false;
+    openP('frzPanel');
+  }else{
+    rmPaint();
+    $('rmGo').textContent=nx?'Configurar rutina de fuerza':'Iniciar rutina completa';
+    $('rmBack').hidden=false;
+    openP('runMenu');
+  }
+}
+function cfNormal(){
+  CF.on=false;
+  $('frzClose').textContent='Listo';$('frzNext').hidden=true;$('frzStart').hidden=true;$('frzBack').hidden=true;
+  $('rmGo').textContent='Iniciar carrera';$('rmBack').hidden=true;
+}
+function rtBegin(){
   if(started||R.on)return;
-  ensureAudio();rSave();closeP('rtMenu');
-  var now=Date.now();
-  RT={on:true,id:now,stage:1,first:rtOrd,t0:now,last:now,parts:[]};
-  rtStart(rtOrd);
-};
+  ensureAudio();rtOrd=CF.first;rSave();
+  closeP('frzPanel');closeP('runMenu');closeP('rtMenu');
+  var now=Date.now(),f=CF.first;
+  cfNormal();
+  RT={on:true,id:now,stage:1,first:f,t0:now,last:now,parts:[]};
+  rtStart(f);
+}
+$('openRt').onclick=function(){ensureAudio();cfNormal();CF.first=rtOrd;rtBPaint();openP('rtMenu')};
+$('rtClose').onclick=function(){cfNormal();closeP('rtMenu')};
+function rtPick(w){CF.on=true;CF.first=w;rtOrd=w;rSave();rtBPaint();setTimeout(function(){if(CF.on&&CF.first===w)cfShow(w)},220)}
+$('rtBF').onclick=function(){rtPick('f')};
+$('rtBC').onclick=function(){rtPick('c')};
+$('openFrz').onclick=function(){cfNormal();openP('frzPanel')};
+$('frzClose').onclick=function(){cfNormal();closeP('frzPanel')};
+$('frzNext').onclick=function(){cfShow('c')};
+$('frzStart').onclick=rtBegin;
+$('frzBack').onclick=function(){cfShow(CF.first==='f'?'menu':'c')};
+$('rmBack').onclick=function(){cfShow(CF.first==='c'?'menu':'f')};
 function rGoIcon(t){$('rsGo').innerHTML=GOI[t];$('rsGo').setAttribute('aria-label',GOL[t])}
 function rBuild(){
   $('runScr').classList.remove('done');
@@ -1699,7 +1733,11 @@ function rPrepShow(){
   $('rcEnd').textContent=R.mode==='t'?hm2(R.pend+R.goal*1000):'--:--';
   rPrepTick();
 }
-$('rmGo').onclick=function(){ensureAudio();rSave();closeP('runMenu');RT.on=false;rStartRun()};
+$('rmGo').onclick=function(){
+  ensureAudio();rSave();
+  if(CF.on){if(CF.first==='c')cfShow('f');else rtBegin();return}
+  closeP('runMenu');RT.on=false;rStartRun()
+};
 function rStartRun(){
   var now=Date.now();
   R={on:true,mode:rMode,goal:rMode==='t'?rMin*60:0,run:false,prep:rPrep>0,pend:now+rPrep*1000,pl:-1,start:now,acc:0,t0:now,blk:0,fin:false,pz:0,pzl:-1,pt:0,tm:0};
@@ -1788,7 +1826,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',function(){navig
 </script>
 <script>
 (function(){
-  var APP_VERSION='v51';
+  var APP_VERSION='v52';
   var sp=document.getElementById('splash');
   if(!sp)return;
   document.getElementById('spVer').textContent=APP_VERSION;
