@@ -229,6 +229,7 @@ details.snd summary{cursor:pointer;padding:13px 0;font-family:var(--font-display
 #selDel{background:#c62828!important;color:#fff!important;border-color:#c62828!important;font-weight:600}
 #selDel:disabled{opacity:.4}
 #selMerge{font-weight:600}
+#limWait{display:block;margin-top:8px;font-family:var(--font-display);font-weight:700;font-size:26px;font-variant-numeric:tabular-nums}
 #selMerge:disabled{opacity:.4}
 #hsel:disabled{opacity:.45}
 .h-item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
@@ -359,6 +360,31 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
 #runScr.rt #rsDur{margin:4px 0 0;font-size:clamp(20px,5vw,26px)}
 #runScr.rt #rsRB{font-size:clamp(30px,min(10vw,5.2vh),46px)}
 #runScr.rt #rsClock b{font-size:clamp(20px,3.2vh,26px)}
+#rtTot .s3,#rsRt .s3{display:flex;justify-content:space-around;margin-top:4px}
+.s3 span{display:flex;flex-direction:column;align-items:center}
+.s3 small{font:600 13px/1.2 system-ui;opacity:.85}
+.s3 b{font-family:var(--font-display);font-weight:700;font-size:22px;line-height:1.1;font-variant-numeric:tabular-nums}
+@media (max-height:600px){.s3 small{font-size:10px}.s3 b{font-size:15px}}
+@media (orientation:portrait){
+  #rsClock{font-size:16px}
+  #rsClock small{font-size:16px}
+  #runScr.rt #rsClock small{font-size:14px}
+  #rsClock b{font-size:clamp(44px,14.5vw,60px)}
+  #runScr #rsCtrl{height:max(84px,10.5vh)}
+  #runScr #rsEnd{height:max(88px,11vh)}
+  #runScr.rt #rsCtrl{height:max(64px,8vh)}
+  #runScr.rt #rsEnd{height:max(68px,8.5vh)}
+  #runScr.rt #rsBig{font-size:min(26vw,11vh)}
+  #runScr.rt #rsDur{font-size:clamp(18px,4.6vw,22px)}
+  #runScr.rt #rsClock{font-size:14px}
+  #runScr.rt #rsClock b{font-size:clamp(30px,9vw,40px)}
+  #rsRt .l,#rtTot .l{font-size:18px}
+  #rsRB,#runScr.rt #rsRB{font-size:clamp(54px,17vw,72px)}
+  #rtTB{font-size:clamp(54px,17vw,72px)}
+  #rsRt .s,#rtTot .s{font-size:16px}
+  .s3 small{font-size:14px}
+  .s3 b{font-size:clamp(28px,8.6vw,36px)}
+}
 #runScr.wt #rsBar{background:rgba(255,255,255,.3)}
 #rsCtrl{display:flex;gap:10px;height:max(96px,13vh)}
 .rb{flex:1;border-radius:20px;border:3px solid #000;background:#FFD60A;color:#000;display:flex;align-items:center;justify-content:center;padding:0}
@@ -431,7 +457,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
 </style>
 </head>
 <body>
-<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v56</div></div>
+<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v57</div></div>
 <main class="wrap">
   <div id="topbar"><h1 id="ttl">Kettlebell Training</h1><div class="ibtns"><button type="button" id="openRt" aria-label="Rutina completa"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15"/><path d="M11 12 5.12 2.2"/><path d="m13 12 5.88-9.8"/><path d="M8 7h8"/><circle cx="12" cy="17" r="5"/><path d="M12 18v-2h-.5"/></svg></button><button type="button" id="openFrz" aria-label="Fuerza"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path fill-rule="evenodd" d="M6.6 11V7a5.4 5.4 0 0 1 10.8 0v4zM9.2 11V7a2.8 2.8 0 0 1 5.6 0v4z"/><circle cx="12" cy="15.3" r="6.9"/></svg></button><button type="button" id="openRun" aria-label="Carrera"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z"/></svg></button><button type="button" id="openHist" aria-label="Registro de entrenamientos"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3" width="13" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 7h4M3 12h4M3 17h4M10 8h6M10 12h6M10 16h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><button type="button" id="openCfg" aria-label="Ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div></div>
 
@@ -444,7 +470,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     <div class="track"><div id="bar"></div></div>
     <div id="tot"><div id="totMain"></div><div id="totSub"></div></div>
     <div id="clock" hidden><span>Hora<b id="ckNow">--:--</b></span><span><i id="ckL1">Inicio de rutina</i><b id="ckStart">--:--</b></span><span><i id="ckL2">Término de rutina</i><b id="ckEnd">--:--</b></span></div>
-    <div id="rtTot" hidden><div class="l">Tiempo total rutina completa</div><b id="rtTB">0:00</b><div class="s" id="rtTS"></div><div class="s" id="rtTE"></div></div>
+    <div id="rtTot" hidden><div class="l">Tiempo total rutina completa</div><b id="rtTB">0:00</b><div class="s" id="rtTS"></div><div class="s3" id="rtTE"><span><small>Llevas</small><b id="rtXL">0:00</b></span><span><small>Inicio</small><b id="rtXI">--:--</b></span><span><small>Término</small><b id="rtXE">--:--</b></span></div></div>
   </section>
 
   <div class="ctrls">
@@ -497,7 +523,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
       <div id="rsDur" hidden></div>
       <div id="rsBar"><i></i></div>
       <div id="rsClock"><span><small>Inicio de carrera</small><b id="rcStart">--:--</b></span><span><small id="rcEL">Término de carrera</small><b id="rcEnd">--:--</b></span></div>
-      <div id="rsRt" hidden><div class="l">Tiempo total rutina completa</div><b id="rsRB">0:00</b><div class="s" id="rsRS"></div><div class="s" id="rsRE"></div></div>
+      <div id="rsRt" hidden><div class="l">Tiempo total rutina completa</div><b id="rsRB">0:00</b><div class="s" id="rsRS"></div><div class="s3" id="rsRE"><span><small>Llevas</small><b id="rsXL">0:00</b></span><span><small>Inicio</small><b id="rsXI">--:--</b></span><span><small>Término</small><b id="rsXE">--:--</b></span></div></div>
     </div>
     <div id="rsCtrl"><button type="button" class="rb" id="rsGo" aria-label="Pausar"></button></div>
     <button type="button" id="rsEnd" aria-label="Terminar carrera: mantén apretado"><span id="rsFill" aria-hidden="true"></span><span class="t">Terminar</span></button>
@@ -505,7 +531,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     <button type="button" id="rsCancel" aria-label="Cancelar: mantén apretado"><span id="rcFill" aria-hidden="true"></span><span class="t">Cancelar</span></button>
   </div>
 
-  <div id="limBox" role="alertdialog" aria-modal="true" aria-labelledby="limTitle" hidden><div id="limCard"><p id="limTitle"></p><small id="limTxt"></small><div class="lb"><button type="button" id="limExp" class="pri">Exportar ahora</button><button type="button" id="limOk">Entendido</button></div></div></div>
+  <div id="limBox" role="alertdialog" aria-modal="true" aria-labelledby="limTitle" hidden><div id="limCard"><p id="limTitle"></p><small id="limTxt"></small><small id="limWait" hidden></small><div class="lb"><button type="button" id="limExp" class="pri">Exportar ahora</button><button type="button" id="limOk">Entendido</button></div></div></div>
 
   <div id="rstBox" role="alertdialog" aria-modal="true" aria-labelledby="rstTitle" hidden>
     <div id="rstCard">
@@ -553,7 +579,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     <summary>Probar sonidos</summary>
     <div class="sgrid" id="sgrid"></div>
   </details>
-  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 56</small>
+  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 57</small>
   </div></div>
 
   <div class="panel" id="histPanel" role="dialog" aria-label="Registro" hidden><div class="pin"><div class="phead"><h2>Registro</h2><button type="button" id="histClose">Cerrar</button></div>
@@ -1033,7 +1059,12 @@ function saveEntry(done,ask){
   if(RT.on){setTimeout(function(){rtPartDone(e,done)},600);return}
   if(hist.length>=450)setTimeout(showLim,600);else if(ask)setTimeout(showExp,600);
 }
-var RT={on:false},limMode='';
+var RT={on:false},limMode='',limWI=0;
+function limWaitStop(){if(limWI){clearInterval(limWI);limWI=0}$('limWait').hidden=true}
+function limWaitStart(t0){
+  function u(){$('limWait').textContent='Descansando '+fmtDur(Math.max(0,Math.floor((Date.now()-t0)/1000)))}
+  limWaitStop();$('limWait').hidden=false;u();limWI=setInterval(u,1000);
+}
 function showExp(){
   limMode='';
   $('limTitle').textContent='Sesión guardada';
@@ -1051,8 +1082,8 @@ function showLim(){
   $('limBox').hidden=false;
   try{play(SND.ask)}catch(e){}
 }
-$('limOk').onclick=function(){$('limBox').hidden=true;if(limMode==='next'){rtSummary();return}if(limMode==='sum'){try{if(R&&R.on&&R.fin)$('rsClose').click()}catch(e){}}};
-$('limExp').onclick=function(){$('limBox').hidden=true;if(limMode==='next'){rtNext();return}try{if(R&&R.on&&R.fin)$('rsClose').click()}catch(e){}try{$('openHist').click();setTimeout(function(){$('hexp').click()},80)}catch(e){}};
+$('limOk').onclick=function(){limWaitStop();$('limBox').hidden=true;if(limMode==='next'){rtSummary();return}if(limMode==='sum'){try{if(R&&R.on&&R.fin)$('rsClose').click()}catch(e){}}};
+$('limExp').onclick=function(){limWaitStop();$('limBox').hidden=true;if(limMode==='next'){rtNext();return}try{if(R&&R.on&&R.fin)$('rsClose').click()}catch(e){}try{$('openHist').click();setTimeout(function(){$('hexp').click()},80)}catch(e){}};
 
 function setPhase(i,silent,e0){
   var prev=ph[idx];
@@ -1659,18 +1690,18 @@ function rtCalc(){
   var wall=RT.stage===1?(othPlan||0)+(oth==='c'?rPrep:0):0;
   return {plan:plan,unk:unk,llevas:done+curEl,end:(unk||curRem==null)?null:now+(curRem+wall)*1000,ord:RT.first==='f'?'fuerza + cardio':'cardio + fuerza'};
 }
-function rtFillBox(b,s,e,c){
+function rtFillBox(b,s,x,c){
   $(b).textContent=fmtDur(c.plan)+(c.unk?'+':'');
   $(s).textContent=c.ord+(c.unk?' · el cronómetro se suma al terminar':'');
-  $(e).textContent='Llevas '+fmtDur(c.llevas)+' · Inicio '+hm2(RT.t0)+' · Término '+(c.end?hm2(c.end):'--:--');
+  $(x+'L').textContent=fmtDur(c.llevas);$(x+'I').textContent=hm2(RT.t0);$(x+'E').textContent=c.end?hm2(c.end):'--:--';
 }
 function rtShowF(){
   var on=!!RT.on&&started;
   $('rtTot').hidden=!on;document.documentElement.classList.toggle('rtm',on);
   $('ckL1').textContent=on?'Inicio de fuerza':'Inicio de rutina';$('ckL2').textContent=on?'Término de fuerza':'Término de rutina';
 }
-function rtFillF(){if(RT.on&&started)rtFillBox('rtTB','rtTS','rtTE',rtCalc())}
-function rtFillR(){if(RT.on&&R.on&&!$('rsRt').hidden)rtFillBox('rsRB','rsRS','rsRE',rtCalc())}
+function rtFillF(){if(RT.on&&started)rtFillBox('rtTB','rtTS','rtX',rtCalc())}
+function rtFillR(){if(RT.on&&R.on&&!$('rsRt').hidden)rtFillBox('rsRB','rsRS','rsX',rtCalc())}
 function rtLbl(w){return w==='f'?'Fuerza':'Cardio'}
 function rtStart(w){
   if(w==='c'){
@@ -1694,7 +1725,7 @@ function rtPartDone(e,done){
     $('limTitle').textContent='Parte 1 terminada';
     $('limTxt').textContent=rtLbl(RT.first)+': '+fmtDur(e?e.dur:0)+'. Sigue: '+rtLbl(RT.first==='f'?'c':'f')+(RT.first==='f'?' (parte con la cuenta regresiva).':'.');
     $('limExp').textContent='Continuar con '+rtLbl(RT.first==='f'?'c':'f');$('limOk').textContent='Terminar rutina';
-    $('limBox').hidden=false;
+    $('limBox').hidden=false;limWaitStart(RT.last);
     try{play(SND.ask)}catch(x){}
     return;
   }
@@ -1969,7 +2000,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',function(){navig
 </script>
 <script>
 (function(){
-  var APP_VERSION='v56';
+  var APP_VERSION='v57';
   var sp=document.getElementById('splash');
   if(!sp)return;
   document.getElementById('spVer').textContent=APP_VERSION;
