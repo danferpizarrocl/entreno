@@ -141,6 +141,15 @@ html.run #disp{flex:0 1 auto}
 #impYes{color:var(--on-accent);background:var(--accent);border-color:var(--accent)}
 #delBox{position:fixed;inset:0;z-index:230;margin:0;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.72)}
 #delBox[hidden]{display:none!important}
+#sureBox{position:fixed;inset:0;z-index:240;display:flex;flex-direction:column;gap:12px;background:var(--bg);padding:calc(16px + env(safe-area-inset-top,0px)) max(14px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px))}
+#sureBox[hidden]{display:none!important}
+#sureBox .sh{flex:none;text-align:center}
+#sureBox p{margin:0;font-weight:700;font-size:clamp(24px,6vw,36px)}
+#sureBox small{display:block;color:var(--muted);margin-top:4px;font-size:clamp(14px,3.4vw,20px)}
+#sureBox .sb{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:14px}
+#sureBox .sb button{flex:1 1 0;min-height:0;border-radius:24px;border:2px solid #000;color:#000;font-family:var(--font-display,inherit);font-weight:700;font-size:clamp(56px,min(20vw,14vh),150px);cursor:pointer;-webkit-tap-highlight-color:transparent}
+#sureYes{background:#ff1744}#sureNo{background:#39ff14}
+@media (orientation:landscape){#sureBox .sb{flex-direction:row}}
 #delBox .dcard{width:min(94vw,620px);max-height:94vh;overflow-y:auto;box-sizing:border-box;background:var(--surface);border:3px solid var(--danger);border-radius:24px;padding:clamp(20px,4vh,36px)}
 #delBox p{margin:0 0 8px;font-weight:700;font-size:clamp(24px,5.4vw,36px);line-height:1.15}
 #delBox small{display:block;color:var(--muted);margin-bottom:clamp(16px,3vh,26px);font-size:clamp(16px,3.6vw,22px)}
@@ -674,6 +683,10 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
         <small id="delSub"></small>
         <div class="bx"><button type="button" id="delYes">Sí, borrar</button><button type="button" id="delNo">Cancelar</button></div>
       </div>
+    </div>
+    <div id="sureBox" role="alertdialog" aria-labelledby="sureTitle" hidden>
+      <div class="sh"><p id="sureTitle">¿Estás seguro?</p><small id="sureSub"></small></div>
+      <div class="sb"><button type="button" id="sureYes">Sí</button><button type="button" id="sureNo">No</button></div>
     </div>
     <div id="impBox" hidden>
       <p>Importar entrenamientos</p>
@@ -1648,6 +1661,14 @@ $('hclear').onclick=function(){
 $('delNo').onclick=closeDel;
 $('delYes').onclick=function(){
   if(delTarget==='merge'){mergeDo();return}
+  var n=delTarget==='sel'?Object.keys(sel).length:delTarget==='all'?hist.length:1;
+  $('sureSub').textContent=delTarget==='all'?'Se borra todo el registro ('+n+(n===1?' entrenamiento':' entrenamientos')+'). No se puede deshacer.':delTarget==='sel'?'Se borran '+n+(n===1?' entrenamiento seleccionado':' entrenamientos seleccionados')+'. No se puede deshacer.':'Se borra este entrenamiento. No se puede deshacer.';
+  $('sureBox').hidden=false;
+  try{ensureAudio();play(SND.ask)}catch(er){}
+};
+$('sureNo').onclick=function(){$('sureBox').hidden=true;closeDel()};
+$('sureYes').onclick=function(){
+  $('sureBox').hidden=true;
   if(delTarget==='sel'){hist=hist.filter(function(x){return !sel[x.id]});sel={};selMode=false;$('selBar').hidden=true}
   else if(delTarget==='all'){hist=[];$('cpy').hidden=true;$('msg').textContent=''}
   else if(delTarget!==null){var id=delTarget;hist=hist.filter(function(x){return x.id!==id})}
