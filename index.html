@@ -139,9 +139,14 @@ html.run #disp{flex:0 1 auto}
 #impTxt{width:100%;min-height:110px;border:1px solid var(--line);border-radius:10px;background:var(--bg);padding:8px;font-size:13px;margin-bottom:8px}
 #impInfo{font-size:14px;min-height:18px;margin-bottom:10px}
 #impYes{color:var(--on-accent);background:var(--accent);border-color:var(--accent)}
-#delBox{background:var(--surface);border:1px solid var(--danger);border-radius:14px;padding:14px}
-#delBox p{margin:0 0 4px;font-weight:500;font-size:16px}
-#delBox small{display:block;color:var(--muted);margin-bottom:12px}
+#delBox{position:fixed;inset:0;z-index:230;margin:0;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.72)}
+#delBox[hidden]{display:none!important}
+#delBox .dcard{width:min(94vw,620px);max-height:94vh;overflow-y:auto;box-sizing:border-box;background:var(--surface);border:3px solid var(--danger);border-radius:24px;padding:clamp(20px,4vh,36px)}
+#delBox p{margin:0 0 8px;font-weight:700;font-size:clamp(24px,5.4vw,36px);line-height:1.15}
+#delBox small{display:block;color:var(--muted);margin-bottom:clamp(16px,3vh,26px);font-size:clamp(16px,3.6vw,22px)}
+#delBox .bx{flex-direction:column;gap:12px}
+#delBox .bx button{flex:0 0 auto;width:100%;height:clamp(60px,9vh,88px);border-radius:16px;font-size:clamp(20px,4.6vw,28px);font-weight:600;border-width:2px}
+@media (max-height:500px){#delBox .bx{flex-direction:row}#delBox .bx button{height:clamp(48px,16vh,64px)}#delBox p{font-size:clamp(18px,6vh,26px)}#delBox small{margin-bottom:10px;font-size:clamp(13px,4vh,17px)}}
 #rstBox{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.72)}
 #rstBox[hidden]{display:none!important}
 #rstCard{width:min(94vw,600px);max-height:94vh;overflow:auto;background:var(--surface);border:3px solid var(--danger);border-radius:24px;padding:clamp(18px,4vh,34px) clamp(16px,4vw,32px);text-align:center;box-shadow:0 12px 40px rgba(0,0,0,.5)}
@@ -289,6 +294,12 @@ html.run .ctrls,html.run #finWrap{transition:transform .38s cubic-bezier(.22,.8,
 html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--bh,0px)));position:relative;z-index:5}
 #hlist .h-month{list-style:none;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;background:var(--bg);border:2px solid var(--line);border-radius:14px;padding:12px 14px;margin-top:6px}
 #hlist .h-month:first-child{margin-top:0}
+#hlist .h-month{margin-left:10px}
+#hlist .h-year{list-style:none;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;background:var(--surface);border:2px solid var(--accent);border-radius:14px;padding:14px;margin-top:14px}
+#hlist .h-year:first-child{margin-top:0}
+.h-year .hm-name{font-size:22px}
+.h-year.open .hm-name b{transform:rotate(90deg)}
+#hlist .yh{display:none!important}
 .hm-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
 .hm-name{font-size:17px;font-weight:700}
 .hm-name b{display:inline-block;font-weight:400;color:var(--muted);transition:transform .25s;margin-right:4px}
@@ -512,7 +523,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
 </style>
 </head>
 <body>
-<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v63</div></div>
+<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v64</div></div>
 <main class="wrap">
   <div id="home" role="navigation" aria-label="Inicio">
     <div class="hmtop"><h1>Kettlebell Training</h1><div class="ibtns"><button type="button" id="hmCfg" aria-label="Ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div></div>
@@ -641,7 +652,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     <summary>Probar sonidos</summary>
     <div class="sgrid" id="sgrid"></div>
   </details>
-  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 63</small>
+  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 64</small>
   </div></div>
 
   <div class="panel" id="histPanel" role="dialog" aria-label="Registro" hidden><div class="pin"><div class="phead"><h2>Registro</h2><div class="phb"><button type="button" class="hic" id="histClose" aria-label="Inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button></div></div>
@@ -658,9 +669,11 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     </div>
     <div id="selBar" hidden><span id="selCnt" aria-live="polite">0 seleccionadas</span><button type="button" id="selMerge" disabled>Unir</button><button type="button" id="selDel" disabled>Eliminar</button><button type="button" id="selAll">Seleccionar todo</button><button type="button" id="selCancel">Cancelar</button></div>
     <div id="delBox" role="alertdialog" aria-labelledby="delTitle" hidden>
-      <p id="delTitle"></p>
-      <small id="delSub"></small>
-      <div class="bx"><button type="button" id="delYes">Sí, borrar</button><button type="button" id="delNo">Cancelar</button></div>
+      <div class="dcard">
+        <p id="delTitle"></p>
+        <small id="delSub"></small>
+        <div class="bx"><button type="button" id="delYes">Sí, borrar</button><button type="button" id="delNo">Cancelar</button></div>
+      </div>
     </div>
     <div id="impBox" hidden>
       <p>Importar entrenamientos</p>
@@ -1116,11 +1129,11 @@ function saveEntry(done,ask){
   var e={id:Date.now(),ts:new Date().toISOString(),dur:Math.round(accum/1000),S:cfg.S,E:cfg.E,w:TF.c_work.s,st:TF.c_str.s,r:TF.c_rest.s,sr:TF.c_srest.s,done:done};
   if(RT.on)e.rt=RT.id;
   hist.unshift(e);
-  if(hist.length>500)hist.length=500;
+  if(hist.length>1000)hist.length=1000;
   lsSet(KEY_H,hist);
   renderHist();
   if(RT.on){setTimeout(function(){rtPartDone(e,done)},600);return}
-  if(hist.length>=450)setTimeout(showLim,600);else if(ask)setTimeout(showExp,600);
+  if(hist.length>=900)setTimeout(showLim,600);else if(ask)setTimeout(showExp,600);
 }
 var RT={on:false},limMode='',limWI=0;
 function limWaitStop(){if(limWI){clearInterval(limWI);limWI=0}$('limWait').hidden=true}
@@ -1140,8 +1153,8 @@ function showLim(){
   limMode='';
   var n=hist.length;
   $('limExp').textContent='Exportar ahora';$('limOk').textContent='Entendido';
-  $('limTitle').textContent=n>=500?'Registro lleno':'Registro casi lleno';
-  $('limTxt').textContent=n>=500?'Ya tienes 500 entrenamientos guardados. Al terminar el próximo se borra el más antiguo. Exporta tu registro para no perderlos.':'Llevas '+n+' de 500 entrenamientos. Al llegar a 500, los más antiguos se borran solos. Te recomiendo exportar tu registro.';
+  $('limTitle').textContent=n>=1000?'Registro lleno':'Registro casi lleno';
+  $('limTxt').textContent=n>=1000?'Ya tienes 1000 entrenamientos guardados. Al terminar el próximo se borra el más antiguo. Exporta tu registro para no perderlos.':'Llevas '+n+' de 1000 entrenamientos. Al llegar a 1000, los más antiguos se borran solos. Te recomiendo exportar tu registro.';
   $('limBox').hidden=false;
   try{play(SND.ask)}catch(e){}
 }
@@ -1520,7 +1533,7 @@ function setSelMode(on){
   $('selBar').hidden=!selMode;
   renderHist();
 }
-var openM={};
+var openM={},openY={};
 function renderHist(){
   var list=$('hlist'),h='';
   var ids={};hist.forEach(function(e){ids[e.id]=1});for(var k in sel)if(!ids[k])delete sel[k];
@@ -1539,22 +1552,39 @@ function renderHist(){
       var M=months[k];M.n++;M.t+=e.dur;if(e.t==='c')M.r+=e.dur;else M.f+=e.dur;M.days[isNaN(d.getTime())?'x':d.getDate()]=1;
     });
     var maxT=1;order.forEach(function(k){if(months[k].t>maxT)maxT=months[k].t});
-    var lastK=null;
+    var years={},yorder=[],curY=String(nowD.getFullYear());
+    sorted.forEach(function(e){
+      var d=new Date(e.ts),y=isNaN(d.getTime())?'x':String(d.getFullYear());
+      if(!years[y]){years[y]={n:0,t:0,f:0,r:0,days:{},ms:{}};yorder.push(y)}
+      var Y=years[y];Y.n++;Y.t+=e.dur;if(e.t==='c')Y.r+=e.dur;else Y.f+=e.dur;
+      if(y!=='x'){Y.days[d.getMonth()+'-'+d.getDate()]=1;Y.ms[d.getMonth()]=1}
+    });
+    var lastK=null,lastY=null;
     sorted.forEach(function(e){
       tot+=e.dur;if(e.t==='c')totR+=e.dur;
       var d=new Date(e.ts),k=isNaN(d.getTime())?'x':d.getFullYear()+'-'+d.getMonth();
+      var ky=k==='x'?'x':k.split('-')[0];
+      if(ky!==lastY){
+        lastY=ky;var Y=years[ky],yd=Object.keys(Y.days).length,ym=Object.keys(Y.ms).length;
+        if(openY[ky]===undefined)openY[ky]=(ky===curY||(yorder[0]===ky&&!years[curY]));
+        var yo=!!openY[ky];
+        h+='<li class="h-year'+(yo?' open':'')+'" data-yy="'+ky+'" role="button" tabindex="0" aria-expanded="'+yo+'">'
+          +'<div class="hm-top"><span class="hm-name"><b aria-hidden="true">&#9654;</b>'+(ky==='x'?'Sin fecha':ky)+'</span><span class="hm-tot">'+fmtDur(Y.t)+'</span></div>'
+          +'<div class="hm-sub">'+Y.n+(Y.n===1?' entrenamiento':' entrenamientos')+(ky==='x'?'':' · '+yd+(yd===1?' día':' días')+' · '+ym+(ym===1?' mes':' meses'))+'</div>'
+          +(Y.r>0?'<div class="hm-sub">Fuerza '+fmtHM(Y.f)+' · Carrera '+fmtHM(Y.r)+'</div>':'')+'</li>';
+      }
       if(k!==lastK){
         lastK=k;var M=months[k],nd=Object.keys(M.days).length;
         if(openM[k]===undefined)openM[k]=(k===curK||order[0]===k&&!months[curK]);
         var isO=!!openM[k];
-        h+='<li class="h-month'+(isO?' open':'')+'" data-m="'+k+'" role="button" tabindex="0" aria-expanded="'+isO+'">'
+        h+='<li class="h-month'+(isO?' open':'')+(openY[ky]?'':' yh')+'" data-y="'+ky+'" data-m="'+k+'" role="button" tabindex="0" aria-expanded="'+isO+'">'
           +'<div class="hm-top"><span class="hm-name"><b aria-hidden="true">&#9654;</b>'+(k==='x'?'Sin fecha':MN[M.m]+' '+M.y)+'</span><span class="hm-tot">'+fmtDur(M.t)+'</span></div>'
           +'<div class="hm-sub">'+M.n+(M.n===1?' entrenamiento':' entrenamientos')+' · '+nd+(nd===1?' día':' días')+' · prom. '+fmtDur(Math.round(M.t/M.n))+'</div>'
           +(M.r>0?'<div class="hm-sub">Fuerza '+fmtHM(M.f)+' · Carrera '+fmtHM(M.r)+'</div>':'')
           +'<div class="hm-bar"><i style="width:'+Math.max(3,Math.round(M.t/maxT*100))+'%"></i></div></li>';
       }
       var on=!!sel[e.id],hide=!openM[k];
-      h+='<li class="h-item'+(selMode?' sm':'')+(selMode&&on?' on':'')+(hide?' mh':'')+'" data-mk="'+k+'"'+(selMode?' data-id="'+e.id+'" role="checkbox" aria-checked="'+on+'" tabindex="0"':'')+'>'
+      h+='<li class="h-item'+(selMode?' sm':'')+(selMode&&on?' on':'')+(hide?' mh':'')+(openY[ky]?'':' yh')+'" data-y="'+ky+'" data-mk="'+k+'"'+(selMode?' data-id="'+e.id+'" role="checkbox" aria-checked="'+on+'" tabindex="0"':'')+'>'
         +(selMode?'<span class="h-chk" aria-hidden="true">'+(on?'&#10003;':'')+'</span>':'')
         +'<div><div class="h-date"><span class="tp '+(e.t==='c'?'c">Carrera':'f">Fuerza')+'</span>'+(e.rt?'<span class="tp r">Rutina completa</span>':'')+(e.mg>1?'<span class="tp r">Unida</span>':'')+dstr(e.ts)+'</div><div class="h-cfg">'+cfgStr(e)+'</div></div>'
         +'<div class="h-dur">'+fmtDur(e.dur)+'</div>'
@@ -1574,12 +1604,19 @@ function toggleSel(li){
   li.querySelector('.h-chk').innerHTML=on?'&#10003;':'';
   updSel();
 }
+function toggleYear(li){
+  var y=li.getAttribute('data-yy'),o=!openY[y];openY[y]=o;
+  li.classList.toggle('open',o);li.setAttribute('aria-expanded',o);
+  document.querySelectorAll('#hlist [data-y]').forEach(function(x){if(x.getAttribute('data-y')===y)x.classList.toggle('yh',!o)});
+}
 function toggleMonth(li){
   var k=li.getAttribute('data-m'),o=!openM[k];openM[k]=o;
   li.classList.toggle('open',o);li.setAttribute('aria-expanded',o);
   document.querySelectorAll('#hlist .h-item').forEach(function(x){if(x.getAttribute('data-mk')===k)x.classList.toggle('mh',!o)});
 }
 $('hlist').addEventListener('click',function(e){
+  var yr=e.target.closest('.h-year');
+  if(yr){toggleYear(yr);return}
   var mo=e.target.closest('.h-month');
   if(mo){toggleMonth(mo);return}
   var b=e.target.closest('.h-del');
@@ -1589,6 +1626,7 @@ $('hlist').addEventListener('click',function(e){
   if(li)toggleSel(li);
 });
 $('hlist').addEventListener('keydown',function(e){
+  if((e.key===' '||e.key==='Enter')&&e.target.classList&&e.target.classList.contains('h-year')){e.preventDefault();toggleYear(e.target);return}
   if((e.key===' '||e.key==='Enter')&&e.target.classList&&e.target.classList.contains('h-month')){e.preventDefault();toggleMonth(e.target);return}
   if(!selMode||(e.key!==' '&&e.key!=='Enter'))return;
   var li=e.target.closest&&e.target.closest('.h-item');
@@ -1662,7 +1700,7 @@ $('impYes').onclick=function(){
   var add=0;
   impPend.forEach(function(c){if(!have[c.id]){have[c.id]=1;hist.push(c);add++}});
   hist.sort(function(a,b){return b.id-a.id});
-  if(hist.length>500)hist=hist.slice(0,500);
+  if(hist.length>1000)hist=hist.slice(0,1000);
   lsSet(KEY_H,hist);renderHist();impReset();
   $('msg').textContent='Se agregaron '+add+(add===1?' entrenamiento.':' entrenamientos.');
 };
@@ -2054,9 +2092,9 @@ function rFinish(done){
     he={id:Date.now(),ts:new Date(R.start).toISOString(),dur:sec,t:'c',m:R.mode,g:R.goal,done:!!done};
     if(RT.on)he.rt=RT.id;
     hist.unshift(he);
-    if(hist.length>500)hist.length=500;
+    if(hist.length>1000)hist.length=1000;
     lsSet(KEY_H,hist);renderHist();
-    if(!RT.on){if(hist.length>=450)setTimeout(showLim,600);else setTimeout(showRunExp,600)}
+    if(!RT.on){if(hist.length>=900)setTimeout(showLim,600);else setTimeout(showRunExp,600)}
   }
   if(RT.on)setTimeout(function(){rtPartDone(he,done)},600);
 }
@@ -2098,7 +2136,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',function(){navig
 </script>
 <script>
 (function(){
-  var APP_VERSION='v63';
+  var APP_VERSION='v64';
   var sp=document.getElementById('splash');
   if(!sp)return;
   document.getElementById('spVer').textContent=APP_VERSION;
