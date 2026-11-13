@@ -307,6 +307,12 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
 #hlist .h-year{list-style:none;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;background:var(--surface);border:2px solid var(--accent);border-radius:14px;padding:14px;margin-top:14px}
 #hlist .h-year:first-child{margin-top:0}
 .h-year .hm-name{font-size:22px}
+.hm-top .hm-name{flex:1 1 auto;min-width:0}
+.hflt{display:flex;gap:6px;flex:none;align-self:center}
+.hf{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--muted);display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.hf svg{width:20px;height:20px}
+.hf.on{color:#000;border:2px solid #000}
+.hf.f.on{background:#39ff14}.hf.c.on{background:#FFD60A}
 .h-year.open .hm-name b{transform:rotate(90deg)}
 #hlist .yh{display:none!important}
 .hm-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
@@ -532,7 +538,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
 </style>
 </head>
 <body>
-<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v64</div></div>
+<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v65</div></div>
 <main class="wrap">
   <div id="home" role="navigation" aria-label="Inicio">
     <div class="hmtop"><h1>Kettlebell Training</h1><div class="ibtns"><button type="button" id="hmCfg" aria-label="Ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div></div>
@@ -661,7 +667,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     <summary>Probar sonidos</summary>
     <div class="sgrid" id="sgrid"></div>
   </details>
-  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 64</small>
+  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 65</small>
   </div></div>
 
   <div class="panel" id="histPanel" role="dialog" aria-label="Registro" hidden><div class="pin"><div class="phead"><h2>Registro</h2><div class="phb"><button type="button" class="hic" id="histClose" aria-label="Inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button></div></div>
@@ -1546,7 +1552,13 @@ function setSelMode(on){
   $('selBar').hidden=!selMode;
   renderHist();
 }
-var openM={},openY={};
+var openM={},openY={},fltY={},fltM={};
+var FARM='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.409 13.017A5 5 0 0 1 22 15c0 3.866-4 7-9 7-4.077 0-8.153-.82-10.371-2.462-.426-.316-.631-.832-.62-1.362C2.118 12.723 2.627 2 10 2a3 3 0 0 1 3 3 2 2 0 0 1-2 2c-1.105 0-1.64-.444-2-1"/><path d="M15 14a5 5 0 0 0-7.584 2"/><path d="M9.964 6.825C8.019 7.977 9.5 13 8 15"/></svg>',FRUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13" cy="4" r="1"/><path d="M4 17l5 1l.75-1.5"/><path d="M15 21v-4l-4-3l1-6"/><path d="M7 12V9l5-1l3 3l3 1"/></svg>';
+function fltBtns(kind,key,cur){
+  return '<span class="hflt">'
+    +'<button type="button" class="hf f'+(cur==='f'?' on':'')+'" data-fk="'+kind+'" data-fy="'+key+'" data-ft="f" aria-pressed="'+(cur==='f')+'" aria-label="Ver solo fuerza">'+FARM+'</button>'
+    +'<button type="button" class="hf c'+(cur==='c'?' on':'')+'" data-fk="'+kind+'" data-fy="'+key+'" data-ft="c" aria-pressed="'+(cur==='c')+'" aria-label="Ver solo cardio">'+FRUN+'</button></span>';
+}
 function renderHist(){
   var list=$('hlist'),h='';
   var ids={};hist.forEach(function(e){ids[e.id]=1});for(var k in sel)if(!ids[k])delete sel[k];
@@ -1558,10 +1570,17 @@ function renderHist(){
   }else{
     var tot=0,totR=0,MN=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
     var sorted=hist.slice().sort(function(a,b){return (b.ts>a.ts)-(b.ts<a.ts)});
+    var tpOf=function(e){return e.t==='c'?'c':'f'};
+    var yOf=function(e){var d=new Date(e.ts);return isNaN(d.getTime())?'x':String(d.getFullYear())};
+    var kOf=function(e){var d=new Date(e.ts);return isNaN(d.getTime())?'x':d.getFullYear()+'-'+d.getMonth()};
+    var okY=function(e){var f=fltY[yOf(e)];return !f||tpOf(e)===f};
+    var okM=function(e){var f=fltM[kOf(e)];return !f||tpOf(e)===f};
     var months={},order=[],nowD=new Date(),curK=nowD.getFullYear()+'-'+nowD.getMonth();
     sorted.forEach(function(e){
+      if(!okY(e))return;
       var d=new Date(e.ts),k=isNaN(d.getTime())?'x':d.getFullYear()+'-'+d.getMonth();
       if(!months[k]){months[k]={k:k,n:0,t:0,f:0,r:0,days:{},y:d.getFullYear(),m:d.getMonth()};order.push(k)}
+      if(!okM(e))return;
       var M=months[k];M.n++;M.t+=e.dur;if(e.t==='c')M.r+=e.dur;else M.f+=e.dur;M.days[isNaN(d.getTime())?'x':d.getDate()]=1;
     });
     var maxT=1;order.forEach(function(k){if(months[k].t>maxT)maxT=months[k].t});
@@ -1569,6 +1588,7 @@ function renderHist(){
     sorted.forEach(function(e){
       var d=new Date(e.ts),y=isNaN(d.getTime())?'x':String(d.getFullYear());
       if(!years[y]){years[y]={n:0,t:0,f:0,r:0,days:{},ms:{}};yorder.push(y)}
+      if(!okY(e))return;
       var Y=years[y];Y.n++;Y.t+=e.dur;if(e.t==='c')Y.r+=e.dur;else Y.f+=e.dur;
       if(y!=='x'){Y.days[d.getMonth()+'-'+d.getDate()]=1;Y.ms[d.getMonth()]=1}
     });
@@ -1582,20 +1602,22 @@ function renderHist(){
         if(openY[ky]===undefined)openY[ky]=(ky===curY||(yorder[0]===ky&&!years[curY]));
         var yo=!!openY[ky];
         h+='<li class="h-year'+(yo?' open':'')+'" data-yy="'+ky+'" role="button" tabindex="0" aria-expanded="'+yo+'">'
-          +'<div class="hm-top"><span class="hm-name"><b aria-hidden="true">&#9654;</b>'+(ky==='x'?'Sin fecha':ky)+'</span><span class="hm-tot">'+fmtDur(Y.t)+'</span></div>'
+          +'<div class="hm-top"><span class="hm-name"><b aria-hidden="true">&#9654;</b>'+(ky==='x'?'Sin fecha':ky)+'</span>'+fltBtns('y',ky,fltY[ky])+'<span class="hm-tot">'+fmtDur(Y.t)+'</span></div>'
           +'<div class="hm-sub">'+Y.n+(Y.n===1?' entrenamiento':' entrenamientos')+(ky==='x'?'':' · '+yd+(yd===1?' día':' días')+' · '+ym+(ym===1?' mes':' meses'))+'</div>'
           +(Y.r>0?'<div class="hm-sub">Fuerza '+fmtHM(Y.f)+' · Carrera '+fmtHM(Y.r)+'</div>':'')+'</li>';
       }
+      if(!okY(e))return;
       if(k!==lastK){
         lastK=k;var M=months[k],nd=Object.keys(M.days).length;
         if(openM[k]===undefined)openM[k]=(k===curK||order[0]===k&&!months[curK]);
         var isO=!!openM[k];
         h+='<li class="h-month'+(isO?' open':'')+(openY[ky]?'':' yh')+'" data-y="'+ky+'" data-m="'+k+'" role="button" tabindex="0" aria-expanded="'+isO+'">'
-          +'<div class="hm-top"><span class="hm-name"><b aria-hidden="true">&#9654;</b>'+(k==='x'?'Sin fecha':MN[M.m]+' '+M.y)+'</span><span class="hm-tot">'+fmtDur(M.t)+'</span></div>'
-          +'<div class="hm-sub">'+M.n+(M.n===1?' entrenamiento':' entrenamientos')+' · '+nd+(nd===1?' día':' días')+' · prom. '+fmtDur(Math.round(M.t/M.n))+'</div>'
+          +'<div class="hm-top"><span class="hm-name"><b aria-hidden="true">&#9654;</b>'+(k==='x'?'Sin fecha':MN[M.m]+' '+M.y)+'</span>'+fltBtns('m',k,fltM[k])+'<span class="hm-tot">'+fmtDur(M.t)+'</span></div>'
+          +'<div class="hm-sub">'+M.n+(M.n===1?' entrenamiento':' entrenamientos')+' · '+nd+(nd===1?' día':' días')+' · prom. '+fmtDur(M.n?Math.round(M.t/M.n):0)+'</div>'
           +(M.r>0?'<div class="hm-sub">Fuerza '+fmtHM(M.f)+' · Carrera '+fmtHM(M.r)+'</div>':'')
           +'<div class="hm-bar"><i style="width:'+Math.max(3,Math.round(M.t/maxT*100))+'%"></i></div></li>';
       }
+      if(!okM(e))return;
       var on=!!sel[e.id],hide=!openM[k];
       h+='<li class="h-item'+(selMode?' sm':'')+(selMode&&on?' on':'')+(hide?' mh':'')+(openY[ky]?'':' yh')+'" data-y="'+ky+'" data-mk="'+k+'"'+(selMode?' data-id="'+e.id+'" role="checkbox" aria-checked="'+on+'" tabindex="0"':'')+'>'
         +(selMode?'<span class="h-chk" aria-hidden="true">'+(on?'&#10003;':'')+'</span>':'')
@@ -1628,6 +1650,15 @@ function toggleMonth(li){
   document.querySelectorAll('#hlist .h-item').forEach(function(x){if(x.getAttribute('data-mk')===k)x.classList.toggle('mh',!o)});
 }
 $('hlist').addEventListener('click',function(e){
+  var fb=e.target.closest('.hf');
+  if(fb){
+    e.stopPropagation();
+    var kd=fb.getAttribute('data-fk'),ky2=fb.getAttribute('data-fy'),ft=fb.getAttribute('data-ft');
+    var obj=kd==='y'?fltY:fltM;
+    if(obj[ky2]===ft)delete obj[ky2];else obj[ky2]=ft;
+    if(kd==='y')Object.keys(fltM).forEach(function(m){if(m.split('-')[0]===ky2)delete fltM[m]});
+    renderHist();return;
+  }
   var yr=e.target.closest('.h-year');
   if(yr){toggleYear(yr);return}
   var mo=e.target.closest('.h-month');
@@ -1677,7 +1708,7 @@ $('sureYes').onclick=function(){
 function openP(id){$(id).hidden=false;document.documentElement.classList.add('pnl');$(id).scrollTop=0}
 function closeP(id){$(id).hidden=true;document.documentElement.classList.remove('pnl')}
 $('openCfg').onclick=function(){openP('cfgPanel')};
-$('openHist').onclick=function(){openP('histPanel')};
+$('openHist').onclick=function(){fltY={};fltM={};try{renderHist()}catch(e){}openP('histPanel')};
 $('cfgClose').onclick=function(){closeP('cfgPanel')};
 $('histClose').onclick=function(){closeP('histPanel')};
 var impPend=null,EXP_TAG='ENTRENO1:';
@@ -2157,7 +2188,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',function(){navig
 </script>
 <script>
 (function(){
-  var APP_VERSION='v64';
+  var APP_VERSION='v65';
   var sp=document.getElementById('splash');
   if(!sp)return;
   document.getElementById('spVer').textContent=APP_VERSION;
