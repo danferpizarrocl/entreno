@@ -538,7 +538,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
 </style>
 </head>
 <body>
-<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v65</div></div>
+<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v66</div></div>
 <main class="wrap">
   <div id="home" role="navigation" aria-label="Inicio">
     <div class="hmtop"><h1>Kettlebell Training</h1><div class="ibtns"><button type="button" id="hmCfg" aria-label="Ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div></div>
@@ -667,7 +667,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     <summary>Probar sonidos</summary>
     <div class="sgrid" id="sgrid"></div>
   </details>
-  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 65</small>
+  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 66</small>
   </div></div>
 
   <div class="panel" id="histPanel" role="dialog" aria-label="Registro" hidden><div class="pin"><div class="phead"><h2>Registro</h2><div class="phb"><button type="button" class="hic" id="histClose" aria-label="Inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button></div></div>
@@ -677,7 +677,6 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     </div>
     <div class="hact" style="margin:10px 0">
       <button type="button" id="hsel">Seleccionar</button>
-      <button type="button" id="hcopy">Copiar registro</button>
       <button type="button" id="hexp">Exportar</button>
       <button type="button" id="himp">Importar</button>
       <button type="button" id="hclear">Borrar todo</button>
@@ -696,7 +695,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     </div>
     <div id="impBox" hidden>
       <p>Importar entrenamientos</p>
-      <small>Pega aquí el texto que copiaste con "Exportar" desde otro lugar. Se suman solo los nuevos; no se borra nada.</small>
+      <small>Pega aquí el texto que copiaste con "Exportar" (sirve completo, con el resumen incluido). Se suman solo los nuevos; no se borra nada.</small>
       <textarea id="impTxt" aria-label="Texto a importar" placeholder="Pega aquí el texto exportado"></textarea>
       <div id="impInfo" role="status"></div>
       <div class="bx"><button type="button" id="impChk">Revisar</button><button type="button" id="impYes" hidden>Sí, importar</button><button type="button" id="impNo">Cancelar</button></div>
@@ -1713,11 +1712,44 @@ $('cfgClose').onclick=function(){closeP('cfgPanel')};
 $('histClose').onclick=function(){closeP('histPanel')};
 var impPend=null,EXP_TAG='ENTRENO1:';
 function impReset(){impPend=null;$('impBox').hidden=true;$('impTxt').value='';$('impInfo').textContent='';$('impYes').hidden=true}
+function buildExport(){
+  var MN2=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  var srt=hist.slice().sort(function(a,b){return (b.ts>a.ts)-(b.ts<a.ts)}),grp={},ord=[],yrs={},yord=[];
+  var tt=0,tf=0,tc=0;
+  srt.forEach(function(e){
+    var d=new Date(e.ts),bad=isNaN(d.getTime()),k=bad?'x':d.getFullYear()+'-'+d.getMonth(),y=bad?'x':String(d.getFullYear());
+    if(!grp[k]){grp[k]={d:d,y:y,f:[],c:[]};ord.push(k)}
+    grp[k][e.t==='c'?'c':'f'].push(e);
+    if(!yrs[y]){yrs[y]={n:0,f:0,c:0,days:{}};yord.push(y)}
+    var Y=yrs[y];Y.n++;if(e.t==='c'){Y.c+=e.dur;tc+=e.dur}else{Y.f+=e.dur;tf+=e.dur}
+    if(!bad)Y.days[d.getMonth()+'-'+d.getDate()]=1;
+  });
+  tt=tf+tc;
+  function ln(e){return dstr(e.ts)+' · '+fmtDur(e.dur)+' · '+cfgStr(e)+' · '+(e.done?'completo':'incompleto')+(isFinite(e.rt)?' · rutina completa':'')+(isFinite(e.mg)&&e.mg>1?' · unido ('+e.mg+' partes)':'')}
+  var out=['ENTRENAMIENTOS · respaldo del '+dstr(new Date().toISOString()),
+    'Total '+hist.length+(hist.length===1?' entrenamiento':' entrenamientos')+' · '+fmtHM(tt)+' · Fuerza '+fmtHM(tf)+' · Carrera '+fmtHM(tc),''];
+  var lastY=null;
+  ord.forEach(function(k){
+    var G=grp[k],mf=0,mc=0;G.f.forEach(function(e){mf+=e.dur});G.c.forEach(function(e){mc+=e.dur});
+    if(G.y!==lastY){
+      lastY=G.y;var Y=yrs[G.y],nd=Object.keys(Y.days).length;
+      out.push('=== '+(G.y==='x'?'Sin fecha':G.y)+' ===');
+      out.push('Año: '+Y.n+(Y.n===1?' entrenamiento':' entrenamientos')+(G.y==='x'?'':' · '+nd+(nd===1?' día':' días'))+' · '+fmtHM(Y.f+Y.c)+' · Fuerza '+fmtHM(Y.f)+' · Carrera '+fmtHM(Y.c),'');
+    }
+    out.push('== '+(k==='x'?'Sin fecha':MN2[G.d.getMonth()]+' '+G.d.getFullYear())+' ==');
+    out.push('Total '+fmtHM(mf+mc)+' · Fuerza '+fmtHM(mf)+' · Carrera '+fmtHM(mc));
+    if(G.c.length){out.push('','CARRERA');G.c.forEach(function(e){out.push(ln(e))})}
+    if(G.f.length){out.push('','FUERZA (pesa rusa)');G.f.forEach(function(e){out.push(ln(e))})}
+    out.push('');
+  });
+  var readable=out.join('\n').replace(/\[/g,'(').replace(/\]/g,')').trim();
+  return readable+'\n\n----------------------------------------\nRESPALDO (no borres esta línea: es lo que lee "Importar")\n'+EXP_TAG+JSON.stringify(hist);
+}
 $('hexp').onclick=function(){
   if(!hist.length){$('msg').textContent='No hay nada que exportar.';return}
-  var txt=EXP_TAG+JSON.stringify(hist),ta=$('cpy');
+  var txt=buildExport(),ta=$('cpy');
   function fb(){ta.value=txt;ta.hidden=false;ta.focus();ta.select();$('msg').textContent='Selecciona todo el texto de abajo y cópialo.'}
-  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){ta.hidden=true;$('msg').textContent='Exportado: pégalo en Importar donde quieras traer los entrenamientos.'},fb)}else fb();
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){ta.hidden=true;$('msg').textContent='Exportado: resumen y respaldo copiados. Pégalo en tus notas; con Importar se recupera todo.'},fb)}else fb()
 };
 $('himp').onclick=function(){impReset();$('impBox').hidden=false;$('delBox').hidden=true;$('impTxt').focus();try{$('impBox').scrollIntoView({block:'center'})}catch(e){}};
 $('impNo').onclick=impReset;
@@ -1756,29 +1788,6 @@ $('impYes').onclick=function(){
   lsSet(KEY_H,hist);renderHist();impReset();
   $('msg').textContent='Se agregaron '+add+(add===1?' entrenamiento.':' entrenamientos.');
 };
-$('hcopy').onclick=function(){
-  if(!hist.length){$('msg').textContent='Todavía no hay entrenamientos para copiar.';return}
-  var MN2=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-  var srt=hist.slice().sort(function(a,b){return (b.ts>a.ts)-(b.ts<a.ts)}),grp={},ord=[];
-  srt.forEach(function(e){var d=new Date(e.ts),k=isNaN(d.getTime())?'x':d.getFullYear()+'-'+d.getMonth();if(!grp[k]){grp[k]={d:d,f:[],c:[]};ord.push(k)}grp[k][e.t==='c'?'c':'f'].push(e)});
-  var out=[];
-  function ln(e){return dstr(e.ts)+' · '+fmtDur(e.dur)+' · '+cfgStr(e)+' · '+(e.done?'completo':'incompleto')}
-  ord.forEach(function(k){
-    var G=grp[k],tf=0,tc=0;G.f.forEach(function(e){tf+=e.dur});G.c.forEach(function(e){tc+=e.dur});
-    out.push('== '+(k==='x'?'Sin fecha':MN2[G.d.getMonth()]+' '+G.d.getFullYear())+' ==');
-    out.push('Total '+fmtHM(tf+tc)+' · Fuerza '+fmtHM(tf)+' · Carrera '+fmtHM(tc));
-    if(G.c.length){out.push('','CARRERA');G.c.forEach(function(e){out.push(ln(e))})}
-    if(G.f.length){out.push('','FUERZA (pesa rusa)');G.f.forEach(function(e){out.push(ln(e))})}
-    out.push('');
-  });
-  var txt=out.join('\n').trim();
-  var ta=$('cpy');
-  function fallback(){ta.value=txt;ta.hidden=false;ta.focus();ta.select();$('msg').textContent='Selecciona el texto y cópialo.'}
-  try{
-    navigator.clipboard.writeText(txt).then(function(){ta.hidden=true;$('msg').textContent='Registro copiado.'},fallback);
-  }catch(e){fallback()}
-};
-
 /* ===== Pausa visible (pesas) ===== */
 var pzStart=0,pzT=0,pzLast=-1;
 function pzTick(){
@@ -2188,7 +2197,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',function(){navig
 </script>
 <script>
 (function(){
-  var APP_VERSION='v65';
+  var APP_VERSION='v66';
   var sp=document.getElementById('splash');
   if(!sp)return;
   document.getElementById('spVer').textContent=APP_VERSION;
