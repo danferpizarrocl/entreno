@@ -531,6 +531,25 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
 .hst-l i{display:inline-block;width:10px;height:10px;margin-right:4px}
 .hst-l i.ln{width:14px;height:0;border-top:1.5px solid var(--fg);vertical-align:middle}
 .ymed{display:flex;align-items:center;gap:6px}
+.hst-h{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+.hst-h .hst-t{margin:0}
+.hst-w span.off{background:transparent;border:1px dashed var(--muted);box-sizing:border-box}
+.tubtn{height:40px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--fg);padding:0 14px;font-weight:600;font-size:15px}
+.tuit{display:block;width:100%;text-align:left;min-height:40px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--fg);padding:8px 12px;margin-bottom:6px;font-size:14px}
+#turnoBox{position:fixed;inset:0;z-index:236;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.72)}
+#turnoBox[hidden]{display:none!important}
+#turnoBox .gc{width:min(94vw,420px);background:var(--surface);border:3px solid var(--accent);border-radius:24px;padding:22px 18px;text-align:center;box-sizing:border-box}
+#turnoBox p{margin:0 0 10px;font-weight:700;font-size:clamp(22px,5.5vw,30px)}
+#turnoBox label{display:block;font-size:15px;color:var(--muted);text-align:left;margin-bottom:10px}
+#turnoBox input[type=date]{display:block;width:100%;box-sizing:border-box;height:52px;font-size:18px;border:2px solid var(--line);border-radius:14px;background:var(--bg);color:var(--fg);margin-top:4px;padding:0 10px}
+#turnoBox .tt{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:4px 0 12px}
+#turnoBox .tt button{height:52px;border-radius:14px;border:2px solid var(--line);background:var(--bg);color:var(--fg);font-size:16px;font-weight:600}
+#turnoBox .tt button.on{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+#turnoBox .ge{font-size:14px;color:#ff1744;margin-bottom:8px}
+#turnoBox .gb{display:flex;gap:10px}
+#turnoBox .gb button{flex:1;height:56px;border-radius:16px;font-size:20px;font-weight:600;border:2px solid var(--line);background:var(--bg);color:var(--fg)}
+#turnoBox .gb button.pri{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+#turnoBox .gb button.dng{color:#ff1744}
 .medal{vertical-align:-7px;margin-left:6px}
 .gset{margin-top:8px;padding-top:8px;border-top:1px solid var(--line)}
 .gset .row input{flex:0 0 90px;height:36px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--fg);padding:0 8px;text-align:center}
@@ -575,7 +594,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="medalA" viewBox="0 0 40 40"><path d="M12 2h6l4 12h-6zM28 2h-6l-4 12h6z" fill="#BA7517"/><circle cx="20" cy="26" r="11" fill="#EF9F27" stroke="#854F0B" stroke-width="2"/><circle cx="20" cy="26" r="7" fill="#FAC775" stroke="#BA7517" stroke-width="1.5"/><path d="M20 21l1.7 3.5 3.8.5-2.8 2.6.7 3.8-3.4-1.9-3.4 1.9.7-3.8-2.8-2.6 3.8-.5z" fill="#854F0B"/></symbol></defs></svg>
-<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v70</div></div>
+<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v71</div></div>
 <main class="wrap">
   <div id="home" role="navigation" aria-label="Inicio">
     <div class="hmtop"><h1>Kettlebell Training</h1><div class="ibtns"><button type="button" id="hmCfg" aria-label="Ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div></div>
@@ -657,6 +676,11 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
   </div>
 
   <div id="goalBox" role="dialog" aria-modal="true" aria-labelledby="goalTitle" hidden><div class="gc"><p id="goalTitle"></p><small id="goalSub"></small><div class="gf"><label>Fuerza<input type="number" id="goalF" min="0" max="2000" step="any" inputmode="decimal"><span>h</span></label><label>Cardio<input type="number" id="goalC" min="0" max="2000" step="any" inputmode="decimal"><span>h</span></label></div><div id="goalTot" class="gt"></div><div id="goalErr" class="ge" role="alert"></div><div class="gb"><button type="button" id="goalNo">Cancelar</button><button type="button" id="goalOk" class="pri">Guardar</button></div></div></div>
+  <div id="turnoBox" role="dialog" aria-modal="true" aria-labelledby="tuTitle" hidden><div class="gc"><p id="tuTitle">Turno</p>
+    <label>Desde<input type="date" id="tuFrom"></label><label>Hasta<input type="date" id="tuTo"></label>
+    <div class="tt"><button type="button" id="tuNoGym" class="on">Sin gimnasio</button><button type="button" id="tuGym">Con gimnasio</button></div>
+    <div id="tuErr" class="ge" role="alert"></div>
+    <div class="gb"><button type="button" id="tuNo">Cancelar</button><button type="button" id="tuDel" class="dng" hidden>Borrar</button><button type="button" id="tuOk" class="pri">Guardar</button></div></div></div>
   <div id="limBox" role="alertdialog" aria-modal="true" aria-labelledby="limTitle" hidden><div id="limCard"><p id="limTitle"></p><small id="limTxt"></small><small id="limWait" hidden></small><div class="lb"><button type="button" id="limExp" class="pri">Exportar ahora</button><button type="button" id="limOk">Entendido</button></div></div></div>
 
   <div id="rstBox" role="alertdialog" aria-modal="true" aria-labelledby="rstTitle" hidden>
@@ -704,6 +728,11 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
       <div class="row" id="gyRowF"><label for="gyF">Fuerza, este año</label><input type="number" id="gyF" min="0" step="any" inputmode="decimal"></div>
       <div class="row" id="gyRowC"><label for="gyC">Cardio, este año</label><input type="number" id="gyC" min="0" step="any" inputmode="decimal"></div>
     </div>
+    <div class="gset"><b>Turnos</b>
+      <small style="display:block;color:var(--muted);margin:2px 0 8px">Fechas en las que no puedes entrenar. Ajustan las metas y no cortan la racha.</small>
+      <div id="tuList"></div>
+      <button type="button" class="tubtn" id="tuAdd">Agregar turno</button>
+    </div>
   </section>
 
 
@@ -711,7 +740,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     <summary>Probar sonidos</summary>
     <div class="sgrid" id="sgrid"></div>
   </details>
-  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 70</small>
+  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 71</small>
   </div></div>
 
   <div class="panel" id="histPanel" role="dialog" aria-label="Registro" hidden><div class="pin"><div class="phead"><h2>Registro</h2><div class="phb"><button type="button" class="hic" id="histClose" aria-label="Inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button></div></div>
@@ -1560,24 +1589,57 @@ function monthAgg(){
     var m=a[k]||(a[k]={f:0,c:0,t:0,y:d.getFullYear(),m:d.getMonth()});m.t+=e.dur;if(e.t==='c')m.c+=e.dur;else m.f+=e.dur});
   return a;
 }
-function mHit(k,m){var g=goalVal(goalOf(k),'');return !!g&&m.t>0&&m.t>=g*3600}
+var TC={list:[],off:{},gym:{}};
+function dnStr(t){var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(t||'');return m?Math.round(Date.UTC(+m[1],+m[2]-1,+m[3])/864e5):null}
+function getTurnos(){
+  var a=lsGet('turnos');if(!Array.isArray(a))return[];
+  var L=[];a.forEach(function(t){if(!t||typeof t!=='object')return;var x=dnStr(t.from),y=dnStr(t.to);if(x===null||y===null||y<x)return;L.push({id:t.id,from:t.from,to:t.to,a:x,b:y,gym:!!t.gym})});
+  L.sort(function(p,q){return p.a-q.a});return L;
+}
+function tcBuild(){var L=getTurnos(),off={},gym={};L.forEach(function(t){for(var d=t.a;d<=t.b&&d-t.a<800;d++){(t.gym?gym:off)[d]=1}});TC={list:L,off:off,gym:gym}}
+function isOff(n){return !!TC.off[n]}
+function monthInfo(y,m){
+  var days=new Date(y,m+1,0).getDate(),st=Math.round(Date.UTC(y,m,1)/864e5),o=0,g=0;
+  for(var i=0;i<days;i++){if(TC.off[st+i])o++;else if(TC.gym[st+i])g++}
+  return{days:days,off:o,gym:g};
+}
+function yearInfo(y){
+  var days=(new Date(y,1,29).getMonth()===1)?366:365,st=Math.round(Date.UTC(y,0,1)/864e5),o=0;
+  for(var i=0;i<days;i++){if(TC.off[st+i])o++}
+  return{days:days,off:o};
+}
+function mGoal(k,eff){
+  var raw=goalVal(goalOf(k),eff);if(!raw||k==='x')return null;
+  var p=k.split('-'),mi=monthInfo(+p[0],+p[1]);
+  if(mi.off===0)return{v:raw,adj:false};
+  var free=mi.days-mi.off;if(free<=0)return{v:null,full:true};
+  return{v:Math.max(0.1,r1(raw*free/mi.days)),adj:true};
+}
+function mHit(k,m){var g=mGoal(k,'');return !!(g&&g.v)&&m.t>0&&m.t>=g.v*3600}
+function fmtD(t){var x=/^(\d{4})-(\d{2})-(\d{2})$/.exec(t||'');return x?(+x[3])+' '+MNAMES[+x[2]-1].slice(0,3).toLowerCase()+' '+x[1]:''}
 function streakHTML(){
   var set={};hist.forEach(function(e){var n=dayNum(new Date(e.ts).getTime());if(n!==null)set[n]=1});
   var days=Object.keys(set).map(Number).sort(function(a,b){return a-b});
   var today=dayNum(Date.now()),cur=0,best=0,run=0,prev=null;
-  days.forEach(function(n){run=(prev!==null&&n===prev+1)?run+1:1;if(run>best)best=run;prev=n});
-  var st=set[today]?today:(set[today-1]?today-1:null);
-  if(st!==null){var q=st;while(set[q]){cur++;q--}}
-  var dow=(new Date(today*864e5).getUTCDay()+6)%7,ws=today-dow,wk=0,bars='';
-  for(var i=0;i<7;i++){var on=!!set[ws+i];if(on)wk++;bars+='<span class="'+(on?'on':'')+'"></span>'}
+  var bridged=function(a,b){for(var q=a+1;q<b;q++){if(!isOff(q))return false}return true};
+  days.forEach(function(n){run=(prev!==null&&(n===prev+1||bridged(prev,n)))?run+1:1;if(run>best)best=run;prev=n});
+  var q0=today;while(isOff(q0)&&!set[q0])q0--;
+  var st=null;if(set[q0])st=q0;else{var q2=q0-1;while(isOff(q2)&&!set[q2])q2--;if(set[q2])st=q2}
+  if(st!==null){var q=st;while(true){if(set[q]){cur++;q--}else if(isOff(q)){q--}else break}}
+  var dow=(new Date(today*864e5).getUTCDay()+6)%7,ws=today-dow,wk=0,offn=0,bars='';
+  for(var i=0;i<7;i++){var on=!!set[ws+i],of=!on&&isOff(ws+i);if(on)wk++;if(of)offn++;bars+='<span class="'+(on?'on':of?'off':'')+'"></span>'}
+  var den=7-offn;
   return '<div class="hst"><div class="hst-t">Racha</div><div class="hst-g">'
     +'<div class="hst-c"><b>'+cur+'</b> <small>'+(cur===1?'día seguido':'días seguidos')+'</small><em>Mejor racha: '+best+(best===1?' día':' días')+'</em></div>'
-    +'<div class="hst-c"><b>'+wk+'</b> <small>de 7 días</small><em>Esta semana</em><div class="hst-w">'+bars+'</div></div></div></div>';
+    +'<div class="hst-c">'+(den===0?'<small>Semana en turno</small>':'<b>'+wk+'</b> <small>de '+den+' días</small>')+'<em>Esta semana</em><div class="hst-w">'+bars+'</div></div></div></div>';
 }
+var chartFlt='';
 function chartHTML(){
-  var agg=monthAgg(),n=new Date(),MI=['E','F','M','A','M','J','J','A','S','O','N','D'],ms=[],i;
+  var agg=monthAgg(),n=new Date(),MI=['E','F','M','A','M','J','J','A','S','O','N','D'],ms=[],i,flt=chartFlt,anyT=false;
   for(i=11;i>=0;i--){var d=new Date(n.getFullYear(),n.getMonth()-i,1),k=d.getFullYear()+'-'+d.getMonth();
-    var a=agg[k]||{f:0,c:0,t:0},g=goalVal(goalOf(k),'')||0;ms.push({k:k,m:d.getMonth(),f:a.f/3600,c:a.c/3600,t:a.t/3600,g:g,hit:mHit(k,a)})}
+    var a=agg[k]||{f:0,c:0,t:0},G=mGoal(k,flt),g=G&&G.v?G.v:0,mi=monthInfo(d.getFullYear(),d.getMonth());
+    var amt=(flt==='f'?a.f:flt==='c'?a.c:a.t)/3600;if(mi.off>0||mi.gym>0)anyT=true;
+    ms.push({m:d.getMonth(),f:a.f/3600,c:a.c/3600,t:amt,g:g,hit:g>0&&amt>0&&amt>=g,off:mi.off>0,gym:mi.gym>0})}
   var mx=0;ms.forEach(function(x){mx=Math.max(mx,x.t,x.g)});
   var step=mx<=8?2:mx<=20?5:mx<=40?10:20,top=Math.max(step*2,Math.ceil(mx*1.05/step)*step);
   var X0=26,W=310,Y0=20,H=120,bw=16,gap=(W-12*bw)/12,sc=function(v){return H*v/top};
@@ -1587,15 +1649,23 @@ function chartHTML(){
   for(t=0;t<=top;t+=step){o+='<text x="22" y="'+(Y0+H-sc(t)+3)+'">'+t+'</text>'}
   o+='</g>';
   ms.forEach(function(x,j){
-    var bx=X0+8+j*(bw+gap),fh=sc(x.f),ch=sc(x.c),yb=Y0+H;
+    var bx=X0+8+j*(bw+gap),yb=Y0+H,fh=sc(flt==='c'?0:(flt==='f'?x.t:x.f)),ch=sc(flt==='f'?0:(flt==='c'?x.t:x.c));
     if(x.hit){o+='<rect x="'+bx+'" y="'+(yb-fh-ch)+'" width="'+bw+'" height="'+(fh+ch)+'" fill="#EF9F27"/>'}
-    else{o+='<rect x="'+bx+'" y="'+(yb-fh)+'" width="'+bw+'" height="'+fh+'" fill="#39ff14"/><rect x="'+bx+'" y="'+(yb-fh-ch)+'" width="'+bw+'" height="'+ch+'" fill="#FFD60A"/>'}
+    else{if(fh>0)o+='<rect x="'+bx+'" y="'+(yb-fh)+'" width="'+bw+'" height="'+fh+'" fill="#39ff14"/>';if(ch>0)o+='<rect x="'+bx+'" y="'+(yb-fh-ch)+'" width="'+bw+'" height="'+ch+'" fill="#FFD60A"/>'}
     if(x.g>0){var gy=yb-sc(x.g);o+='<line x1="'+(bx-4)+'" y1="'+gy+'" x2="'+(bx+bw+4)+'" y2="'+gy+'" stroke="var(--fg)" stroke-width="1.5"/>'}
     o+='<text x="'+(bx+bw/2)+'" y="156" font-size="10" fill="var(--muted)" text-anchor="middle">'+MI[x.m]+'</text>';
+    if(x.off)o+='<rect x="'+bx+'" y="161" width="'+bw+'" height="4" fill="var(--muted)"/>';
+    else if(x.gym)o+='<rect x="'+(bx+.5)+'" y="161.5" width="'+(bw-1)+'" height="3" fill="none" stroke="var(--muted)" stroke-width="1"/>';
   });
   o+='</svg>';
-  return '<div class="hst"><div class="hst-t">Últimos 12 meses · horas</div>'+o
-    +'<div class="hst-l"><span><i style="background:#39ff14"></i>Fuerza</span><span><i style="background:#FFD60A"></i>Cardio</span><span><i style="background:#EF9F27"></i>Meta cumplida</span><span><i class="ln"></i>Meta del mes</span></div></div>';
+  var lg='';
+  if(flt!=='c')lg+='<span><i style="background:#39ff14"></i>Fuerza</span>';
+  if(flt!=='f')lg+='<span><i style="background:#FFD60A"></i>Cardio</span>';
+  lg+='<span><i style="background:#EF9F27"></i>Meta cumplida</span><span><i class="ln"></i>Meta del mes</span>';
+  if(anyT)lg+='<span><i style="background:var(--muted);height:4px"></i>Turno</span>';
+  var btn=function(t,svg,lab){return '<button type="button" class="hf '+t+(flt===t?' on':'')+'" data-cf="'+t+'" aria-pressed="'+(flt===t)+'" aria-label="'+lab+'">'+svg+'</button>'};
+  return '<div class="hst"><div class="hst-h"><div class="hst-t">Últimos 12 meses · horas</div><span class="hflt">'+btn('f',FARM,'Ver solo fuerza')+btn('c',FRUN,'Ver solo cardio')+'</span></div>'+o
+    +'<div class="hst-l">'+lg+'</div></div>';
 }
 function fmtHM(sec){var tm=Math.floor(sec/60),h=Math.floor(tm/60),m=tm%60;return h?h+' h '+m+' min':m+' min'}
 function cfgStr(e){if(e.t==='c')return (e.m==='t'&&e.g)?'Temporizador '+Math.round(e.g/60)+' min':'Cronómetro';return e.S+' series × '+e.E+' ejercicios · ejercicio '+fmtU(e.w)}
@@ -1713,10 +1783,11 @@ function renderHist(){
       var yo=!!openY[ky];
       var yGoal='',yHit=false;
       if(ky!=='x'&&+ky>=2027){
-        var GY=goalYOf(ky),eY=fltY[ky]||'',gvY=GY?(eY==='f'?GY.f:eY==='c'?GY.c:GY.t):0;
+        var GY=goalYOf(ky),eY=fltY[ky]||'',gvY=GY?(eY==='f'?GY.f:eY==='c'?GY.c:GY.t):0,yiA=yearInfo(+ky),yAdj=false;
+        if(gvY>0&&yiA.off>0){var frY=yiA.days-yiA.off;if(frY>0){gvY=Math.max(0.1,r1(gvY*frY/yiA.days));yAdj=true}else gvY=0}
         if(gvY>0){
           var pcY=Math.round(Y.t/(gvY*3600)*100);yHit=Y.t>0&&Y.t>=gvY*3600;
-          yGoal='<div class="hm-sub">'+fmtHM(Y.t)+' de <span class="hgoal" role="button" tabindex="0" data-gy="'+ky+'" aria-label="Cambiar meta anual">'+gvY+' h</span> · '+pcY+' %</div>'
+          yGoal='<div class="hm-sub">'+fmtHM(Y.t)+' de <span class="hgoal" role="button" tabindex="0" data-gy="'+ky+'" aria-label="Cambiar meta anual">'+gvY+' h</span>'+(yAdj?' (ajustada por turno)':'')+' · '+pcY+' %</div>'
             +'<div class="hm-bar'+(yHit?' gold':'')+'"><i style="width:'+Math.min(100,Y.t>0?Math.max(3,pcY):0)+'%"></i></div>';
         }else if(!eY){yGoal='<div class="hm-sub"><span class="hgoal" role="button" tabindex="0" data-gy="'+ky+'">Definir meta anual</span></div>'}
       }
@@ -1727,14 +1798,17 @@ function renderHist(){
         +yMed(ky)+yGoal+'</li>';
     };
     var mCard=function(k,M,ky){
-      var nd=Object.keys(M.days).length,eM=fltM[k]||fltY[ky]||'',gh=k==='x'?null:goalVal(goalOf(k),eM),pc=gh?Math.round(M.t/(gh*3600)*100):0,hit=!!gh&&M.t>0&&M.t>=gh*3600;
+      var nd=Object.keys(M.days).length,eM=fltM[k]||fltY[ky]||'',GM=k==='x'?null:mGoal(k,eM),gh=GM&&GM.v?GM.v:null,pc=gh?Math.round(M.t/(gh*3600)*100):0,hit=!!gh&&M.t>0&&M.t>=gh*3600,miC=k==='x'?null:monthInfo(M.y,M.m),fullOff=!!miC&&miC.off>=miC.days;
       if(openM[k]===undefined)openM[k]=(k===curK||order[0]===k&&!months[curK]);
       var isO=!!openM[k];
       return '<li class="h-month'+(isO?' open':'')+(openY[ky]?'':' yh')+'" data-y="'+ky+'" data-m="'+k+'" role="button" tabindex="0" aria-expanded="'+isO+'">'
-        +'<div class="hm-top"><span class="hm-name"><b aria-hidden="true">&#9654;</b>'+(k==='x'?'Sin fecha':MN[M.m]+' '+M.y)+(hit?MEDAL:'')+'</span>'+fltBtns('m',k,fltM[k])+'<span class="hm-tot">'+fmtDur(M.t)+'</span></div>'
+        +'<div class="hm-top"><span class="hm-name"><b aria-hidden="true">&#9654;</b>'+(k==='x'?'Sin fecha':MN[M.m]+' '+M.y)+(hit&&!fullOff?MEDAL:'')+'</span>'+fltBtns('m',k,fltM[k])+'<span class="hm-tot">'+fmtDur(M.t)+'</span></div>'
         +'<div class="hm-sub">'+M.n+(M.n===1?' entrenamiento':' entrenamientos')+' · '+nd+(nd===1?' día':' días')+' · prom. '+fmtDur(M.n?Math.round(M.t/M.n):0)+'</div>'
         +(M.r>0?'<div class="hm-sub">Fuerza '+fmtHM(M.f)+' · Carrera '+fmtHM(M.r)+'</div>':'')
-        +(gh?'<div class="hm-sub">'+fmtHM(M.t)+' de <span class="hgoal" role="button" tabindex="0" data-gk="'+k+'" aria-label="Cambiar metas del mes">'+gh+' h</span> · '+pc+' %</div>'
+        +(miC&&miC.off>0&&!fullOff?'<div class="hm-sub"><span class="tp r">Turno · '+miC.off+(miC.off===1?' día':' días')+'</span></div>':'')
+        +(miC&&miC.gym>0?'<div class="hm-sub"><span class="tp r">Turno con gimnasio · '+miC.gym+(miC.gym===1?' día':' días')+'</span></div>':'')
+        +(fullOff?'<div class="hm-sub"><span class="tp r">Mes en turno</span></div>':'')
+        +(gh&&!fullOff?'<div class="hm-sub">'+fmtHM(M.t)+' de <span class="hgoal" role="button" tabindex="0" data-gk="'+k+'" aria-label="Cambiar metas del mes">'+gh+' h</span>'+(GM.adj?' (ajustada por turno)':'')+' · '+pc+' %</div>'
         +'<div class="hm-bar'+(hit?' gold':'')+'"><i style="width:'+Math.min(100,M.t>0?Math.max(3,pc):0)+'%"></i></div>':'')+'</li>';
     };
     if(!years[curY]){h+=yCard(curY,{n:0,t:0,f:0,r:0,days:{},ms:{}});h+=mCard(curK,{k:curK,n:0,t:0,f:0,r:0,days:{},y:nowD.getFullYear(),m:nowD.getMonth()},curY)}
@@ -1827,6 +1901,46 @@ function gsSave(type){
 ['gsF','gsC'].forEach(function(id){$(id).addEventListener('change',function(){gsSave('m')})});
 ['gyF','gyC'].forEach(function(id){$(id).addEventListener('change',function(){gsSave('y')})});
 syncGoalSet();
+var tuCtx=null,tuGymSel=false,tuDelArm=false;
+function tuRender(){
+  var L=TC.list,h='';
+  if(!L.length)h='<small style="display:block;color:var(--muted);margin-bottom:8px">Sin turnos cargados.</small>';
+  L.forEach(function(t){h+='<button type="button" class="tuit" data-tu="'+t.id+'">'+fmtD(t.from)+' – '+fmtD(t.to)+' · '+(t.gym?'Con gimnasio':'Sin gimnasio')+'</button>'});
+  $('tuList').innerHTML=h;
+}
+function tuSetType(g){tuGymSel=g;$('tuGym').classList.toggle('on',g);$('tuNoGym').classList.toggle('on',!g)}
+function tuIso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function tuOpen(id){
+  var t=null;TC.list.forEach(function(x){if(String(x.id)===String(id))t=x});
+  tuCtx={id:t?t.id:null};tuDelArm=false;
+  $('tuTitle').textContent=t?'Editar turno':'Nuevo turno';
+  var today=tuIso(new Date());
+  $('tuFrom').value=t?t.from:today;$('tuTo').value=t?t.to:today;tuSetType(t?t.gym:false);
+  $('tuErr').textContent='';$('tuDel').hidden=!t;$('tuDel').textContent='Borrar';$('turnoBox').hidden=false;
+}
+function tuSave(list){lsSet('turnos',list.map(function(t){return{id:t.id,from:t.from,to:t.to,gym:!!t.gym}}));tcBuild();tuRender();try{renderHist()}catch(e){}}
+$('tuAdd').onclick=function(){tuOpen(null)};
+$('tuList').addEventListener('click',function(e){var b=e.target.closest('[data-tu]');if(b)tuOpen(b.getAttribute('data-tu'))});
+$('tuGym').onclick=function(){tuSetType(true)};$('tuNoGym').onclick=function(){tuSetType(false)};
+$('tuNo').onclick=function(){$('turnoBox').hidden=true;tuCtx=null};
+$('tuDel').onclick=function(){
+  if(!tuCtx)return;
+  if(!tuDelArm){tuDelArm=true;$('tuDel').textContent='¿Seguro? Toca otra vez';return}
+  var id=tuCtx.id;tuSave(TC.list.filter(function(x){return String(x.id)!==String(id)}));$('turnoBox').hidden=true;tuCtx=null;
+};
+$('tuOk').onclick=function(){
+  if(!tuCtx)return;
+  var f=$('tuFrom').value,t=$('tuTo').value,a=dnStr(f),b=dnStr(t),err=$('tuErr');
+  if(a===null||b===null){err.textContent='Elige las dos fechas.';return}
+  if(b<a){err.textContent='La fecha de término no puede ser antes que la de inicio.';return}
+  if(b-a>365){err.textContent='Un turno no puede durar más de un año.';return}
+  var bad=false;TC.list.forEach(function(x){if(String(x.id)!==String(tuCtx.id)&&a<=x.b&&b>=x.a)bad=true});
+  if(bad){err.textContent='Se superpone con otro turno. Cambia las fechas.';return}
+  var L=TC.list.filter(function(x){return String(x.id)!==String(tuCtx.id)});
+  L.push({id:tuCtx.id||(Date.now()),from:f,to:t,gym:tuGymSel});
+  $('turnoBox').hidden=true;tuCtx=null;tuSave(L);
+};
+tcBuild();tuRender();
 function goalCheck(){
   var n=new Date(),y=n.getFullYear(),k=y+'-'+n.getMonth();
   var needY=y>=2027&&!goalYOf(y),needM=!lsObj('goalMS')[k];
@@ -1834,6 +1948,11 @@ function goalCheck(){
   if(needY)goalOpen('y',String(y),'prompt',openM_);else openM_();
 }
 (function(){var tries=0,iv=setInterval(function(){tries++;if(!document.getElementById('splash')){clearInterval(iv);setTimeout(function(){try{goalCheck()}catch(e){}},400)}else if(tries>60)clearInterval(iv)},300)})();
+$('hstats').addEventListener('click',function(e){
+  var b=e.target.closest('[data-cf]');if(!b)return;
+  var v=b.getAttribute('data-cf');chartFlt=chartFlt===v?'':v;
+  $('hstats').innerHTML=streakHTML()+chartHTML();
+});
 $('hlist').addEventListener('click',function(e){
   var gt=e.target.closest('.hgoal');
   if(gt){e.stopPropagation();if(gt.getAttribute('data-gy'))goalOpen('y',gt.getAttribute('data-gy'),'edit');else goalOpen('m',gt.getAttribute('data-gk'),'edit');return}
@@ -1899,8 +2018,8 @@ $('openCfg').onclick=function(){openP('cfgPanel')};
 $('openHist').onclick=function(){fltY={};fltM={};try{renderHist()}catch(e){}openP('histPanel')};
 $('cfgClose').onclick=function(){closeP('cfgPanel')};
 $('histClose').onclick=function(){closeP('histPanel')};
-var impPend=null,EXP_TAG='ENTRENO1:';
-function impReset(){impPend=null;$('impBox').hidden=true;$('impTxt').value='';$('impInfo').textContent='';$('impYes').hidden=true}
+var impPend=null,impPendT=[],EXP_TAG='ENTRENO1:';
+function impReset(){impPend=null;impPendT=[];$('impBox').hidden=true;$('impTxt').value='';$('impInfo').textContent='';$('impYes').hidden=true}
 function buildExport(){
   var MN2=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
   var srt=hist.slice().sort(function(a,b){return (b.ts>a.ts)-(b.ts<a.ts)}),grp={},ord=[],yrs={},yord=[];
@@ -1932,7 +2051,7 @@ function buildExport(){
     out.push('');
   });
   var readable=out.join('\n').replace(/\[/g,'(').replace(/\]/g,')').trim();
-  return readable+'\n\n----------------------------------------\nRESPALDO (no borres esta línea: es lo que lee "Importar")\n'+EXP_TAG+JSON.stringify(hist);
+  return readable+'\n\n----------------------------------------\nRESPALDO (no borres estas líneas: es lo que lee "Importar")\n'+(TC.list.length?'TURNOS1:'+JSON.stringify(TC.list.map(function(t){return{from:t.from,to:t.to,gym:t.gym}}))+'\n':'')+EXP_TAG+JSON.stringify(hist);
 }
 $('hexp').onclick=function(){
   if(!hist.length){$('msg').textContent='No hay nada que exportar.';return}
@@ -1946,7 +2065,7 @@ $('impTxt').addEventListener('input',function(){impPend=null;$('impYes').hidden=
 $('impChk').onclick=function(){
   impPend=null;$('impYes').hidden=true;
   var t=$('impTxt').value.trim(),info=$('impInfo');
-  var k=t.indexOf('[');
+  var ki=t.indexOf(EXP_TAG),k=ki>=0?t.indexOf('[',ki):t.indexOf('[');
   if(!t||k<0){info.textContent='No encontré entrenamientos en ese texto.';return}
   var arr;
   try{arr=JSON.parse(t.slice(k))}catch(e){info.textContent='El texto está incompleto o dañado. Cópialo de nuevo con Exportar.';return}
@@ -1963,19 +2082,24 @@ $('impChk').onclick=function(){
     good.push(c);if(!have[c.id]){have[c.id]=1;fresh++}
   });
   if(!good.length){info.textContent='No encontré entrenamientos válidos en ese texto.';return}
-  impPend=good;
-  info.textContent='Encontré '+good.length+(good.length===1?' entrenamiento':' entrenamientos')+(bad?' ('+bad+' dañados se ignoran)':'')+': '+fresh+(fresh===1?' nuevo':' nuevos')+', '+(good.length-fresh)+' que ya tienes.'+(fresh?'':' No hay nada que agregar.');
-  $('impYes').hidden=!fresh;
+  impPend=good;impPendT=[];
+  var ti=t.indexOf('TURNOS1:');
+  if(ti>=0){try{var tl=t.indexOf('\n',ti),ts=t.slice(t.indexOf('[',ti),tl<0?undefined:tl),ta=JSON.parse(ts);
+    var occ=TC.list.slice();
+    ta.forEach(function(x){var a=dnStr(x&&x.from),b=dnStr(x&&x.to);if(a===null||b===null||b<a)return;var clash=false;occ.forEach(function(o){if(a<=o.b&&b>=o.a)clash=true});if(clash)return;var n={id:Date.now()+impPendT.length,from:x.from,to:x.to,gym:!!x.gym,a:a,b:b};impPendT.push(n);occ.push(n)})}catch(e){impPendT=[]}}
+  info.textContent='Encontré '+good.length+(good.length===1?' entrenamiento':' entrenamientos')+(bad?' ('+bad+' dañados se ignoran)':'')+': '+fresh+(fresh===1?' nuevo':' nuevos')+', '+(good.length-fresh)+' que ya tienes.'+(impPendT.length?' Turnos nuevos: '+impPendT.length+'.':'')+((fresh||impPendT.length)?'':' No hay nada que agregar.');
+  $('impYes').hidden=!(fresh||impPendT.length);
 };
 $('impYes').onclick=function(){
   if(!impPend)return;
   var have={};hist.forEach(function(x){have[x.id]=1});
-  var add=0;
+  var add=0,addT=0;
   impPend.forEach(function(c){if(!have[c.id]){have[c.id]=1;hist.push(c);add++}});
+  if(impPendT.length){var L=TC.list.slice();impPendT.forEach(function(n){var clash=false;L.forEach(function(o){if(n.a<=o.b&&n.b>=o.a)clash=true});if(!clash){L.push(n);addT++}});if(addT)tuSave(L)}
   hist.sort(function(a,b){return b.id-a.id});
   if(hist.length>1000)hist=hist.slice(0,1000);
   lsSet(KEY_H,hist);renderHist();impReset();
-  $('msg').textContent='Se agregaron '+add+(add===1?' entrenamiento.':' entrenamientos.');
+  $('msg').textContent='Se agregaron '+add+(add===1?' entrenamiento':' entrenamientos')+(addT?' y '+addT+(addT===1?' turno.':' turnos.'):'.');
 };
 /* ===== Pausa visible (pesas) ===== */
 var pzStart=0,pzT=0,pzLast=-1;
@@ -2386,7 +2510,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',function(){navig
 </script>
 <script>
 (function(){
-  var APP_VERSION='v70';
+  var APP_VERSION='v71';
   var sp=document.getElementById('splash');
   if(!sp)return;
   document.getElementById('spVer').textContent=APP_VERSION;
