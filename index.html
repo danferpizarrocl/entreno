@@ -525,6 +525,21 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
 .hst-c b{font-family:var(--font-display);font-size:28px;font-weight:600}
 .hst-c small{font-size:13px;color:var(--muted)}
 .hst-c em{display:block;font-style:normal;font-size:12px;color:var(--muted)}
+.hst-c[data-sm]{cursor:pointer;position:relative;-webkit-tap-highlight-color:transparent}
+.hst-c[data-sm]::after{content:'›';position:absolute;right:10px;top:8px;font-size:20px;color:var(--muted)}
+#sumPanel{z-index:55}
+#sumBody .card{margin-top:10px}
+.sm-h{font-family:var(--font-display);font-size:30px;font-weight:600}
+.sm-no{font-size:14px;color:var(--muted)}
+.sm-r{display:flex;align-items:baseline;gap:8px;padding:4px 0}
+.sm-r span{flex:1;font-weight:600}
+.sm-r b{font-family:var(--font-display);font-size:22px;font-weight:600}
+.sm-r em{font-style:normal;font-size:12px;color:var(--muted);min-width:96px;text-align:right}
+.sm-t{border-top:1px solid var(--line);margin-top:4px;padding-top:8px}
+.sm-dh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.sm-dh b{font-size:17px}
+.sm-dh span{font-family:var(--font-display);font-size:20px;font-weight:600}
+.sm-w{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;padding:6px 0;border-top:1px solid var(--line)}
 .hst-w{display:flex;gap:3px;margin-top:6px}
 .hst-w span{flex:1;height:6px;border-radius:3px;background:var(--line)}
 .hst-w span.on{background:var(--fg)}
@@ -595,7 +610,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="medalA" viewBox="0 0 40 40"><path d="M12 2h6l4 12h-6zM28 2h-6l-4 12h6z" fill="#BA7517"/><circle cx="20" cy="26" r="11" fill="#EF9F27" stroke="#854F0B" stroke-width="2"/><circle cx="20" cy="26" r="7" fill="#FAC775" stroke="#BA7517" stroke-width="1.5"/><path d="M20 21l1.7 3.5 3.8.5-2.8 2.6.7 3.8-3.4-1.9-3.4 1.9.7-3.8-2.8-2.6 3.8-.5z" fill="#854F0B"/></symbol></defs></svg>
-<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v72</div></div>
+<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v73</div></div>
 <main class="wrap">
   <div id="home" role="navigation" aria-label="Inicio">
     <div class="hmtop"><h1>Kettlebell Training</h1><div class="ibtns"><button type="button" id="hmCfg" aria-label="Ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div></div>
@@ -677,6 +692,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
   </div>
 
   <div id="goalBox" role="dialog" aria-modal="true" aria-labelledby="goalTitle" hidden><div class="gc"><p id="goalTitle"></p><small id="goalSub"></small><div class="gf"><label>Fuerza<input type="number" id="goalF" min="0" max="2000" step="any" inputmode="decimal"><span>h</span></label><label>Cardio<input type="number" id="goalC" min="0" max="2000" step="any" inputmode="decimal"><span>h</span></label></div><div id="goalTot" class="gt"></div><div id="goalErr" class="ge" role="alert"></div><div class="gb"><button type="button" id="goalNo">Cancelar</button><button type="button" id="goalOk" class="pri">Guardar</button></div></div></div>
+  <div class="panel" id="sumPanel" role="dialog" aria-label="Resumen" hidden><div class="pin"><div class="phead"><h2 id="sumTitle">Resumen</h2><div class="phb"><button type="button" class="hic" id="sumClose" aria-label="Volver"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg></button></div></div><div id="sumBody"></div></div></div>
   <div class="panel" id="turnPanel" role="dialog" aria-label="Turnos" hidden><div class="pin"><div class="phead"><h2>Turnos</h2><div class="phb"><button type="button" class="hic" id="turnClose" aria-label="Inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button></div></div>
     <section class="card" aria-label="Turnos">
       <small style="display:block;color:var(--muted);margin:0 0 10px">Fechas en las que no puedes entrenar. Ajustan las metas y no cortan la racha.</small>
@@ -743,7 +759,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     <summary>Probar sonidos</summary>
     <div class="sgrid" id="sgrid"></div>
   </details>
-  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 72</small>
+  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 73</small>
   </div></div>
 
   <div class="panel" id="histPanel" role="dialog" aria-label="Registro" hidden><div class="pin"><div class="phead"><h2>Registro</h2><div class="phb"><button type="button" class="hic" id="histClose" aria-label="Inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button></div></div>
@@ -1620,21 +1636,66 @@ function mGoal(k,eff){
 }
 function mHit(k,m){var g=mGoal(k,'');return !!(g&&g.v)&&m.t>0&&m.t>=g.v*3600}
 function fmtD(t){var x=/^(\d{4})-(\d{2})-(\d{2})$/.exec(t||'');return x?(+x[3])+' '+MNAMES[+x[2]-1].slice(0,3).toLowerCase()+' '+x[1]:''}
-function streakHTML(){
-  var set={};hist.forEach(function(e){var n=dayNum(new Date(e.ts).getTime());if(n!==null)set[n]=1});
+var DN=['dom','lun','mar','mié','jue','vie','sáb'];
+function dnLabel(n){var d=new Date(n*864e5);return DN[d.getUTCDay()]+' '+d.getUTCDate()+' '+MNAMES[d.getUTCMonth()].slice(0,3).toLowerCase()}
+function hhmm(ts){var d=new Date(ts);return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}
+function dayGroups(){var g={};hist.forEach(function(e){var n=dayNum(new Date(e.ts).getTime());if(n===null)return;(g[n]||(g[n]=[])).push(e)});for(var k in g)g[k].sort(function(a,b){return a.ts<b.ts?-1:1});return g}
+function streakCalc(){
+  var G=dayGroups(),set={};for(var k in G)set[k]=1;
   var days=Object.keys(set).map(Number).sort(function(a,b){return a-b});
   var today=dayNum(Date.now()),cur=0,best=0,run=0,prev=null;
-  var bridged=function(a,b){for(var q=a+1;q<b;q++){if(!isOff(q))return false}return true};
-  days.forEach(function(n){run=(prev!==null&&(n===prev+1||bridged(prev,n)))?run+1:1;if(run>best)best=run;prev=n});
-  var q0=today;while(isOff(q0)&&!set[q0])q0--;
-  var st=null;if(set[q0])st=q0;else{var q2=q0-1;while(isOff(q2)&&!set[q2])q2--;if(set[q2])st=q2}
-  if(st!==null){var q=st;while(true){if(set[q]){cur++;q--}else if(isOff(q)){q--}else break}}
-  var dow=(new Date(today*864e5).getUTCDay()+6)%7,ws=today-dow,wk=0,offn=0,bars='';
-  for(var i=0;i<7;i++){var on=!!set[ws+i],of=!on&&isOff(ws+i);if(on)wk++;if(of)offn++;bars+='<span class="'+(on?'on':of?'off':'')+'"></span>'}
-  var den=7-offn;
+  days.forEach(function(n){run=(prev!==null&&n===prev+1)?run+1:1;if(run>best)best=run;prev=n});
+  var st=set[today]?today:(set[today-1]?today-1:null);
+  if(st!==null){var q=st;while(set[q]){cur++;q--}}
+  return{G:G,set:set,today:today,cur:cur,best:best,st:st};
+}
+function weekCalc(C){
+  var dow=(new Date(C.today*864e5).getUTCDay()+6)%7,ws=C.today-dow,wk=0,offn=0,bars='';
+  for(var i=0;i<7;i++){var on=!!C.set[ws+i],of=!on&&isOff(ws+i);if(on)wk++;if(of)offn++;bars+='<span class="'+(on?'on':of?'off':'')+'"></span>'}
+  return{ws:ws,wk:wk,den:7-offn,bars:bars};
+}
+function streakHTML(){
+  var C=streakCalc(),W=weekCalc(C);
   return '<div class="hst"><div class="hst-t">Racha</div><div class="hst-g">'
-    +'<div class="hst-c"><b>'+cur+'</b> <small>'+(cur===1?'día seguido':'días seguidos')+'</small><em>Mejor racha: '+best+(best===1?' día':' días')+'</em></div>'
-    +'<div class="hst-c">'+(den===0?'<small>Semana en turno</small>':'<b>'+wk+'</b> <small>de '+den+' días</small>')+'<em>Esta semana</em><div class="hst-w">'+bars+'</div></div></div></div>';
+    +'<div class="hst-c" data-sm="streak" role="button" tabindex="0" aria-label="Ver resumen de la racha"><b>'+C.cur+'</b> <small>'+(C.cur===1?'día seguido':'días seguidos')+'</small><em>Mejor racha: '+C.best+(C.best===1?' día':' días')+'</em></div>'
+    +'<div class="hst-c" data-sm="week" role="button" tabindex="0" aria-label="Ver resumen de la semana">'+(W.den===0?'<small>Semana en turno</small>':'<b>'+W.wk+'</b> <small>de '+W.den+' días</small>')+'<em>Esta semana</em><div class="hst-w">'+W.bars+'</div></div></div></div>';
+}
+function sumTotals(list){
+  var f=0,c=0,nf=0,nc=0;list.forEach(function(e){if(e.t==='c'){c+=e.dur;nc++}else{f+=e.dur;nf++}});
+  var q=function(n){return n+(n===1?' entrenamiento':' entrenamientos')};
+  return '<section class="card sm-tot"><div class="sm-r"><span>Fuerza</span><b>'+fmtHM(f)+'</b><em>'+q(nf)+'</em></div><div class="sm-r"><span>Cardio</span><b>'+fmtHM(c)+'</b><em>'+q(nc)+'</em></div><div class="sm-r sm-t"><span>Total</span><b>'+fmtHM(f+c)+'</b><em>'+q(nf+nc)+'</em></div></section>';
+}
+function sumDay(n,list,extra){
+  var tot=0;list.forEach(function(e){tot+=e.dur});
+  var h='<section class="card sm-day"><div class="sm-dh"><b>'+dnLabel(n)+'</b>'+(list.length?'<span>'+fmtHM(tot)+'</span>':'')+'</div>';
+  if(!list.length)h+='<div class="sm-no">'+(extra||'Sin entrenamiento')+'</div>';
+  list.forEach(function(e){
+    h+='<div class="sm-w"><div><span class="tp '+(e.t==='c'?'c">Carrera':'f">Fuerza')+'</span>'+(e.rt?'<span class="tp r">Rutina completa</span>':'')+hhmm(e.ts)+'<div class="h-cfg">'+cfgStr(e)+'</div></div><div class="h-dur">'+fmtDur(e.dur)+'</div></div>';
+  });
+  return h+'</section>';
+}
+function sumOpen(kind){
+  var C=streakCalc(),h='',title;
+  if(kind==='streak'){
+    title='Racha actual';
+    if(C.st===null||C.cur===0){h='<section class="card"><div class="sm-no">No tienes una racha activa. Entrena hoy para empezar una.</div></section>'}
+    else{
+      var list=[],dl=[];for(var q=C.st;C.set[q];q--){dl.push(q);list=list.concat(C.G[q])}
+      var a=dl[dl.length-1],b=dl[0];
+      h='<section class="card"><div class="sm-h">'+C.cur+(C.cur===1?' día seguido':' días seguidos')+'</div><div class="sm-no">Del '+dnLabel(a)+' al '+dnLabel(b)+'</div></section>'+sumTotals(list);
+      dl.forEach(function(n){h+=sumDay(n,C.G[n])});
+    }
+  }else{
+    var W=weekCalc(C),list2=[],i;
+    title='Esta semana';
+    for(i=0;i<7;i++){if(C.G[W.ws+i])list2=list2.concat(C.G[W.ws+i])}
+    h='<section class="card"><div class="sm-h">'+(W.den===0?'Semana en turno':W.wk+' de '+W.den+' días')+'</div><div class="sm-no">Del '+dnLabel(W.ws)+' al '+dnLabel(W.ws+6)+'</div></section>'+sumTotals(list2);
+    for(i=0;i<7;i++){var n=W.ws+i,g=C.G[n]||[],ex=null;
+      if(!g.length){ex=n>C.today?'Por venir':(isOff(n)?'Turno':(TC.gym[n]?'Turno con gimnasio':'Sin entrenamiento'))}
+      h+=sumDay(n,g,ex);
+    }
+  }
+  $('sumTitle').textContent=title;$('sumBody').innerHTML=h;$('sumPanel').hidden=false;$('sumPanel').scrollTop=0;
 }
 var chartFlt='';
 function chartHTML(){
@@ -1951,7 +2012,10 @@ function goalCheck(){
   if(needY)goalOpen('y',String(y),'prompt',openM_);else openM_();
 }
 (function(){var tries=0,iv=setInterval(function(){tries++;if(!document.getElementById('splash')){clearInterval(iv);setTimeout(function(){try{goalCheck()}catch(e){}},400)}else if(tries>60)clearInterval(iv)},300)})();
+$('sumClose').onclick=function(){$('sumPanel').hidden=true};
+$('hstats').addEventListener('keydown',function(e){var c=e.target.closest&&e.target.closest('[data-sm]');if(c&&(e.key==='Enter'||e.key===' ')){e.preventDefault();sumOpen(c.getAttribute('data-sm'))}});
 $('hstats').addEventListener('click',function(e){
+  var sm=e.target.closest('[data-sm]');if(sm){sumOpen(sm.getAttribute('data-sm'));return}
   var b=e.target.closest('[data-cf]');if(!b)return;
   var v=b.getAttribute('data-cf');chartFlt=chartFlt===v?'':v;
   $('hstats').innerHTML=streakHTML()+chartHTML();
@@ -2515,7 +2579,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',function(){navig
 </script>
 <script>
 (function(){
-  var APP_VERSION='v72';
+  var APP_VERSION='v73';
   var sp=document.getElementById('splash');
   if(!sp)return;
   document.getElementById('spVer').textContent=APP_VERSION;
