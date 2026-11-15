@@ -538,7 +538,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
 </style>
 </head>
 <body>
-<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v66</div></div>
+<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v67</div></div>
 <main class="wrap">
   <div id="home" role="navigation" aria-label="Inicio">
     <div class="hmtop"><h1>Kettlebell Training</h1><div class="ibtns"><button type="button" id="hmCfg" aria-label="Ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div></div>
@@ -660,6 +660,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     <label class="wake"><input type="checkbox" id="wake" checked><span>Mantener la pantalla encendida<small>Evita que el celular se apague mientras corre el temporizador.</small></span></label>
     <label class="wake"><input type="checkbox" id="voiceOn" checked><span>Voz que anuncia las fases<small>Voz grabada o la del aparato. Si no puede hablar, suenan los pitidos de siempre.</small></span></label>
     <div class="row"><label for="voiceSel">Voz</label><select id="voiceSel" style="flex:1 1 180px;min-width:0;height:36px;border:1px solid var(--line);border-radius:9px;background:var(--bg);padding:0 6px"><option value="">Automática</option></select></div>
+    <div class="row"><label for="goalH">Objetivo mensual (horas)</label><input type="number" id="goalH" min="1" max="500" step="any" inputmode="decimal" style="flex:0 0 90px;height:36px;border:1px solid var(--line);border-radius:9px;background:var(--bg);padding:0 8px;text-align:center"></div>
   </section>
 
 
@@ -667,7 +668,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     <summary>Probar sonidos</summary>
     <div class="sgrid" id="sgrid"></div>
   </details>
-  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 66</small>
+  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 67</small>
   </div></div>
 
   <div class="panel" id="histPanel" role="dialog" aria-label="Registro" hidden><div class="pin"><div class="phead"><h2>Registro</h2><div class="phb"><button type="button" class="hic" id="histClose" aria-label="Inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button></div></div>
@@ -1490,6 +1491,9 @@ function dstr(iso){
   if(isNaN(d.getTime()))return iso;
   return dfmt?dfmt.format(d):d.toLocaleString();
 }
+function getGoal(){var g=parseFloat(lsGet('goalH'));return g>0?g:12}
+(function(){var gi=document.getElementById('goalH');if(!gi)return;gi.value=getGoal();
+    gi.addEventListener('change',function(){var v=parseFloat(String(gi.value).replace(',','.'));if(!(v>0))v=12;lsSet('goalH',v);gi.value=v;try{renderHist()}catch(e){}})})();
 function fmtHM(sec){var tm=Math.floor(sec/60),h=Math.floor(tm/60),m=tm%60;return h?h+' h '+m+' min':m+' min'}
 function cfgStr(e){if(e.t==='c')return (e.m==='t'&&e.g)?'Temporizador '+Math.round(e.g/60)+' min':'Cronómetro';return e.S+' series × '+e.E+' ejercicios · ejercicio '+fmtU(e.w)}
 function openDel(target){
@@ -1582,7 +1586,7 @@ function renderHist(){
       if(!okM(e))return;
       var M=months[k];M.n++;M.t+=e.dur;if(e.t==='c')M.r+=e.dur;else M.f+=e.dur;M.days[isNaN(d.getTime())?'x':d.getDate()]=1;
     });
-    var maxT=1;order.forEach(function(k){if(months[k].t>maxT)maxT=months[k].t});
+    var goalH=getGoal();
     var years={},yorder=[],curY=String(nowD.getFullYear());
     sorted.forEach(function(e){
       var d=new Date(e.ts),y=isNaN(d.getTime())?'x':String(d.getFullYear());
@@ -1614,7 +1618,8 @@ function renderHist(){
           +'<div class="hm-top"><span class="hm-name"><b aria-hidden="true">&#9654;</b>'+(k==='x'?'Sin fecha':MN[M.m]+' '+M.y)+'</span>'+fltBtns('m',k,fltM[k])+'<span class="hm-tot">'+fmtDur(M.t)+'</span></div>'
           +'<div class="hm-sub">'+M.n+(M.n===1?' entrenamiento':' entrenamientos')+' · '+nd+(nd===1?' día':' días')+' · prom. '+fmtDur(M.n?Math.round(M.t/M.n):0)+'</div>'
           +(M.r>0?'<div class="hm-sub">Fuerza '+fmtHM(M.f)+' · Carrera '+fmtHM(M.r)+'</div>':'')
-          +'<div class="hm-bar"><i style="width:'+Math.max(3,Math.round(M.t/maxT*100))+'%"></i></div></li>';
+          +'<div class="hm-sub">'+fmtHM(M.t)+' de '+goalH+' h · '+Math.round(M.t/(goalH*3600)*100)+' %</div>'
+          +'<div class="hm-bar"><i style="width:'+Math.min(100,Math.max(3,Math.round(M.t/(goalH*3600)*100)))+'%"></i></div></li>';
       }
       if(!okM(e))return;
       var on=!!sel[e.id],hide=!openM[k];
@@ -2197,7 +2202,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',function(){navig
 </script>
 <script>
 (function(){
-  var APP_VERSION='v66';
+  var APP_VERSION='v67';
   var sp=document.getElementById('splash');
   if(!sp)return;
   document.getElementById('spVer').textContent=APP_VERSION;
