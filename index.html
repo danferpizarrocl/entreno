@@ -515,6 +515,22 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
 #goalBox .gt{font-size:17px;color:var(--muted);margin-bottom:12px;min-height:22px}
 #goalBox .ge{font-size:14px;color:#ff1744;min-height:0;margin-bottom:8px}
 .hm-bar.gold i{background:#EF9F27}
+#hstats{margin-bottom:10px}
+.hst{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-top:10px}
+.hst:first-child{margin-top:0}
+.hst-t{font-size:13px;color:var(--muted);margin-bottom:6px}
+.hst-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.hst-c{background:var(--bg);border-radius:10px;padding:10px}
+.hst-c b{font-family:var(--font-display);font-size:28px;font-weight:600}
+.hst-c small{font-size:13px;color:var(--muted)}
+.hst-c em{display:block;font-style:normal;font-size:12px;color:var(--muted)}
+.hst-w{display:flex;gap:3px;margin-top:6px}
+.hst-w span{flex:1;height:6px;border-radius:3px;background:var(--line)}
+.hst-w span.on{background:var(--fg)}
+.hst-l{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:12px;color:var(--muted);margin-top:6px}
+.hst-l i{display:inline-block;width:10px;height:10px;margin-right:4px}
+.hst-l i.ln{width:14px;height:0;border-top:1.5px solid var(--fg);vertical-align:middle}
+.ymed{display:flex;align-items:center;gap:6px}
 .medal{vertical-align:-7px;margin-left:6px}
 .gset{margin-top:8px;padding-top:8px;border-top:1px solid var(--line)}
 .gset .row input{flex:0 0 90px;height:36px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--fg);padding:0 8px;text-align:center}
@@ -559,7 +575,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="medalA" viewBox="0 0 40 40"><path d="M12 2h6l4 12h-6zM28 2h-6l-4 12h6z" fill="#BA7517"/><circle cx="20" cy="26" r="11" fill="#EF9F27" stroke="#854F0B" stroke-width="2"/><circle cx="20" cy="26" r="7" fill="#FAC775" stroke="#BA7517" stroke-width="1.5"/><path d="M20 21l1.7 3.5 3.8.5-2.8 2.6.7 3.8-3.4-1.9-3.4 1.9.7-3.8-2.8-2.6 3.8-.5z" fill="#854F0B"/></symbol></defs></svg>
-<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v69</div></div>
+<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v70</div></div>
 <main class="wrap">
   <div id="home" role="navigation" aria-label="Inicio">
     <div class="hmtop"><h1>Kettlebell Training</h1><div class="ibtns"><button type="button" id="hmCfg" aria-label="Ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div></div>
@@ -695,7 +711,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     <summary>Probar sonidos</summary>
     <div class="sgrid" id="sgrid"></div>
   </details>
-  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 69</small>
+  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 70</small>
   </div></div>
 
   <div class="panel" id="histPanel" role="dialog" aria-label="Registro" hidden><div class="pin"><div class="phead"><h2>Registro</h2><div class="phb"><button type="button" class="hic" id="histClose" aria-label="Inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button></div></div>
@@ -730,6 +746,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     </div>
     <div id="msg" role="status"></div>
     <textarea id="cpy" readonly hidden aria-label="Texto del registro"></textarea>
+    <div id="hstats"></div>
     <ul id="hlist"></ul>
   </section>
   </div></div>
@@ -1537,6 +1554,49 @@ function goalVal(G,eff){
 }
 function goalYOf(y){var o=lsObj('goalY')[y];return o&&o.f>=0&&o.c>=0&&o.f+o.c>0?{f:o.f,c:o.c,t:o.f+o.c}:null}
 var MEDAL='<svg class="medal" width="26" height="26" role="img" aria-label="Meta cumplida"><use href="#medalA"/></svg>';
+function dayNum(ts){var d=new Date(ts-4*36e5);if(isNaN(d.getTime()))return null;return Math.round(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5)}
+function monthAgg(){
+  var a={};hist.forEach(function(e){var d=new Date(e.ts);if(isNaN(d.getTime()))return;var k=d.getFullYear()+'-'+d.getMonth();
+    var m=a[k]||(a[k]={f:0,c:0,t:0,y:d.getFullYear(),m:d.getMonth()});m.t+=e.dur;if(e.t==='c')m.c+=e.dur;else m.f+=e.dur});
+  return a;
+}
+function mHit(k,m){var g=goalVal(goalOf(k),'');return !!g&&m.t>0&&m.t>=g*3600}
+function streakHTML(){
+  var set={};hist.forEach(function(e){var n=dayNum(new Date(e.ts).getTime());if(n!==null)set[n]=1});
+  var days=Object.keys(set).map(Number).sort(function(a,b){return a-b});
+  var today=dayNum(Date.now()),cur=0,best=0,run=0,prev=null;
+  days.forEach(function(n){run=(prev!==null&&n===prev+1)?run+1:1;if(run>best)best=run;prev=n});
+  var st=set[today]?today:(set[today-1]?today-1:null);
+  if(st!==null){var q=st;while(set[q]){cur++;q--}}
+  var dow=(new Date(today*864e5).getUTCDay()+6)%7,ws=today-dow,wk=0,bars='';
+  for(var i=0;i<7;i++){var on=!!set[ws+i];if(on)wk++;bars+='<span class="'+(on?'on':'')+'"></span>'}
+  return '<div class="hst"><div class="hst-t">Racha</div><div class="hst-g">'
+    +'<div class="hst-c"><b>'+cur+'</b> <small>'+(cur===1?'día seguido':'días seguidos')+'</small><em>Mejor racha: '+best+(best===1?' día':' días')+'</em></div>'
+    +'<div class="hst-c"><b>'+wk+'</b> <small>de 7 días</small><em>Esta semana</em><div class="hst-w">'+bars+'</div></div></div></div>';
+}
+function chartHTML(){
+  var agg=monthAgg(),n=new Date(),MI=['E','F','M','A','M','J','J','A','S','O','N','D'],ms=[],i;
+  for(i=11;i>=0;i--){var d=new Date(n.getFullYear(),n.getMonth()-i,1),k=d.getFullYear()+'-'+d.getMonth();
+    var a=agg[k]||{f:0,c:0,t:0},g=goalVal(goalOf(k),'')||0;ms.push({k:k,m:d.getMonth(),f:a.f/3600,c:a.c/3600,t:a.t/3600,g:g,hit:mHit(k,a)})}
+  var mx=0;ms.forEach(function(x){mx=Math.max(mx,x.t,x.g)});
+  var step=mx<=8?2:mx<=20?5:mx<=40?10:20,top=Math.max(step*2,Math.ceil(mx*1.05/step)*step);
+  var X0=26,W=310,Y0=20,H=120,bw=16,gap=(W-12*bw)/12,sc=function(v){return H*v/top};
+  var o='<svg viewBox="0 0 340 170" width="100%" role="img" aria-label="Horas por mes en los últimos 12 meses, con la meta de cada mes"><title>Horas por mes (últimos 12 meses)</title><g stroke="var(--line)" stroke-width="0.5">';
+  var t;for(t=0;t<=top;t+=step){var yy=Y0+H-sc(t);o+='<line x1="'+X0+'" y1="'+yy+'" x2="336" y2="'+yy+'"/>'}
+  o+='</g><g font-size="10" fill="var(--muted)" text-anchor="end">';
+  for(t=0;t<=top;t+=step){o+='<text x="22" y="'+(Y0+H-sc(t)+3)+'">'+t+'</text>'}
+  o+='</g>';
+  ms.forEach(function(x,j){
+    var bx=X0+8+j*(bw+gap),fh=sc(x.f),ch=sc(x.c),yb=Y0+H;
+    if(x.hit){o+='<rect x="'+bx+'" y="'+(yb-fh-ch)+'" width="'+bw+'" height="'+(fh+ch)+'" fill="#EF9F27"/>'}
+    else{o+='<rect x="'+bx+'" y="'+(yb-fh)+'" width="'+bw+'" height="'+fh+'" fill="#39ff14"/><rect x="'+bx+'" y="'+(yb-fh-ch)+'" width="'+bw+'" height="'+ch+'" fill="#FFD60A"/>'}
+    if(x.g>0){var gy=yb-sc(x.g);o+='<line x1="'+(bx-4)+'" y1="'+gy+'" x2="'+(bx+bw+4)+'" y2="'+gy+'" stroke="var(--fg)" stroke-width="1.5"/>'}
+    o+='<text x="'+(bx+bw/2)+'" y="156" font-size="10" fill="var(--muted)" text-anchor="middle">'+MI[x.m]+'</text>';
+  });
+  o+='</svg>';
+  return '<div class="hst"><div class="hst-t">Últimos 12 meses · horas</div>'+o
+    +'<div class="hst-l"><span><i style="background:#39ff14"></i>Fuerza</span><span><i style="background:#FFD60A"></i>Cardio</span><span><i style="background:#EF9F27"></i>Meta cumplida</span><span><i class="ln"></i>Meta del mes</span></div></div>';
+}
 function fmtHM(sec){var tm=Math.floor(sec/60),h=Math.floor(tm/60),m=tm%60;return h?h+' h '+m+' min':m+' min'}
 function cfgStr(e){if(e.t==='c')return (e.m==='t'&&e.g)?'Temporizador '+Math.round(e.g/60)+' min':'Cronómetro';return e.S+' series × '+e.E+' ejercicios · ejercicio '+fmtU(e.w)}
 function openDel(target){
@@ -1612,6 +1672,7 @@ function renderHist(){
   $('hsel').disabled=!hist.length;
   if(!hist.length){
     list.innerHTML='<li class="empty">Aquí aparece cada entrenamiento al terminar: fecha, hora y duración.</li>';
+    $('hstats').innerHTML='';
     $('hsum').textContent='';
   }else{
     var tot=0,totR=0,MN=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
@@ -1637,6 +1698,15 @@ function renderHist(){
       var Y=years[y];Y.n++;Y.t+=e.dur;if(e.t==='c')Y.r+=e.dur;else Y.f+=e.dur;
       if(y!=='x'){Y.days[d.getMonth()+'-'+d.getDate()]=1;Y.ms[d.getMonth()]=1}
     });
+    var aggAll=monthAgg();
+    var yMed=function(ky){
+      if(ky==='x')return '';
+      var nm=0,md=0,kk;
+      for(kk in aggAll){if(String(aggAll[kk].y)===ky){md++;if(mHit(kk,aggAll[kk]))nm++}}
+      if(ky===curY&&!aggAll[curK])md++;
+      return nm>0?'<div class="hm-sub ymed">'+MEDAL.replace('width="26" height="26"','width="20" height="20"')+nm+(nm===1?' medalla':' medallas')+' de '+md+(md===1?' mes':' meses')+'</div>':'';
+    };
+    $('hstats').innerHTML=streakHTML()+chartHTML();
     var yCard=function(ky,Y){
       var yd=Object.keys(Y.days).length,ym=Object.keys(Y.ms).length;
       if(openY[ky]===undefined)openY[ky]=(ky===curY||(yorder[0]===ky&&!years[curY]));
@@ -1654,7 +1724,7 @@ function renderHist(){
         +'<div class="hm-top"><span class="hm-name"><b aria-hidden="true">&#9654;</b>'+(ky==='x'?'Sin fecha':ky)+(yHit?MEDAL:'')+'</span>'+fltBtns('y',ky,fltY[ky])+'<span class="hm-tot">'+fmtDur(Y.t)+'</span></div>'
         +'<div class="hm-sub">'+Y.n+(Y.n===1?' entrenamiento':' entrenamientos')+(ky==='x'?'':' · '+yd+(yd===1?' día':' días')+' · '+ym+(ym===1?' mes':' meses'))+'</div>'
         +(Y.r>0?'<div class="hm-sub">Fuerza '+fmtHM(Y.f)+' · Carrera '+fmtHM(Y.r)+'</div>':'')
-        +yGoal+'</li>';
+        +yMed(ky)+yGoal+'</li>';
     };
     var mCard=function(k,M,ky){
       var nd=Object.keys(M.days).length,eM=fltM[k]||fltY[ky]||'',gh=k==='x'?null:goalVal(goalOf(k),eM),pc=gh?Math.round(M.t/(gh*3600)*100):0,hit=!!gh&&M.t>0&&M.t>=gh*3600;
@@ -2316,7 +2386,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',function(){navig
 </script>
 <script>
 (function(){
-  var APP_VERSION='v69';
+  var APP_VERSION='v70';
   var sp=document.getElementById('splash');
   if(!sp)return;
   document.getElementById('spVer').textContent=APP_VERSION;
