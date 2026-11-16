@@ -185,10 +185,10 @@ html.run #disp{flex:0 1 auto}
 .hmbigs .hmb{flex:1 1 0;min-height:0;font-size:clamp(44px,min(14vw,9vh),120px)}
 .hmbigs .hmb svg{width:1.1em;height:1.1em}
 .hmf{background:#39ff14}.hmc{background:#FFD60A}
-.hmmed{flex:none;width:1.3em;height:1.3em;border-radius:50%;background:#000;display:flex;align-items:center;justify-content:center}
-.hmf .hmmed{color:#39ff14}.hmc .hmmed{color:#FFD60A}
-.hmb.on .hmmed{color:#ff0a3c}
-.hmbigs .hmb .hmmed svg{width:.8em;height:.8em}
+.hmmed{flex:none;display:flex;align-items:center;justify-content:center;color:#000}
+.hmc .hmmed svg path{stroke:#FFD60A}
+.hmb.on .hmmed svg path{stroke:#ff0a3c}
+.hmbigs .hmb .hmmed svg{width:1.7em;height:1.7em}
 .hmsplit{flex:none;display:flex;flex-direction:column;width:clamp(54px,16vw,100px);height:clamp(64px,10vh,110px);border-radius:18px;overflow:hidden;border:2px solid #000;box-sizing:border-box}
 #home .hmsplit .hmb{flex:1 1 0;min-height:0;width:auto;height:auto;border:none;border-radius:0}
 .hmsplit .hmb svg{width:46%;height:46%}
@@ -205,7 +205,6 @@ html.run #disp{flex:0 1 auto}
   .hmbigs{flex-direction:row}
   .hmbigs .hmb{flex-direction:column;font-size:clamp(34px,min(9vw,13vh),110px)}
   .hmbigs .hmb svg{width:1.5em;height:1.5em}
-  .hmmed{width:1.8em;height:1.8em}
   .hmside{flex-direction:column;width:clamp(150px,22vw,230px)}
   .hmside .hmb{height:auto}
   .hmr{flex:1;flex-direction:column;gap:8px;text-align:center;line-height:1.1;font-size:clamp(18px,min(3vw,5vh),30px)}
@@ -363,6 +362,13 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
 #rtMenu .xnote{display:block;padding-top:2px}
 @media (orientation:landscape){#rtMenu .rtbigs{flex-direction:row}#rtMenu .rtbig{flex-direction:column;font-size:clamp(34px,min(9vw,13vh),110px)}#rtMenu .rtbig svg{width:1.6em;height:1.6em}#rtMenu .pin{max-width:none;gap:8px;padding-bottom:12px}}
 @media (orientation:portrait){#rtMenu .pin{max-width:none}}
+#rtMenu .pin{padding:6px 6px 8px;gap:0}
+#rtMenu .card{padding:0;background:none;border:none;box-shadow:none}
+#rtMenu .phead{margin-bottom:6px}
+#rtMenu .phead h2{margin:0}
+#rtMenu .phead button.hic{width:30px;height:30px}
+#rtMenu .phead button.hic svg{width:60%;height:60%}
+#rtMenu .rtbigs{padding:0;gap:8px}
 .neon{background:#39ff14!important;color:#000!important}
 .rback{height:52px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font-size:18px;font-weight:600}
 .rchips{display:flex;gap:8px;flex-wrap:wrap}
@@ -652,7 +658,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="medalA" viewBox="0 0 40 40"><path d="M12 2h6l4 12h-6zM28 2h-6l-4 12h6z" fill="#BA7517"/><circle cx="20" cy="26" r="11" fill="#EF9F27" stroke="#854F0B" stroke-width="2"/><circle cx="20" cy="26" r="7" fill="#FAC775" stroke="#BA7517" stroke-width="1.5"/><path d="M20 21l1.7 3.5 3.8.5-2.8 2.6.7 3.8-3.4-1.9-3.4 1.9.7-3.8-2.8-2.6 3.8-.5z" fill="#854F0B"/></symbol></defs></svg>
-<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v83</div></div>
+<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v84</div></div>
 <main class="wrap">
   <div id="home" role="navigation" aria-label="Inicio">
         <div id="hmBody">
@@ -684,11 +690,10 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
   <div id="finWrap" hidden><button id="finBtn" type="button" aria-label="Terminar sesión: mantén apretado 1,5 segundos"><span id="finFill" aria-hidden="true"></span><span id="finTxt"><span id="finMain"><span>Terminar</span><span>Sesión</span></span><span id="finSub">Mantén 2 segundos</span></span></button></div>
 
   <div class="panel" id="rtMenu" role="dialog" aria-label="Rutina completa" hidden><div class="pin">
-    <div class="phead"><h2>Rutina completa</h2><div class="phb"><button type="button" class="hic" id="rtClose" aria-label="Inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button></div></div>
+    
     <section class="card">
-      <h2>¿Qué va primero?</h2>
+      <div class="phead"><h2>¿Qué va primero?</h2><div class="phb"><button type="button" class="hic" id="rtClose" aria-label="Inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button></div></div>
       <div class="rtbigs"><button type="button" class="rtbig" id="rtBF"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="15" r="7" fill="currentColor"/><path d="M7.4 9.6C6 5.2 8.2 2.8 12 2.8s6 2.4 4.6 6.8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg><span>Fuerza</span></button><button type="button" class="rtbig" id="rtBC"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9.5" y="1.5" width="5" height="2.6" rx="1" fill="currentColor"/><circle cx="12" cy="13.6" r="8.6" fill="currentColor"/><path class="hand" d="M12 8.6v5.4l3.3 2" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Cardio</span></button></div>
-      <small class="xnote">Al elegir, te llevo a configurar esa parte y después la otra. Al terminar la primera parte te pregunto si sigues con la segunda.</small>
     </section>
   </div></div>
 
@@ -806,7 +811,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     <summary>Probar sonidos</summary>
     <div class="sgrid" id="sgrid"></div>
   </details>
-  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 83</small>
+  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 84</small>
   </div></div>
 
   <div class="panel" id="histPanel" role="dialog" aria-label="Registro" hidden><div class="pin"><div class="phead"><h2>Registro</h2><div class="phb"><button type="button" class="hic" id="histClose" aria-label="Inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button></div></div>
@@ -2657,7 +2662,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',function(){navig
 </script>
 <script>
 (function(){
-  var APP_VERSION='v83';
+  var APP_VERSION='v84';
   var sp=document.getElementById('splash');
   if(!sp)return;
   document.getElementById('spVer').textContent=APP_VERSION;
