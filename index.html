@@ -353,16 +353,15 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
 .rtbig.on{background:#ff0a3c;border-color:#000;color:#fff}
 .rtbig{display:flex;align-items:center;justify-content:center;gap:.35em}
 .rtbig svg{width:1.1em;height:1.1em;flex:none}
-#rtMenu .rtbig .hmmed svg{width:.8em;height:.8em}
-#rtBF .hmmed{color:#39ff14}#rtBC .hmmed{color:#FFD60A}
-.rtbig.on .hmmed{color:#ff0a3c}
+.rtbig .hand{stroke:var(--bg)}
+.rtbig.on .hand{stroke:#ff0a3c}
 #rtMenu .pin{min-height:100%;box-sizing:border-box}
 #rtMenu .card{flex:1 1 auto;display:flex;flex-direction:column;padding:10px 14px}
 #rtMenu .card>h2{margin:2px 0}
 #rtMenu .rtbigs{flex:1 1 auto;gap:14px;min-height:0}
 #rtMenu .rtbig{flex:1 1 0;height:auto;min-height:0;border-radius:24px;font-size:clamp(44px,min(14vw,9vh),120px)}
 #rtMenu .xnote{display:block;padding-top:2px}
-@media (orientation:landscape){#rtMenu .rtbigs{flex-direction:row}#rtMenu .rtbig{flex-direction:column;font-size:clamp(34px,min(9vw,13vh),110px)}#rtMenu .rtbig svg{width:1.6em;height:1.6em}#rtMenu .rtbig .hmmed{width:1.8em;height:1.8em}#rtMenu .rtbig .hmmed svg{width:.8em;height:.8em}#rtMenu .pin{max-width:none;gap:8px;padding-bottom:12px}}
+@media (orientation:landscape){#rtMenu .rtbigs{flex-direction:row}#rtMenu .rtbig{flex-direction:column;font-size:clamp(34px,min(9vw,13vh),110px)}#rtMenu .rtbig svg{width:1.6em;height:1.6em}#rtMenu .pin{max-width:none;gap:8px;padding-bottom:12px}}
 @media (orientation:portrait){#rtMenu .pin{max-width:none}}
 .neon{background:#39ff14!important;color:#000!important}
 .rback{height:52px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font-size:18px;font-weight:600}
@@ -653,7 +652,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="medalA" viewBox="0 0 40 40"><path d="M12 2h6l4 12h-6zM28 2h-6l-4 12h6z" fill="#BA7517"/><circle cx="20" cy="26" r="11" fill="#EF9F27" stroke="#854F0B" stroke-width="2"/><circle cx="20" cy="26" r="7" fill="#FAC775" stroke="#BA7517" stroke-width="1.5"/><path d="M20 21l1.7 3.5 3.8.5-2.8 2.6.7 3.8-3.4-1.9-3.4 1.9.7-3.8-2.8-2.6 3.8-.5z" fill="#854F0B"/></symbol></defs></svg>
-<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v81</div></div>
+<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v82</div></div>
 <main class="wrap">
   <div id="home" role="navigation" aria-label="Inicio">
         <div id="hmBody">
@@ -688,7 +687,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     <div class="phead"><h2>Rutina completa</h2><div class="phb"><button type="button" class="hic" id="rtClose" aria-label="Inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button></div></div>
     <section class="card">
       <h2>¿Qué va primero?</h2>
-      <div class="rtbigs"><button type="button" class="rtbig" id="rtBF"><span class="hmmed"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="15" r="7" fill="currentColor"/><path d="M7.4 9.6C6 5.2 8.2 2.8 12 2.8s6 2.4 4.6 6.8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></span><span>Fuerza</span></button><button type="button" class="rtbig" id="rtBC"><span class="hmmed"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9.5" y="1.5" width="5" height="2.6" rx="1" fill="currentColor"/><circle cx="12" cy="13.6" r="8.6" fill="currentColor"/><path d="M12 8.6v5.4l3.3 2" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Cardio</span></button></div>
+      <div class="rtbigs"><button type="button" class="rtbig" id="rtBF"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="15" r="7" fill="currentColor"/><path d="M7.4 9.6C6 5.2 8.2 2.8 12 2.8s6 2.4 4.6 6.8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg><span>Fuerza</span></button><button type="button" class="rtbig" id="rtBC"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9.5" y="1.5" width="5" height="2.6" rx="1" fill="currentColor"/><circle cx="12" cy="13.6" r="8.6" fill="currentColor"/><path class="hand" d="M12 8.6v5.4l3.3 2" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Cardio</span></button></div>
       <small class="xnote">Al elegir, te llevo a configurar esa parte y después la otra. Al terminar la primera parte te pregunto si sigues con la segunda.</small>
     </section>
   </div></div>
@@ -805,7 +804,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     <summary>Probar sonidos</summary>
     <div class="sgrid" id="sgrid"></div>
   </details>
-  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 81</small>
+  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 82</small>
   </div></div>
 
   <div class="panel" id="histPanel" role="dialog" aria-label="Registro" hidden><div class="pin"><div class="phead"><h2>Registro</h2><div class="phb"><button type="button" class="hic" id="histClose" aria-label="Inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button></div></div>
@@ -2642,7 +2641,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',function(){navig
 </script>
 <script>
 (function(){
-  var APP_VERSION='v81';
+  var APP_VERSION='v82';
   var sp=document.getElementById('splash');
   if(!sp)return;
   document.getElementById('spVer').textContent=APP_VERSION;
