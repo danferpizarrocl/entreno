@@ -355,6 +355,15 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
 .rstep .rn{font-size:30px;font-weight:700;font-variant-numeric:tabular-nums}
 .rstep button{width:52px;height:52px;border-radius:50%;border:2px solid var(--accent);background:var(--surface);color:var(--accent);font-size:28px;font-weight:700;padding:0}
 .rgo{height:68px;border-radius:16px;border:2px solid #000;background:var(--accent);color:var(--on-accent);font-size:22px;font-weight:700}
+#runReady{position:fixed;inset:0;z-index:45;background:var(--bg);display:flex;flex-direction:column;gap:12px;box-sizing:border-box;padding:calc(14px + env(safe-area-inset-top,0px)) max(14px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px))}
+#rdCard{flex:1;min-height:0;border-radius:24px;border:1px solid var(--line);background:#FFD60A;color:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:16px}
+#rdLbl{font-family:var(--font-display,inherit);font-size:clamp(18px,4.6vw,32px);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+#rdBig{font-family:var(--font-display,inherit);font-weight:700;line-height:1;font-size:clamp(80px,26vw,220px);font-variant-numeric:tabular-nums}
+#rdMode{font-family:var(--font-display,inherit);font-weight:700;font-size:clamp(26px,7vw,56px)}
+#rdSub{font-size:clamp(15px,3.6vw,24px);font-weight:600}
+#rdGo{flex:none;height:clamp(110px,22vh,200px);border-radius:24px;border:2px solid #000;background:#39ff14;display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#rdGo svg{width:clamp(48px,9vh,90px);height:clamp(48px,9vh,90px)}
+#runMenu .pin{max-width:none}
 #runScr{position:fixed;inset:0;z-index:120;display:flex;flex-direction:column;gap:12px;padding:calc(12px + env(safe-area-inset-top,0px)) max(14px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));background:#FFD60A;color:#000;transition:background-color .6s ease,color .3s ease;font-family:var(--font-display)}
 #runScr[hidden]{display:none}
 #rsTop{display:flex;justify-content:space-between;font-weight:600;font-size:22px;letter-spacing:.06em;text-transform:uppercase}
@@ -610,7 +619,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="medalA" viewBox="0 0 40 40"><path d="M12 2h6l4 12h-6zM28 2h-6l-4 12h6z" fill="#BA7517"/><circle cx="20" cy="26" r="11" fill="#EF9F27" stroke="#854F0B" stroke-width="2"/><circle cx="20" cy="26" r="7" fill="#FAC775" stroke="#BA7517" stroke-width="1.5"/><path d="M20 21l1.7 3.5 3.8.5-2.8 2.6.7 3.8-3.4-1.9-3.4 1.9.7-3.8-2.8-2.6 3.8-.5z" fill="#854F0B"/></symbol></defs></svg>
-<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v74</div></div>
+<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v75</div></div>
 <main class="wrap">
   <div id="home" role="navigation" aria-label="Inicio">
     <div class="hmtop"><h1>Kettlebell Training</h1><div class="ibtns"><button type="button" id="hmCfg" aria-label="Ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div></div>
@@ -672,6 +681,8 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     <button type="button" class="rgo" id="rmGo">Iniciar carrera</button>
     <button type="button" class="rback" id="rmBack" hidden>Volver</button>
   </div></div>
+
+  <div id="runReady" hidden><div class="hmtop"><h1>Kettlebell Training</h1><div class="ibtns"><button type="button" id="rdHome" aria-label="Inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button><button type="button" id="rdCfg" aria-label="Configuración de cardio"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div></div><div id="rdCard"><div id="rdLbl">Listo para empezar</div><div id="rdBig">0:00</div><div id="rdMode">Cronómetro</div><div id="rdSub"></div></div><button type="button" id="rdGo" aria-label="Iniciar carrera"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z" fill="#000"/></svg></button></div>
 
   <div id="runScr" hidden>
     <div id="rsTop"><span id="rsMode">Carrera</span><span id="rsGoal"></span></div>
@@ -759,7 +770,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     <summary>Probar sonidos</summary>
     <div class="sgrid" id="sgrid"></div>
   </details>
-  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 74</small>
+  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 75</small>
   </div></div>
 
   <div class="panel" id="histPanel" role="dialog" aria-label="Registro" hidden><div class="pin"><div class="phead"><h2>Registro</h2><div class="phb"><button type="button" class="hic" id="histClose" aria-label="Inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button></div></div>
@@ -2200,7 +2211,7 @@ function rmPaint(){
   [].forEach.call(document.querySelectorAll('#rpChips button'),function(b){b.classList.toggle('on',+b.getAttribute('data-p')===rPrep)});
 }
 $('openRun').onclick=function(){ensureAudio();cfNormal();rmPaint();openP('runMenu')};
-$('rmClose').onclick=function(){cfNormal();closeP('runMenu')};
+$('rmClose').onclick=function(){cfNormal();closeP('runMenu');if(rReady)rdPaint()};
 $('rmC').onclick=function(){rMode='c';rSave();rmPaint()};
 $('rmT').onclick=function(){rMode='t';rSave();rmPaint()};
 $('rmChips').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;rMin=+b.getAttribute('data-m');rSave();rmPaint()});
@@ -2310,16 +2321,17 @@ function cfShow(w){
     $('frzNext').hidden=!nx;$('frzStart').hidden=nx;$('frzBack').hidden=false;
     openP('frzPanel');
   }else{
-    rmPaint();
+    rmPaint();rmHead(false);
     $('rmGo').textContent=nx?'Configurar rutina de fuerza':'Iniciar rutina completa';
     $('rmBack').hidden=false;$('rmBackT').hidden=false;
     openP('runMenu');
   }
 }
+function rmHead(on){var c=$('rmClose');if(on){c.textContent='Listo';c.classList.remove('hic');c.removeAttribute('aria-label')}else{c.innerHTML=HOUSE_SVG;c.classList.add('hic');c.setAttribute('aria-label','Inicio')}}
 function cfNormal(){
   CF.on=false;
   cfHead(false);$('frzBackT').hidden=true;$('rmBackT').hidden=true;$('frzNext').hidden=true;$('frzStart').hidden=true;$('frzBack').hidden=true;
-  $('rmGo').textContent='Iniciar carrera';$('rmBack').hidden=true;
+  $('rmGo').textContent='Iniciar carrera';$('rmBack').hidden=true;rmHead(false);
 }
 function rtBegin(){
   if(started||R.on)return;
@@ -2340,7 +2352,14 @@ function homeHide(){$('home').hidden=true}
 function homeShow(){$('home').hidden=false}
 function hmGo(b,fn){b.classList.add('on');setTimeout(function(){b.classList.remove('on');fn()},220)}
 $('hmF').onclick=function(){hmGo(this,homeHide)};
-$('hmC').onclick=function(){hmGo(this,function(){$('openRun').click()})};
+var rReady=false;
+function rdPaint(){var t=rMode==='t';$('rdBig').textContent=t?fmtDur(rMin*60):'0:00';$('rdMode').textContent=t?'Temporizador':'Cronómetro';$('rdSub').textContent=(t?'Duración '+rMin+' min · ':'')+(rPrep?'Cuenta regresiva '+rPrep+' s':'Sin cuenta regresiva')}
+function rdOpen(){ensureAudio();cfNormal();rReady=true;rdPaint();$('runReady').hidden=false}
+function rdClose(){rReady=false;$('runReady').hidden=true}
+$('hmC').onclick=function(){hmGo(this,rdOpen)};
+$('rdHome').onclick=rdClose;
+$('rdCfg').onclick=function(){ensureAudio();rmPaint();rmHead(true);$('rmGo').textContent='Listo';openP('runMenu')};
+$('rdGo').onclick=function(){ensureAudio();rdClose();RT.on=false;rStartRun()};
 $('hmR').onclick=function(){hmGo(this,function(){$('openRt').click()})};
 $('hmH').onclick=function(){hmGo(this,function(){$('openHist').click()})};
 $('hmT').onclick=function(){hmGo(this,function(){tuRender();openP('turnPanel')})};
@@ -2476,6 +2495,7 @@ function rPrepShow(){
 }
 $('rmGo').onclick=function(){
   ensureAudio();rSave();
+  if(rReady&&!CF.on){closeP('runMenu');cfNormal();rdPaint();return}
   if(CF.on){if(CF.first==='c')cfShow('f');else rtBegin();return}
   closeP('runMenu');RT.on=false;rStartRun()
 };
@@ -2579,7 +2599,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',function(){navig
 </script>
 <script>
 (function(){
-  var APP_VERSION='v74';
+  var APP_VERSION='v75';
   var sp=document.getElementById('splash');
   if(!sp)return;
   document.getElementById('spVer').textContent=APP_VERSION;
