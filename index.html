@@ -364,8 +364,20 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
 #rdGo{flex:none;height:clamp(110px,22vh,200px);border-radius:24px;border:2px solid #000;background:#39ff14;display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
 #rdGo svg{width:clamp(48px,9vh,90px);height:clamp(48px,9vh,90px)}
 #runMenu .pin{max-width:none}
-#runScr{position:fixed;inset:0;z-index:120;display:flex;flex-direction:column;gap:12px;padding:calc(12px + env(safe-area-inset-top,0px)) max(14px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));background:#FFD60A;color:#000;transition:background-color .6s ease,color .3s ease;font-family:var(--font-display)}
+#runScr{position:fixed;inset:0;z-index:120;display:flex;flex-direction:column;gap:12px;padding:calc(12px + env(safe-area-inset-top,0px)) max(14px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));background:var(--bg);color:var(--fg);font-family:var(--font-display)}
 #runScr[hidden]{display:none}
+#rsHead .ibtns button{opacity:.35;pointer-events:none}
+@media (orientation:portrait){
+  #runScr #rsBig{font-size:min(30vw,17vh)}
+  #runScr #rsBig.l{font-size:min(23vw,13vh)}
+  #runScr.rt #rsBig{font-size:min(26vw,11vh)}
+  #runScr #rsClock b{font-size:clamp(34px,min(11vw,5.2vh),80px)}
+  #runScr.rt #rsClock b{font-size:clamp(30px,min(10vw,4.8vh),64px)}
+  #runScr #rsBar{margin:12px 0 22px}
+  #runScr #rsSub{font-size:clamp(20px,5.6vw,30px)}
+}
+@media (orientation:portrait) and (max-height:700px){#rsHead{display:none}}
+#rsCard{flex:1;min-height:0;display:flex;flex-direction:column;gap:6px;box-sizing:border-box;border-radius:24px;border:1px solid var(--line);padding:14px;background:#FFD60A;color:#000;transition:background-color .6s ease,color .3s ease}
 #rsTop{display:flex;justify-content:space-between;font-weight:600;font-size:22px;letter-spacing:.06em;text-transform:uppercase}
 #rsMain{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:4px}
 #rsPz{min-height:36px;font-size:24px;font-weight:700}
@@ -495,12 +507,12 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
 #rcFill{position:absolute;left:0;top:0;bottom:0;width:100%;background:rgba(0,0,0,.24);transform:scaleX(0);transform-origin:0 50%}
 #rsCancel .t{position:relative;display:block}
 @media (orientation:landscape) and (max-height:600px){
-  #runScr{display:grid;grid-template-columns:1fr minmax(220px,32%);grid-template-rows:auto 1fr auto;column-gap:14px}
+  #runScr{display:grid;grid-template-columns:1fr minmax(220px,32%);grid-template-rows:1fr auto;column-gap:14px}
   #runScr[hidden]{display:none}
-  #rsTop{grid-column:1/3}
-  #rsMain{grid-column:1;grid-row:2/4}
-  #rsCtrl{grid-column:2;grid-row:2;height:auto}
-  #rsEnd,#rsClose,#rsCancel{grid-column:2;grid-row:3;height:max(80px,22vh)}
+  #rsHead{display:none}
+  #rsCard{grid-column:1;grid-row:1/3}
+  #rsCtrl{grid-column:2;grid-row:1;height:auto}
+  #rsEnd,#rsClose,#rsCancel{grid-column:2;grid-row:2;height:max(80px,22vh)}
   #rsBig{font-size:min(24vw,27vh)}
   #rsBig.l{font-size:min(17vw,20vh)}
   #rsPhase{font-size:22px}
@@ -619,7 +631,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="medalA" viewBox="0 0 40 40"><path d="M12 2h6l4 12h-6zM28 2h-6l-4 12h6z" fill="#BA7517"/><circle cx="20" cy="26" r="11" fill="#EF9F27" stroke="#854F0B" stroke-width="2"/><circle cx="20" cy="26" r="7" fill="#FAC775" stroke="#BA7517" stroke-width="1.5"/><path d="M20 21l1.7 3.5 3.8.5-2.8 2.6.7 3.8-3.4-1.9-3.4 1.9.7-3.8-2.8-2.6 3.8-.5z" fill="#854F0B"/></symbol></defs></svg>
-<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v75</div></div>
+<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v76</div></div>
 <main class="wrap">
   <div id="home" role="navigation" aria-label="Inicio">
     <div class="hmtop"><h1>Kettlebell Training</h1><div class="ibtns"><button type="button" id="hmCfg" aria-label="Ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div></div>
@@ -685,7 +697,8 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
   <div id="runReady" hidden><div class="hmtop"><h1>Kettlebell Training</h1><div class="ibtns"><button type="button" id="rdHome" aria-label="Inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button><button type="button" id="rdCfg" aria-label="Configuración de cardio"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div></div><div id="rdCard"><div id="rdLbl">Listo para empezar</div><div id="rdBig">0:00</div><div id="rdMode">Cronómetro</div><div id="rdSub"></div></div><button type="button" id="rdGo" aria-label="Iniciar carrera"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z" fill="#000"/></svg></button></div>
 
   <div id="runScr" hidden>
-    <div id="rsTop"><span id="rsMode">Carrera</span><span id="rsGoal"></span></div>
+    <div class="hmtop" id="rsHead"><h1>Kettlebell Training</h1><div class="ibtns"><button type="button" disabled tabindex="-1" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button><button type="button" disabled tabindex="-1" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div></div>
+    <div id="rsCard"><div id="rsTop"><span id="rsMode">Carrera</span><span id="rsGoal"></span></div>
     <div id="rsMain">
       <div id="rsPz" aria-live="off"></div>
       <div id="rsPhase">Faltan</div>
@@ -695,6 +708,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
       <div id="rsBar"><i></i></div>
       <div id="rsClock"><span><small>Inicio de carrera</small><b id="rcStart">--:--</b></span><span><small id="rcEL">Término de carrera</small><b id="rcEnd">--:--</b></span></div>
       <div id="rsRt" hidden><div class="l">Tiempo total rutina completa</div><b id="rsRB">0:00</b><div class="s" id="rsRS"></div><div class="s3" id="rsRE"><span><small>Llevas</small><b id="rsXL">0:00</b></span><span><small>Inicio</small><b id="rsXI">--:--</b></span><span><small>Término</small><b id="rsXE">--:--</b></span></div></div>
+    </div>
     </div>
     <div id="rsCtrl"><button type="button" class="rb" id="rsGo" aria-label="Pausar"></button></div>
     <button type="button" id="rsEnd" aria-label="Terminar carrera: mantén apretado"><span id="rsFill" aria-hidden="true"></span><span class="t">Terminar</span></button>
@@ -770,7 +784,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     <summary>Probar sonidos</summary>
     <div class="sgrid" id="sgrid"></div>
   </details>
-  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 75</small>
+  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 76</small>
   </div></div>
 
   <div class="panel" id="histPanel" role="dialog" aria-label="Registro" hidden><div class="pin"><div class="phead"><h2>Registro</h2><div class="phb"><button type="button" class="hic" id="histClose" aria-label="Inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button></div></div>
@@ -2389,12 +2403,20 @@ function rBuild(){
   $('rsFill').style.transform='scaleX(0)';
 }
 function rColor(){
-  var s=$('runScr'),bg,dark;
+  var s=$('runScr'),cd=$('rsCard'),bg,dark;
   if(R.fin){bg='#ff0a3c';dark=true}
   else{var p=RPAL[Math.floor(rEl()/300000)%12];bg=p[0];dark=!!p[1]}
-  s.style.backgroundColor=bg;s.style.color=dark?'#000':'#fff';s.classList.toggle('wt',!dark);
+  cd.style.backgroundColor=bg;cd.style.color=dark?'#000':'#fff';s.classList.toggle('wt',!dark);
 }
+var rFitT=0;
+function rFit(){
+  var m=$('rsMain');if(!m||$('runScr').hidden)return;
+  m.style.zoom='';
+  for(var i=0;i<3;i++){var h=m.clientHeight,sh=m.scrollHeight;if(sh<=h+1)break;var z=parseFloat(m.style.zoom)||1;m.style.zoom=Math.max(.45,z*h/sh*0.985)}
+}
+window.addEventListener('resize',function(){setTimeout(rFit,60)});
 function rPaint(){
+  var _n=Date.now();if(_n-rFitT>2000){rFitT=_n;setTimeout(rFit,0)}
   var e=Math.floor(rEl()/1000),g=R.goal,t=R.mode==='t';
   var big=t?fmtDur(Math.max(0,g-e)):fmtDur(e);
   var B=$('rsBig');B.textContent=big;B.classList.toggle('l',big.length>5);
@@ -2484,14 +2506,14 @@ function rPrepTick(){
 function rPrepShow(){
   var s=$('runScr');
   s.classList.add('prep');s.classList.remove('wt');
-  s.style.backgroundColor='#39ff14';s.style.color='#000';
+  $('rsCard').style.backgroundColor='#39ff14';$('rsCard').style.color='#000';
   $('rsPhase').textContent='Prepárate';
   if(rPrep>=8)rVoz('pr','Prepárate. Va a comenzar la carrera');
   $('rsSub').textContent='La carrera parte sola';
   $('rsBar').firstChild.style.width='0%';
   $('rcStart').textContent=hm2(R.pend);
   $('rcEnd').textContent=R.mode==='t'?hm2(R.pend+R.goal*1000):'--:--';
-  rPrepTick();
+  rPrepTick();rFit();
 }
 $('rmGo').onclick=function(){
   ensureAudio();rSave();
@@ -2599,7 +2621,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',function(){navig
 </script>
 <script>
 (function(){
-  var APP_VERSION='v75';
+  var APP_VERSION='v76';
   var sp=document.getElementById('splash');
   if(!sp)return;
   document.getElementById('spVer').textContent=APP_VERSION;
