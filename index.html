@@ -185,6 +185,10 @@ html.run #disp{flex:0 1 auto}
 .hmbigs .hmb{flex:1 1 0;min-height:0;font-size:clamp(44px,min(14vw,9vh),120px)}
 .hmbigs .hmb svg{width:1.1em;height:1.1em}
 .hmf{background:#39ff14}.hmc{background:#FFD60A}
+.hmmed{flex:none;width:1.3em;height:1.3em;border-radius:50%;background:#000;display:flex;align-items:center;justify-content:center}
+.hmf .hmmed{color:#39ff14}.hmc .hmmed{color:#FFD60A}
+.hmb.on .hmmed{color:#ff0a3c}
+.hmbigs .hmb .hmmed svg{width:.8em;height:.8em}
 .hmsplit{flex:none;display:flex;flex-direction:column;width:clamp(54px,16vw,100px);height:clamp(64px,10vh,110px);border-radius:18px;overflow:hidden;border:2px solid #000;box-sizing:border-box}
 #home .hmsplit .hmb{flex:1 1 0;min-height:0;width:auto;height:auto;border:none;border-radius:0}
 .hmsplit .hmb svg{width:46%;height:46%}
@@ -201,6 +205,7 @@ html.run #disp{flex:0 1 auto}
   .hmbigs{flex-direction:row}
   .hmbigs .hmb{flex-direction:column;font-size:clamp(34px,min(9vw,13vh),110px)}
   .hmbigs .hmb svg{width:1.5em;height:1.5em}
+  .hmmed{width:1.8em;height:1.8em}
   .hmside{flex-direction:column;width:clamp(150px,22vw,230px)}
   .hmside .hmb{height:auto}
   .hmr{flex:1;flex-direction:column;gap:8px;text-align:center;line-height:1.1;font-size:clamp(18px,min(3vw,5vh),30px)}
@@ -645,11 +650,11 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="medalA" viewBox="0 0 40 40"><path d="M12 2h6l4 12h-6zM28 2h-6l-4 12h6z" fill="#BA7517"/><circle cx="20" cy="26" r="11" fill="#EF9F27" stroke="#854F0B" stroke-width="2"/><circle cx="20" cy="26" r="7" fill="#FAC775" stroke="#BA7517" stroke-width="1.5"/><path d="M20 21l1.7 3.5 3.8.5-2.8 2.6.7 3.8-3.4-1.9-3.4 1.9.7-3.8-2.8-2.6 3.8-.5z" fill="#854F0B"/></symbol></defs></svg>
-<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v79</div></div>
+<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v80</div></div>
 <main class="wrap">
   <div id="home" role="navigation" aria-label="Inicio">
         <div id="hmBody">
-      <div class="hmbigs"><button type="button" class="hmb hmf" id="hmF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.409 13.017A5 5 0 0 1 22 15c0 3.866-4 7-9 7-4.077 0-8.153-.82-10.371-2.462-.426-.316-.631-.832-.62-1.362C2.118 12.723 2.627 2 10 2a3 3 0 0 1 3 3 2 2 0 0 1-2 2c-1.105 0-1.64-.444-2-1"/><path d="M15 14a5 5 0 0 0-7.584 2"/><path d="M9.964 6.825C8.019 7.977 9.5 13 8 15"/></svg><span>Fuerza</span></button><button type="button" class="hmb hmc" id="hmC"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13" cy="4" r="1"/><path d="M4 17l5 1l.75-1.5"/><path d="M15 21v-4l-4-3l1-6"/><path d="M7 12V9l5-1l3 3l3 1"/></svg><span>Cardio</span></button></div>
+      <div class="hmbigs"><button type="button" class="hmb hmf" id="hmF"><span class="hmmed"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="15" r="7" fill="currentColor"/><path d="M7.4 9.6C6 5.2 8.2 2.8 12 2.8s6 2.4 4.6 6.8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></span><span>Fuerza</span></button><button type="button" class="hmb hmc" id="hmC"><span class="hmmed"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9.5" y="1.5" width="5" height="2.6" rx="1" fill="currentColor"/><circle cx="12" cy="13.6" r="8.6" fill="currentColor"/><path d="M12 8.6v5.4l3.3 2" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Cardio</span></button></div>
       <div class="hmside"><button type="button" class="hmb hmr" id="hmR"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15"/><path d="M11 12 5.12 2.2"/><path d="m13 12 5.88-9.8"/><path d="M8 7h8"/><circle cx="12" cy="17" r="5"/><path d="M12 18v-2h-.5"/></svg><span>Rutina completa</span></button><button type="button" class="hmb hmh" id="hmH" aria-label="Registro de entrenamientos"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3" width="13" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 7h4M3 12h4M3 17h4M10 8h6M10 12h6M10 16h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><div class="hmsplit"><button type="button" class="hmb hmh hmt" id="hmT" aria-label="Turnos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.795 21h-6.795a2 2 0 0 1-2-2v-12a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496v1.504l1 1"/></svg></button><button type="button" class="hmb hmg" id="hmCfg" aria-label="Ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div></div>
     </div>
   </div>
@@ -797,7 +802,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     <summary>Probar sonidos</summary>
     <div class="sgrid" id="sgrid"></div>
   </details>
-  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 79</small>
+  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 80</small>
   </div></div>
 
   <div class="panel" id="histPanel" role="dialog" aria-label="Registro" hidden><div class="pin"><div class="phead"><h2>Registro</h2><div class="phb"><button type="button" class="hic" id="histClose" aria-label="Inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button></div></div>
@@ -2634,7 +2639,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',function(){navig
 </script>
 <script>
 (function(){
-  var APP_VERSION='v79';
+  var APP_VERSION='v80';
   var sp=document.getElementById('splash');
   if(!sp)return;
   document.getElementById('spVer').textContent=APP_VERSION;
