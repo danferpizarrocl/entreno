@@ -367,6 +367,7 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
 #rtMenu .card{position:relative}
 #rtMenu .phead{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:5;margin:0}
 #rtMenu .phead button.hic{width:88px;height:88px}
+#rtMenu .phead button.hic.on{background:#39ff14;border-color:#39ff14;color:#000}
 #rtMenu .phead button.hic svg{width:60%;height:60%}
 #rtMenu .rtbigs{padding:0;gap:8px}
 .neon{background:#39ff14!important;color:#000!important}
@@ -658,7 +659,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="medalA" viewBox="0 0 40 40"><path d="M12 2h6l4 12h-6zM28 2h-6l-4 12h6z" fill="#BA7517"/><circle cx="20" cy="26" r="11" fill="#EF9F27" stroke="#854F0B" stroke-width="2"/><circle cx="20" cy="26" r="7" fill="#FAC775" stroke="#BA7517" stroke-width="1.5"/><path d="M20 21l1.7 3.5 3.8.5-2.8 2.6.7 3.8-3.4-1.9-3.4 1.9.7-3.8-2.8-2.6 3.8-.5z" fill="#854F0B"/></symbol></defs></svg>
-<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v85</div></div>
+<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v86</div></div>
 <main class="wrap">
   <div id="home" role="navigation" aria-label="Inicio">
         <div id="hmBody">
@@ -811,7 +812,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     <summary>Probar sonidos</summary>
     <div class="sgrid" id="sgrid"></div>
   </details>
-  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 85</small>
+  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 86</small>
   </div></div>
 
   <div class="panel" id="histPanel" role="dialog" aria-label="Registro" hidden><div class="pin"><div class="phead"><h2>Registro</h2><div class="phb"><button type="button" class="hic" id="histClose" aria-label="Inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button></div></div>
@@ -2398,7 +2399,7 @@ function rtBegin(){
   rtStart(f);
 }
 $('openRt').onclick=function(){ensureAudio();cfNormal();CF.first=rtOrd;rtBPaint();openP('rtMenu')};
-$('rtClose').onclick=function(){cfNormal();closeP('rtMenu')};
+$('rtClose').onclick=function(){var b=this;b.classList.add('on');setTimeout(function(){b.classList.remove('on');cfNormal();closeP('rtMenu')},220)};
 function rtPick(w){CF.on=true;CF.first=w;rtOrd=w;rSave();rtBPaint();setTimeout(function(){if(CF.on&&CF.first===w)cfShow(w)},220)}
 $('rtBF').onclick=function(){rtPick('f')};
 $('rtBC').onclick=function(){rtPick('c')};
@@ -2662,7 +2663,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',function(){navig
 </script>
 <script>
 (function(){
-  var APP_VERSION='v85';
+  var APP_VERSION='v86';
   var sp=document.getElementById('splash');
   if(!sp)return;
   document.getElementById('spVer').textContent=APP_VERSION;
