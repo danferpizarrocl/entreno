@@ -350,10 +350,13 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
 .rtbigs{display:flex;flex-direction:column;gap:12px;padding:10px 0}
 .rtbig{height:96px;border-radius:18px;border:2px solid var(--line);background:var(--bg);color:var(--fg);font-size:30px;font-weight:700}
 .rtbig.on{background:#ff0a3c;border-color:#000;color:#fff}
+#rtBF{background:#39ff14;border-color:#000;color:#000}
+#rtBC{background:#FFD60A;border-color:#000;color:#000}
+#rtBF.on,#rtBC.on{background:#ff0a3c;color:#fff}
 .rtbig{display:flex;align-items:center;justify-content:center;gap:.35em}
 .rtbig svg{width:1.1em;height:1.1em;flex:none}
-.rtbig .hand{stroke:var(--bg)}
-.rtbig.on .hand{stroke:#ff0a3c}
+.rtbig .hand{stroke:#FFD60A}
+.rtbig.on .hand,#rtBC.on .hand{stroke:#ff0a3c}
 #rtMenu .pin{min-height:100%;box-sizing:border-box}
 #rtMenu .card{flex:1 1 auto;display:flex;flex-direction:column;padding:10px 14px}
 #rtMenu .card>h2{margin:2px 0}
@@ -366,7 +369,7 @@ html.run.bar .ctrls,html.run.bar #finWrap{transform:translateY(calc(-1 * var(--b
 #rtMenu .card{padding:0;background:none;border:none;box-shadow:none}
 #rtMenu .card{position:relative}
 #rtMenu .phead{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:5;margin:0}
-#rtMenu .phead button.hic{width:88px;height:88px}
+#rtMenu .phead button.hic{width:112px;height:112px}
 #rtMenu .phead button.hic.on{background:#39ff14;border-color:#39ff14;color:#000}
 #rtMenu .phead button.hic svg{width:60%;height:60%}
 #rtMenu .rtbigs{padding:0;gap:8px}
@@ -659,11 +662,11 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="medalA" viewBox="0 0 40 40"><path d="M12 2h6l4 12h-6zM28 2h-6l-4 12h6z" fill="#BA7517"/><circle cx="20" cy="26" r="11" fill="#EF9F27" stroke="#854F0B" stroke-width="2"/><circle cx="20" cy="26" r="7" fill="#FAC775" stroke="#BA7517" stroke-width="1.5"/><path d="M20 21l1.7 3.5 3.8.5-2.8 2.6.7 3.8-3.4-1.9-3.4 1.9.7-3.8-2.8-2.6 3.8-.5z" fill="#854F0B"/></symbol></defs></svg>
-<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v87</div></div>
+<div id="splash" aria-hidden="true"><img src="icon-192.png" alt=""><div id="spName">Kettlebell Training</div><div id="spVer">v88</div></div>
 <main class="wrap">
   <div id="home" role="navigation" aria-label="Inicio">
         <div id="hmBody">
-      <div class="hmbigs"><button type="button" class="hmb hmf" id="hmF"><span class="hmmed"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="15" r="7" fill="currentColor"/><path d="M7.4 9.6C6 5.2 8.2 2.8 12 2.8s6 2.4 4.6 6.8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></span><span>Fuerza</span></button><button type="button" class="hmb hmc" id="hmC"><span class="hmmed"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9.5" y="1.5" width="5" height="2.6" rx="1" fill="currentColor"/><circle cx="12" cy="13.6" r="8.6" fill="currentColor"/><path d="M12 8.6v5.4l3.3 2" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Cardio</span></button></div>
+      <div class="hmbigs"><button type="button" class="hmb hmf" id="hmF"><span class="hmmed"><svg viewBox="1.6 1.6 20.8 20.8" aria-hidden="true"><circle cx="12" cy="15" r="7" fill="currentColor"/><path d="M7.4 9.6C6 5.2 8.2 2.8 12 2.8s6 2.4 4.6 6.8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></span><span>Fuerza</span></button><button type="button" class="hmb hmc" id="hmC"><span class="hmmed"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9.5" y="1.5" width="5" height="2.6" rx="1" fill="currentColor"/><circle cx="12" cy="13.6" r="8.6" fill="currentColor"/><path d="M12 8.6v5.4l3.3 2" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Cardio</span></button></div>
       <div class="hmside"><button type="button" class="hmb hmr" id="hmR"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15"/><path d="M11 12 5.12 2.2"/><path d="m13 12 5.88-9.8"/><path d="M8 7h8"/><circle cx="12" cy="17" r="5"/><path d="M12 18v-2h-.5"/></svg><span>Rutina completa</span></button><button type="button" class="hmb hmh" id="hmH" aria-label="Registro de entrenamientos"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3" width="13" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 7h4M3 12h4M3 17h4M10 8h6M10 12h6M10 16h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><div class="hmsplit"><button type="button" class="hmb hmh hmt" id="hmT" aria-label="Turnos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.795 21h-6.795a2 2 0 0 1-2-2v-12a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496v1.504l1 1"/></svg></button><button type="button" class="hmb hmg" id="hmCfg" aria-label="Ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div></div>
     </div>
   </div>
@@ -694,7 +697,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     
     <section class="card">
       <div class="phead"><div class="phb"><button type="button" class="hic" id="rtClose" aria-label="Inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button></div></div>
-      <div class="rtbigs"><button type="button" class="rtbig" id="rtBF"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="15" r="7" fill="currentColor"/><path d="M7.4 9.6C6 5.2 8.2 2.8 12 2.8s6 2.4 4.6 6.8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg><span>Fuerza</span></button><button type="button" class="rtbig" id="rtBC"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9.5" y="1.5" width="5" height="2.6" rx="1" fill="currentColor"/><circle cx="12" cy="13.6" r="8.6" fill="currentColor"/><path class="hand" d="M12 8.6v5.4l3.3 2" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Cardio</span></button></div>
+      <div class="rtbigs"><button type="button" class="rtbig" id="rtBF"><svg viewBox="1.6 1.6 20.8 20.8" aria-hidden="true"><circle cx="12" cy="15" r="7" fill="currentColor"/><path d="M7.4 9.6C6 5.2 8.2 2.8 12 2.8s6 2.4 4.6 6.8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg><span>Fuerza</span></button><button type="button" class="rtbig" id="rtBC"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9.5" y="1.5" width="5" height="2.6" rx="1" fill="currentColor"/><circle cx="12" cy="13.6" r="8.6" fill="currentColor"/><path class="hand" d="M12 8.6v5.4l3.3 2" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Cardio</span></button></div>
     </section>
   </div></div>
 
@@ -812,7 +815,7 @@ html.rtm #clock b{font-size:clamp(20px,3.4vh,28px)}
     <summary>Probar sonidos</summary>
     <div class="sgrid" id="sgrid"></div>
   </details>
-  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 87</small>
+  <small class="xnote" style="display:block;text-align:center;margin:10px 0 4px">Versión 88</small>
   </div></div>
 
   <div class="panel" id="histPanel" role="dialog" aria-label="Registro" hidden><div class="pin"><div class="phead"><h2>Registro</h2><div class="phb"><button type="button" class="hic" id="histClose" aria-label="Inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button></div></div>
@@ -2663,7 +2666,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',function(){navig
 </script>
 <script>
 (function(){
-  var APP_VERSION='v87';
+  var APP_VERSION='v88';
   var sp=document.getElementById('splash');
   if(!sp)return;
   document.getElementById('spVer').textContent=APP_VERSION;
